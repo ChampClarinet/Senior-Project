@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDim">#8598D1</color>
+    <color name="colorPrimaryDark">#7386BF</color>
+    <color name="colorAccent">#7C8FC8</color>
+    <color name="colorAccent_pressed">#7386BF</color>
+    <color name="text">@color/primary_dark_material_light</color>
+    <color name="icon">@color/text</color>
+    <color name="liked">#f97e77</color>
+    <color name="black">#000000</color>
+    <color name="nav_header_background">@color/colorPrimaryDim</color>
+</resources>

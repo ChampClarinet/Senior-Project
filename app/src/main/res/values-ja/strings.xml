@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">設定</string>
+    <string name="search_hint">ここから探索</string>
+    <string name="logout">ログアウト</string>
+    <string name="filter_button">探索のオプション</string>
+    <string name="search">探索</string>
+    <string name="google_login_failed">グーグルロクインは失敗しました。</string>
+
+    <!--type filter-->
+    <string-array name="type_list">
+        <item>全部</item>
+        <item>ペットサービス</item>
+        <item>ペットクリニック</item>
+    </string-array>
+    <string name="SUN">日</string>
+    <string name="MON">月</string>
+    <string name="TUE">火</string>
+    <string name="WED">水</string>
+    <string name="THU">木</string>
+    <string name="FRI">金</string>
+    <string name="SAT">土</string>
+    <string name="open_maps">場所</string>
+    <string name="mock_available">犬、猫 のみ</string>
+    <string name="clear">クリア</string>
+    <string name="signing_in">ログイン中</string>
+    <string name="filter">フィルター</string>
+    <string name="result">探索結果</string>
+    <string name="open">開店中</string>
+    <string name="close">閉店中</string>
+    <string name="app_name">簡単ペット</string>
+    <string name="mock_store_title">オーン</string>
+    <string name="info">情報</string>
+    <string name="review">リービュー</string>
+    <string name="price_rate_label">物価指数 %1$s</string>
+    <string name="zero_results">結果はありません...</string>
+    <string name="rate_symbol">￥</string>
+    <string name="time_open">%1$s から %2$s　まで</string>
+    <string name="all_day_open">24 時間営業</string>
+
+</resources>

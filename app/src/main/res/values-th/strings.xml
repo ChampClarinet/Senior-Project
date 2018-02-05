@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_hint">ค้นหาจากตำแหน่งของคุณ</string>
+    <string name="action_settings">ตั้งค่า</string>
+    <string name="logout">ล็อคเอาท์</string>
+    <string name="search">ค้นหา</string>
+    <string name="filter_button">เพิ่มตัวกรองการค้นหา</string>
+    <string name="google_login_failed">การล็อคอินด้วย Google ผิดพลาด</string>
+
+    <!--type filter-->
+    <string-array name="type_list">
+        <item>ทั้งหมด</item>
+        <item>สถานบริการสัตว์เลี้ยง</item>
+        <item>โรงพยาบาลสัตว์</item>
+    </string-array>
+    <string name="mock_available">บริการสำหรับสุนัข, แมว</string>
+    <string name="clear">ล้างค่า</string>
+    <string name="signing_in">กำลังเข้าสู่ระบบ</string>
+    <string name="filter">ตัวกรอง</string>
+    <string name="result">ผลการค้นหา</string>
+    <string name="open">เปิด</string>
+    <string name="close">ปิด</string>
+    <string name="mock_store_title">อร</string>
+    <string name="app_name">EasyPets</string>
+    <string name="open_maps">ที่อยู่ร้าน</string>
+    <string name="SUN">อา</string>
+    <string name="MON">จ</string>
+    <string name="TUE">อ</string>
+    <string name="WED">พ</string>
+    <string name="THU">พฤ</string>
+    <string name="FRI">ศ</string>
+    <string name="SAT">ส</string>
+    <string name="info">ข้อมูล</string>
+    <string name="review">รีวิว</string>
+    <string name="price_rate_label">เรทราคา %1$s</string>
+    <string name="zero_results">ไม่พบข้อมูล</string>
+    <string name="rate_symbol">฿</string>
+    <string name="time_open">%1$sน - %2$sน</string>
+    <string name="all_day_open">ให้บริการตลอด 24 ชม.</string>
+
+</resources>

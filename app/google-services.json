@@ -1,0 +1,143 @@
+{
+  "project_info": {
+    "project_number": "223124031755",
+    "firebase_url": "https://easypetsthailand.firebaseio.com",
+    "project_id": "easypetsthailand",
+    "storage_bucket": "easypetsthailand.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223124031755:android:1377237700750a85",
+        "android_client_info": {
+          "package_name": "com.easypets.champ.easypets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223124031755-6ju6ejs0k7k76n4n2tbjfr4jr9d79181.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.easypets.champ.easypets",
+            "certificate_hash": "2375a04f372cac6b8434897a79196565d6f27983"
+          }
+        },
+        {
+          "client_id": "223124031755-dnoltv32rr7mnrr6ipford9p90i3iq52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDykasW1cQu5rCV0it2xF-AF0Ul1f0JypA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223124031755-dnoltv32rr7mnrr6ipford9p90i3iq52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223124031755:android:34bb4a165c1104b9",
+        "android_client_info": {
+          "package_name": "com.example.champ.easypetstester"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223124031755-v6akum7f0h18cnk046s7t3i3j2mum747.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.champ.easypetstester",
+            "certificate_hash": "2375a04f372cac6b8434897a79196565d6f27983"
+          }
+        },
+        {
+          "client_id": "223124031755-dnoltv32rr7mnrr6ipford9p90i3iq52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDykasW1cQu5rCV0it2xF-AF0Ul1f0JypA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223124031755-dnoltv32rr7mnrr6ipford9p90i3iq52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223124031755:android:d0864151c2324fa5",
+        "android_client_info": {
+          "package_name": "com.easypetsthailand.champ.easypets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223124031755-1kl099b8n20ggv2a6dc1lb2rpd6a4c0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.easypetsthailand.champ.easypets",
+            "certificate_hash": "2375a04f372cac6b8434897a79196565d6f27983"
+          }
+        },
+        {
+          "client_id": "223124031755-dnoltv32rr7mnrr6ipford9p90i3iq52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDykasW1cQu5rCV0it2xF-AF0Ul1f0JypA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223124031755-dnoltv32rr7mnrr6ipford9p90i3iq52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
