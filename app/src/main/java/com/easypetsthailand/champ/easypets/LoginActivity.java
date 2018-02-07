@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "signed in with " + user.getDisplayName());
         startActivity(new Intent(this, SearchActivity.class));
         finish();
-        if(signingInDialog != null)signingInDialog.dismiss();
+        if(signingInDialog != null) signingInDialog.dismiss();
     }
 
     private void signInWithGoogle() {

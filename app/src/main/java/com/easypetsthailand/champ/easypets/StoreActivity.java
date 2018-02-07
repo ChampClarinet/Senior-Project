@@ -2,12 +2,9 @@ package com.easypetsthailand.champ.easypets;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -16,7 +13,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.StringRequest;
 import com.easypetsthailand.champ.easypets.Model.Store;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

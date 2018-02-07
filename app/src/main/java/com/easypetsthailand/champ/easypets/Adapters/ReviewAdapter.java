@@ -2,7 +2,6 @@ package com.easypetsthailand.champ.easypets.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,13 +21,7 @@ import com.easypetsthailand.champ.easypets.Model.Review;
 import com.easypetsthailand.champ.easypets.Model.Store;
 import com.easypetsthailand.champ.easypets.R;
 import com.easypetsthailand.champ.easypets.ReplyActivity;
-import com.easypetsthailand.champ.easypets.ReviewActivity;
-import com.easypetsthailand.champ.easypets.StoreActivity;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,9 +29,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.easypetsthailand.champ.easypets.Core.Utils.createLoadDialog;
-import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHolder> {
 
