@@ -62,7 +62,11 @@
             android:label="@string/reviews"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ReplyActivity"></activity>
+        <activity
+            android:name=".ReplyActivity"
+            android:label="@string/replies"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

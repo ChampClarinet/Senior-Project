@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.Adapters.ReviewAdapter;
 import com.easypetsthailand.champ.easypets.Model.Review;
+import com.easypetsthailand.champ.easypets.Model.Store;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +33,7 @@ public class ReviewActivity extends AppCompatActivity {
     private final String TAG = ReviewActivity.class.getSimpleName();
     private ArrayList<Review> reviews = new ArrayList<>();
     private ReviewAdapter adapter;
-    private int storeId;
+    private Store store;
 
     @BindView(R.id.rv_review)
     RecyclerView rvReview;
@@ -48,17 +49,18 @@ public class ReviewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         getBackIcon();
 
-        storeId = getIntent().getIntExtra(getString(R.string.store_id), -1);
+        store = (Store) getIntent().getSerializableExtra(getString(R.string.model_name_store));
+        Log.d("store", String.valueOf((store == null)));
 
-        adapter = new ReviewAdapter(reviews, this);
+        adapter = new ReviewAdapter(reviews, store, this);
         rvReview.setAdapter(adapter);
         rvReview.setHasFixedSize(true);
         rvReview.setLayoutManager(new LinearLayoutManager(this));
-        if(storeId != -1) bindData();
+        if(store != null) bindData();
     }
 
     private void bindData() {
-        String url = getString(R.string.URL) + getString(R.string.GET_REVIEW_BY_STORE_UID_URL, storeId);
+        String url = getString(R.string.URL) + getString(R.string.GET_REVIEW_BY_STORE_ID_URL, store.getStoreId());
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

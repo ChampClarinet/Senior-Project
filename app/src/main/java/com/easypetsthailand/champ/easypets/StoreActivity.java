@@ -39,7 +39,7 @@ public class StoreActivity extends AppCompatActivity {
     @BindView(R.id.store_open_review_button)
     RelativeLayout storeOpenReviewButton;
 
-    private int store_id = 1;
+    private Store store;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private boolean isCurrentUserLiked;
 
@@ -49,6 +49,9 @@ public class StoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_store);
         Toolbar toolbar = findViewById(R.id.store_toolbar);
         setSupportActionBar(toolbar);
+
+        store = (Store) getIntent().getSerializableExtra(getString(R.string.model_name_store));
+        Log.d("store1", String.valueOf(store == null));
 
         ButterKnife.bind(this);
         getBackIcon();
@@ -67,7 +70,7 @@ public class StoreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //go to review part
                 Intent intent = new Intent(StoreActivity.this, ReviewActivity.class);
-                intent.putExtra(getString(R.string.store_id), store_id);
+                intent.putExtra(getString(R.string.model_name_store), store);
                 startActivity(intent);
             }
         });
@@ -89,7 +92,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     private void setLikeButton() {
-        isCurrentUserLiked = checkLikeCondition(this, store_id, user.getUid());
+        isCurrentUserLiked = checkLikeCondition(this, store.getStoreId(), user.getUid());
         syncLikeCondition();
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Model.Review;
 import com.easypetsthailand.champ.easypets.Model.Store;
 import com.easypetsthailand.champ.easypets.R;
+import com.easypetsthailand.champ.easypets.ReplyActivity;
 import com.easypetsthailand.champ.easypets.ReviewActivity;
 import com.easypetsthailand.champ.easypets.StoreActivity;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -42,17 +43,19 @@ import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHolder> {
 
     private ArrayList<Review> dataSet;
+    private Store store;
     private Context context;
 
-    public ReviewAdapter(ArrayList<Review> dataSet, Context context) {
+    public ReviewAdapter(ArrayList<Review> dataSet, Store store, Context context) {
         this.dataSet = dataSet;
+        this.store = store;
         this.context = context;
     }
 
     @Override
     public GenericHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_review, parent, false);
-        return new ViewHolder(v, context);
+        return new ViewHolder(v, store,  context);
     }
 
     @Override
@@ -93,33 +96,42 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
         TextView cv_reviewTime;
         @BindView(R.id.tv_review_text)
         TextView cv_reviewText;
+        //@BindView(R.id.review)
         private Context context;
+        private Store store;
 
-        public ViewHolder(View itemView, Context context) {
+        public ViewHolder(View itemView, Store store,  Context context) {
             super(itemView);
             this.context = context;
+            this.store = store;
             ButterKnife.bind(this, itemView);
         }
 
-        private void openStoreActivity(Review review) throws Exception {
-            /*Intent i = new Intent(context, ReplyActivity.class);
-            i.putExtra("review_id", review.getReviewId());
-            context.startActivity(i);*/
+        private void openStoreActivity(Review review, String reviewerName, String reviewerPicturePath) throws Exception {
+            Intent i = new Intent(context, ReplyActivity.class);
+            i.putExtra(context.getString(R.string.model_name_store), store);
+            i.putExtra("review", review);
+            i.putExtra("reviewerName", reviewerName);
+            i.putExtra("reviewerPicturePath", reviewerPicturePath);
+            context.startActivity(i);
         }
 
         @Override
         public void setViewData(final Review review) {
+            final String[] user = {null, null};
             String url = context.getString(R.string.URL) + context.getString(R.string.GET_USER_BY_UID_URL, review.getReviewerUid());
             StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
                         JSONObject o = new JSONObject(response);
-                        String reviwerName = o.getString("name");
+                        String reviewerName = o.getString("name");
                         String reviewerPicturePath = o.getString("picture_path");
+                        user[0] = reviewerName;
+                        user[1] = reviewerPicturePath;
 
                         //cv_name
-                        cv_name.setText(reviwerName);
+                        cv_name.setText(reviewerName);
 
                         //user pic
                         Glide.with(context).load(reviewerPicturePath).centerCrop().into(cv_reviewer_pic);
@@ -141,11 +153,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
             //review text
             cv_reviewText.setText(review.getReviewText());
 
+            //review image
+            //Glide.with(context).load(review.getReviewPicturePath()).centerCrop().into(cv);
+
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        openStoreActivity(review);
+                        openStoreActivity(review, user[0], user[1]);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
