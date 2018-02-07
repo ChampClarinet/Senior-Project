@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,6 +66,7 @@ public class ReplyActivity extends AppCompatActivity {
         store = (Store) i.getSerializableExtra(getString(R.string.model_name_store));
 
         ButterKnife.bind(this);
+        getBackIcon();
         bindReviews();
         bindReplies();
     }
@@ -123,4 +125,18 @@ public class ReplyActivity extends AppCompatActivity {
         reviewTime.setText(review.getTimeReviewed());
         reviewText.setText(review.getReviewText());
     }
+
+    private void getBackIcon() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) finish();
+        return super.onOptionsItemSelected(item);
+    }
+
 }
