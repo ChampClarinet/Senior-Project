@@ -2,6 +2,7 @@ package com.easypetsthailand.champ.easypets;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -26,6 +27,8 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.easypetsthailand.champ.easypets.Core.Utils.createLoadDialog;
+
 public class SearchActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,6 +49,8 @@ public class SearchActivity extends AppCompatActivity
     private String filter_type = TYPE_ALL;
     private String filter_text = "";
 
+    private AlertDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +60,7 @@ public class SearchActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -70,9 +75,9 @@ public class SearchActivity extends AppCompatActivity
         TextView userEmail = navbarHeaderView.findViewById(R.id.navbar_email);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d(TAG, user+"");
+        Log.d(TAG, user + "");
 
-        if(user != null){
+        if (user != null) {
             Glide.with(this).load(user.getPhotoUrl()).fitCenter().into(userImageView);
             userName.setText(user.getDisplayName());
             userEmail.setText(user.getEmail());
@@ -98,6 +103,12 @@ public class SearchActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (dialog != null) dialog.dismiss();
     }
 
     private void setSpinner() {
@@ -127,7 +138,7 @@ public class SearchActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1234){
+        if (requestCode == 1234) {
             //set filter
         }
     }

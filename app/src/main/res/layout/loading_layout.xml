@@ -14,12 +14,12 @@
         android:layout_marginStart="@dimen/my_default_margin"
         android:layout_marginTop="@dimen/my_default_margin"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/signingInTextView"
+        app:layout_constraintEnd_toStartOf="@+id/loadingTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/signingInTextView"
+        android:id="@+id/loadingTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -37,5 +37,7 @@
     <string name="rate_symbol">฿</string>
     <string name="time_open">%1$sน - %2$sน</string>
     <string name="all_day_open">ให้บริการตลอด 24 ชม.</string>
+    <string name="launch_google_maps">กำลังเปิด Google Maps</string>
+    <string name="review_no_review">ไม่มีรีวิว</string>
 
 </resources>

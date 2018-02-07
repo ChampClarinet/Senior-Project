@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.easypetsthailand.champ.easypets.Core.UserManager.importUserProfile;
+import static com.easypetsthailand.champ.easypets.Core.Utils.createLoadDialog;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -105,10 +106,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showDialogLoading() {
-        AlertDialog.Builder alert;
-        alert = new AlertDialog.Builder(this);
-        alert.setView(R.layout.loading_layout);
-        signingInDialog = alert.create();
+        signingInDialog = createLoadDialog(this, getResources().getString(R.string.signing_in));
         signingInDialog.show();
     }
 

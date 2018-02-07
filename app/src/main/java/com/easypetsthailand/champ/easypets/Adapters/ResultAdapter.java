@@ -3,6 +3,7 @@ package com.easypetsthailand.champ.easypets.Adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.easypetsthailand.champ.easypets.Core.Utils.createLoadDialog;
 import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHolder> {
@@ -53,7 +55,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
         return dataSet.size();
     }
 
-    public ArrayList<Store> getData() {
+    public ArrayList getData() {
         return dataSet;
     }
 
@@ -98,6 +100,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
         private void openStoreActivity(Store store) throws Exception {
             Intent i = new Intent(context, StoreActivity.class);
             i.putExtra(context.getString(R.string.model_name_store), store);
+            createLoadDialog(context, "loading");
             context.startActivity(i);
         }
 

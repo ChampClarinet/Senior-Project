@@ -55,7 +55,14 @@
         <activity
             android:name=".StoreActivity"
             android:label="@string/mock_store_title"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReviewActivity"
+            android:label="@string/reviews"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ReplyActivity"></activity>
     </application>
 
 </manifest>

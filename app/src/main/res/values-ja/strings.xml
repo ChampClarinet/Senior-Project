@@ -37,5 +37,7 @@
     <string name="rate_symbol">￥</string>
     <string name="time_open">%1$s から %2$s　まで</string>
     <string name="all_day_open">24 時間営業</string>
+    <string name="launch_google_maps">Google Maps を開いています。</string>
+    <string name="review_no_review">リービューまだありません。</string>
 
 </resources>
