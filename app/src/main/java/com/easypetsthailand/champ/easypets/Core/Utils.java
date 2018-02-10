@@ -1,6 +1,8 @@
 package com.easypetsthailand.champ.easypets.Core;
 
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,23 @@ public class Utils {
             b[i] = openDays.charAt(i) != '0';
         }
         return b;
+    }
+
+    public static double calculateDistance(double latitude, double longitude){
+        Location here = getCurrentLocation();
+        Location location = new Location(LocationManager.GPS_PROVIDER);
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
+        return here.distanceTo(location);
+    }
+
+    public static Location getCurrentLocation(){
+        GPSTracker tracker = GPSTracker.getInstance();
+        Location here = new Location(LocationManager.GPS_PROVIDER);
+        here.setLatitude(tracker.getLatitude());
+        here.setLongitude(tracker.getLongitude());
+        tracker.stopUsingGPS();
+        return here;
     }
 
     public static String getGoogleMapsUri(double latitude, double longitude){

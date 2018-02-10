@@ -6,10 +6,10 @@
     <string name="result">Results</string>
 
     <!--URLS-->
-    <string name="URL" translatable="false">http://10.0.2.2/easypets/</string>
+    <string name="URL" translatable="false">http://172.27.162.97/easypets/</string> <!--10.0.2.2-->
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ADD_REVIEW_URL" translatable="false">post_review.php?uid=%1$s&amp;text=%2$s</string>
-    <string name="LIKES_COUNT_URL" translatable="false">likes_count.php?store_id=%1$d</string>
+    <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;store_id=%2$d</string>
     <string name="GET_REPLIES_BY_REVIEW_ID_URL" translatable="false">get_replies.php?review_id=%1$d</string>
     <string name="GET_REVIEW_BY_KEY_URL" translatable="false">get_review_by_key.php?key=%1$d</string>
     <string name="GET_REVIEW_BY_STORE_ID_URL" translatable="false">get_review_by_store_id.php?id=%1$d</string>
@@ -17,7 +17,9 @@
     <string name="GET_USER_BY_UID_URL" translatable="false">get_user_by_uid.php?uid=%1$s</string>
     <string name="IS_USER_EXISTS_URL" translatable="false">is_user_exists.php?status=0&amp;uid=%1$s</string>
     <string name="LIKE_CONDITION_URL" translatable="false">like_condition.php?store_id=%1$d&amp;uid=%2$s</string>
+    <string name="LIKES_COUNT_URL" translatable="false">likes_count.php?store_id=%1$d</string>
     <string name="POST_REPLY_URL" translatable="false">post_reply.php?tits_key=%1$s&amp;uid=%2$s&amp;text=%3$s</string>
+    <string name="REVIEWS_COUNT_URL" translatable="false">reviews_count.php?store_id=%1$d</string>
 
     <!--system-->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
@@ -48,7 +50,7 @@
     <string name="price_rate_label">Price rate %1$s</string>
     <string name="info">info</string>
     <string name="review">review</string>
-    <string name="reviews">Reviews</string>
+    <string name="reviews">%1$s Reviews</string>
     <string name="open_maps">Location</string>
     <string name="zero_results">Zero results</string>
     <string name="rate_symbol">$</string>
@@ -57,6 +59,7 @@
     <string name="review_no_review">No reviews yet</string>
     <string name="replies">Replies</string>
     <string name="no_replies">There is no replies</string>
+    <string name="distance_label">%1$sm</string>
 
     <!--Mock Strings-->
     <string name="mock_address" translatable="false">221B Baker St, Marylebone, London</string>

@@ -50,7 +50,7 @@ public class ReviewActivity extends AppCompatActivity {
         getBackIcon();
 
         store = (Store) getIntent().getSerializableExtra(getString(R.string.model_name_store));
-        Log.d("store", String.valueOf((store == null)));
+        setTitle(getString(R.string.reviews, ""));
 
         adapter = new ReviewAdapter(reviews, store, this);
         rvReview.setAdapter(adapter);

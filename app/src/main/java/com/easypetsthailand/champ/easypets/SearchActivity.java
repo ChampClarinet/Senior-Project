@@ -31,8 +31,8 @@ public class SearchActivity extends AppCompatActivity
 
     private static final String TAG = SearchActivity.class.getSimpleName();
     private static final String TYPE_ALL = "all";
-    private static final String TYPE_HOSPITAL = "hospital";
-    private static final String TYPE_SERVICE = "service";
+    private static final String TYPE_HOSPITAL = "pet hospital";
+    private static final String TYPE_SERVICE = "pet service";
 
     @BindView(R.id.search_type)
     Spinner typeSpinner;

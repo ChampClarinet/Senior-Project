@@ -19,11 +19,13 @@ import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.easypetsthailand.champ.easypets.Core.Utils.calculateDistance;
 import static com.easypetsthailand.champ.easypets.Core.Utils.createLoadDialog;
 import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 
@@ -87,7 +89,8 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
         TextView cv_closeLabel;
         @BindView(R.id.tv_open_time)
         TextView cv_openTimeTextView;
-        //TextView cv_distance;
+        @BindView(R.id.tv_distance)
+        TextView cv_distance;
         private Context context;
 
         public ViewHolder(View itemView, Context context) {
@@ -119,7 +122,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
 
             //price cv_rate
             String rateTextArgs = "";
-            for(int i=0;i<store.getPriceRate();++i){
+            for (int i = 0; i < store.getPriceRate(); ++i) {
                 rateTextArgs += context.getString(R.string.rate_symbol);
             }
             String rateText = context.getString(R.string.price_rate_label, rateTextArgs);
@@ -134,24 +137,23 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
             if (isOpening) {
                 cv_openLabel.setVisibility(View.VISIBLE);
                 cv_closeLabel.setVisibility(View.GONE);
-                /*cv_openLabel.setTextColor(Color.GREEN);
-                cv_closeLabel.setTextColor(context.getResources().getColor(R.color.text));*/
             } else {
                 cv_openLabel.setVisibility(View.GONE);
                 cv_closeLabel.setVisibility(View.VISIBLE);
-                /*cv_closeLabel.setTextColor(Color.RED);
-                cv_openLabel.setTextColor(context.getResources().getColor(R.color.text));*/
             }
             if (openTime != null && closeTime != null)
                 cv_openTimeTextView.setText(context.getString(R.string.time_open_label, openTime, closeTime));
             else cv_openTimeTextView.setText(context.getString(R.string.all_day_open));
 
             //distance
-            /*double serviceDistance = calculateDistance(store.getLatitude(), store.getLongitude());
-            String distanceString = Double.toString(serviceDistance) + " m";
-            if (serviceDistance > 1000)
-                distanceString = serviceDistance/1000 + " km";
-            distance.setText(distanceString);*/
+            double distance = calculateDistance(store.getLatitude(), store.getLongitude());
+            DecimalFormat format = new DecimalFormat("##.##");
+            String distanceString = format.format(distance);
+            if (distance > 1000) {
+                distance /= 1000;
+                distanceString = format.format(distance) + "k";
+            }
+            cv_distance.setText(context.getString(R.string.distance_label, distanceString));
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override

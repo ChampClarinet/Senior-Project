@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.Adapters.ResultAdapter;
+import com.easypetsthailand.champ.easypets.Core.GPSTracker;
 import com.easypetsthailand.champ.easypets.Model.Store;
 
 import org.json.JSONArray;
@@ -36,6 +37,8 @@ public class ResultActivity extends AppCompatActivity {
 
     private ArrayList<Store> stores = new ArrayList<>();
     private ResultAdapter adapter;
+    private String text;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,11 @@ public class ResultActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        String text = getIntent().getStringExtra("filter_text");
-        String type = getIntent().getStringExtra("filter_type");
+        GPSTracker.getInstance(getApplicationContext());
+
+
+        text = getIntent().getStringExtra("filter_text");
+        type = getIntent().getStringExtra("filter_type");
 
         query(text, type);
 
@@ -66,10 +72,13 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        query(text, type);
         adapter.notifyDataSetChanged();
     }
 
     public void query(String query, String type) {
+        if(type == null) type = "";
+        if(query == null) query = "";
         String url = getString(R.string.URL) + getString(R.string.GET_STORE_URL, query, type);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
