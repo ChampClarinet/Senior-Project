@@ -81,10 +81,7 @@ public class StoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(StoreActivity.this, getString(R.string.launch_google_maps), Toast.LENGTH_SHORT).show();
-                //Location location = store.getLocation();
-                double latitude = 13.731595800847062;
-                double longitude = 100.58154787950139;
-                openGoogleMaps(latitude, longitude);
+                openGoogleMaps(store.getLatitude(), store.getLongitude());
             }
         });
         storeOpenReviewButton.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +118,8 @@ public class StoreActivity extends AppCompatActivity {
         //image
         String picturePath = getString(R.string.pictures_storage_ref) + store.getPicturePath();
         StorageReference reference = FirebaseStorage.getInstance().getReference().child(picturePath);
-        Glide.with(this).using(new FirebaseImageLoader()).load(reference).centerCrop().into(imageViewStorePicture);
+        Glide.with(this).using(new FirebaseImageLoader()).load(reference).centerCrop()
+                .placeholder(android.R.drawable.ic_menu_report_image).into(imageViewStorePicture);
         //time
         String openTime = store.getOpenTime();
         String closeTime = store.getCloseTime();

@@ -111,7 +111,8 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
             //logo
             String logoPath = context.getString(R.string.icon_storage_ref) + store.getLogoPath();
             StorageReference reference = FirebaseStorage.getInstance().getReference().child(logoPath);
-            Glide.with(context).using(new FirebaseImageLoader()).load(reference).into(this.cv_logo);
+            Glide.with(context).using(new FirebaseImageLoader()).load(reference).centerCrop()
+                    .placeholder(android.R.drawable.ic_menu_report_image).into(this.cv_logo);
 
             //cv_name
             this.cv_name.setText(store.getName());
