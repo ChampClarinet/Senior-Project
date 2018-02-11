@@ -20,7 +20,7 @@
     <string name="result">ผลการค้นหา</string>
     <string name="open">เปิด</string>
     <string name="close">ปิด</string>
-    <string name="mock_store_title">อร</string>
+    <string name="mock_store_title">ชื่อร้าน</string>
     <string name="app_name">EasyPets</string>
     <string name="open_maps">ที่อยู่ร้าน</string>
     <string name="SUN">อา</string>
@@ -35,9 +35,15 @@
     <string name="price_rate_label">เรทราคา %1$s</string>
     <string name="zero_results">ไม่พบข้อมูล</string>
     <string name="rate_symbol">฿</string>
-    <string name="time_open">%1$sน - %2$sน</string>
     <string name="all_day_open">ให้บริการตลอด 24 ชม.</string>
     <string name="launch_google_maps">กำลังเปิด Google Maps</string>
     <string name="review_no_review">ไม่มีรีวิว</string>
+    <string name="rate_symbol_double">฿฿</string>
+    <string name="rate_symbol_triple">฿฿฿</string>
+    <string name="price_rate_range">ระดับราคาที่สนใจ</string>
+    <string name="opening">กำลังเปิดให้บริการ</string>
+    <string name="time_open_label">%1$sน - %2$sน</string>
+    <string name="sort">เรียงลำดับ</string>
+    <string name="distance">ระยะทาง</string>
 
 </resources>

@@ -5,15 +5,15 @@
     <string name="filter">Filter</string>
     <string name="result">Results</string>
 
-    <!--URLS-->
-    <string name="URL" translatable="false">http://172.27.162.97/easypets/</string> <!--10.0.2.2-->
+    <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
+    <string name="URL" translatable="false">http://03412caf.ngrok.io/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ADD_REVIEW_URL" translatable="false">post_review.php?uid=%1$s&amp;text=%2$s</string>
     <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;store_id=%2$d</string>
     <string name="GET_REPLIES_BY_REVIEW_ID_URL" translatable="false">get_replies.php?review_id=%1$d</string>
     <string name="GET_REVIEW_BY_KEY_URL" translatable="false">get_review_by_key.php?key=%1$d</string>
     <string name="GET_REVIEW_BY_STORE_ID_URL" translatable="false">get_review_by_store_id.php?id=%1$d</string>
-    <string name="GET_STORE_URL" translatable="false">get_store.php?keyword=%1$s&amp;type=%2$s</string>
+    <string name="GET_STORE_URL" translatable="false">get_store.php?keyword=%1$s&amp;type=%2$s&amp;price_rate_filter_out=%3$s&amp;order_by=%4$s</string>
     <string name="GET_USER_BY_UID_URL" translatable="false">get_user_by_uid.php?uid=%1$s</string>
     <string name="IS_USER_EXISTS_URL" translatable="false">is_user_exists.php?status=0&amp;uid=%1$s</string>
     <string name="LIKE_CONDITION_URL" translatable="false">like_condition.php?store_id=%1$d&amp;uid=%2$s</string>
@@ -54,21 +54,30 @@
     <string name="open_maps">Location</string>
     <string name="zero_results">Zero results</string>
     <string name="rate_symbol">$</string>
+    <string name="rate_symbol_double">$$</string>
+    <string name="rate_symbol_triple">$$$</string>
     <string name="all_day_open">Open 24 hours</string>
     <string name="time_open_label">%1$s - %2$s</string>
     <string name="review_no_review">No reviews yet</string>
     <string name="replies">Replies</string>
     <string name="no_replies">There is no replies</string>
+    <string name="name_label">Name</string>
+    <string name="distance">Distance</string>
+    <string name="popularity">Popularity</string>
+    <string name="price">Price</string>
     <string name="distance_label">%1$sm</string>
+    <string name="opening">Opening</string>
+    <string name="price_rate_range">Preferred Price Rate</string>
+    <string name="sort">sort by</string>
 
     <!--Mock Strings-->
+    <string name="mock_store_title">Store name</string>
     <string name="mock_address" translatable="false">221B Baker St, Marylebone, London</string>
     <string name="mock_time" translatable="false">09:00 - 20:00</string>
     <string name="mock_tel" translatable="false">0632724678</string>
     <string name="mock_likes_quantity" translatable="false">592</string>
     <string name="mock_description" translatable="false">Duis sed tempus tortor. Integer commodo quis metus a maximus. Duis a laoreet urna. Nam ut nisi rhoncus, vestibulum elit at, euismod neque. Mauris posuere leo ipsum, nec scelerisque erat scelerisque ac.</string>
     <string name="mock_available">Available for dog, cat</string>
-    <string name="mock_store_title">Orn</string>
 
     <!--Firebase References-->
     <string name="icon_storage_ref" translatable="false">StoreLogo/</string>
@@ -76,9 +85,9 @@
 
     <!--type filter-->
     <string-array name="type_list">
-        <item>All</item>
         <item>Pet Service</item>
         <item>Pet Hospital</item>
+        <item>I\'m looking for</item>
     </string-array>
 
     <!--Store attributes-->

@@ -27,11 +27,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FilterActivity"
-            android:label="@string/filter"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ResultActivity"
             android:label="@string/result"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -47,7 +42,6 @@
         </activity>
         <activity
             android:name=".StoreActivity"
-            android:label="@string/mock_store_title"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

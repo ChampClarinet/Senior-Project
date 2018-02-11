@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.easypetsthailand.champ.easypets.R;
@@ -25,7 +26,7 @@ public class Utils {
         return b;
     }
 
-    public static double calculateDistance(double latitude, double longitude){
+    public static double calculateDistance(double latitude, double longitude) {
         Location here = getCurrentLocation();
         Location location = new Location(LocationManager.GPS_PROVIDER);
         location.setLatitude(latitude);
@@ -33,7 +34,7 @@ public class Utils {
         return here.distanceTo(location);
     }
 
-    public static Location getCurrentLocation(){
+    public static Location getCurrentLocation() {
         GPSTracker tracker = GPSTracker.getInstance();
         Location here = new Location(LocationManager.GPS_PROVIDER);
         here.setLatitude(tracker.getLatitude());
@@ -42,15 +43,15 @@ public class Utils {
         return here;
     }
 
-    public static String getGoogleMapsUri(double latitude, double longitude){
+    public static String getGoogleMapsUri(double latitude, double longitude) {
         String uri = "https://www.google.com/maps/search/?api=1&query=";
-        uri += latitude+","+longitude;
+        uri += latitude + "," + longitude;
         return uri;
     }
 
     private static AlertDialog dialog;
 
-    public static AlertDialog createLoadDialog(Context context, String message){
+    public static AlertDialog createLoadDialog(Context context, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.loading_layout, null);
@@ -63,25 +64,21 @@ public class Utils {
         return dialog;
     }
 
-    public static void dissmissLoadDialog(){
-        if(dialog != null){
+    public static void dissmissLoadDialog() {
+        if (dialog != null) {
             dialog.dismiss();
             dialog = null;
         }
     }
 
-    /*public static double calculateDistance(double latitude, double longitude){
-
-    }*/
-
     public static boolean isOpening(String openTime, String closeTime) {
-        if(openTime != null && closeTime != null){
+        /*if (openTime != null && closeTime != null) {
             Log.d("openTime", openTime);
             Log.d("closeTime", closeTime);
-        }else{
+        } else {
             Log.d("openTime", "null");
             Log.d("closeTime", "null");
-        }
+        }*/
         if (openTime == null || closeTime == null) return true;
         Calendar now = Calendar.getInstance();
         int hourOpen = Integer.parseInt(openTime.substring(0, 2));
@@ -94,6 +91,17 @@ public class Utils {
         return (now.get(Calendar.HOUR_OF_DAY) < hourOpen ||
                 (now.get(Calendar.HOUR_OF_DAY) == hourOpen && now.get(Calendar.MINUTE) > minuteOpen)) && (now.get(Calendar.HOUR_OF_DAY) < hourClose ||
                 now.get(Calendar.HOUR_OF_DAY) == hourClose && now.get(Calendar.MINUTE) < minuteClose);
+    }
+
+    public static void setToggleButtonBackground(Context context, CompoundButton button, boolean status) {
+        if (status) {
+            button.setBackgroundResource(R.drawable.toggle_button_toggled);
+            button.setTextColor(context.getResources().getColor(R.color.colorPrimary));
+        }
+        else {
+            button.setBackgroundResource(R.drawable.toggle_button);
+            button.setTextColor(context.getResources().getColor(R.color.colorAccent));
+        }
     }
 
 }

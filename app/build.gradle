@@ -54,6 +54,9 @@ dependencies {
     //FirebaseUI Storage
     compile 'com.firebaseui:firebase-ui-storage:0.6.0'
 
+    //fab with text
+    compile 'com.github.dimorinny:floating-text-button:0.0.4'
+
 }
 
 
