@@ -65,10 +65,11 @@
     <string name="distance">Distance</string>
     <string name="popularity">Popularity</string>
     <string name="price">Price</string>
-    <string name="distance_label">%1$sm</string>
+    <string name="distance_label" translatable="false">%1$sm</string>
     <string name="opening">Opening</string>
     <string name="price_rate_range">Preferred Price Rate</string>
     <string name="sort">sort by</string>
+    <string name="sorted_by">Sorted by %1$s</string>
 
     <!--Mock Strings-->
     <string name="mock_store_title">Store name</string>

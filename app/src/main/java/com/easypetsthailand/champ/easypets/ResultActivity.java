@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -29,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -48,6 +46,8 @@ public class ResultActivity extends AppCompatActivity {
     RecyclerView resultRecyclerView;
     @BindView(R.id.fab_sort)
     FloatingTextButton fabSort;
+    @BindView(R.id.result_sort_by_tv)
+    TextView sortByTextView;
 
     private ArrayList<Store> stores = new ArrayList<>();
     private ResultAdapter adapter;
@@ -98,6 +98,12 @@ public class ResultActivity extends AppCompatActivity {
         query(text, type, filter, sortBy);
         adapter.notifyDataSetChanged();
         Log.d("sort by", sortBy);
+        String sortByText = sortBy;
+        if(sortByText.equals(getString(R.string.name))) sortByText = getString(R.string.name_label);
+        else if(sortByText.equals(getString(R.string.price_rate))) sortByText = getString(R.string.price);
+        else if(sortByText.equals("popularity")) sortByText = getString(R.string.popularity);
+        else sortByText = getString(R.string.distance);
+        sortByTextView.setText(getString(R.string.sorted_by, sortByText));
     }
 
     public void query(String query, String type, final Filter filter, final String sortBy) {

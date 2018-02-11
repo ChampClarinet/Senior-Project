@@ -9,9 +9,9 @@
 
     <!--type filter-->
     <string-array name="type_list">
-        <item>ทั้งหมด</item>
         <item>สถานบริการสัตว์เลี้ยง</item>
         <item>โรงพยาบาลสัตว์</item>
+        <item>ฉันกำลังหา</item>
     </string-array>
     <string name="mock_available">บริการสำหรับสุนัข, แมว</string>
     <string name="clear">ล้างค่า</string>
@@ -45,5 +45,12 @@
     <string name="time_open_label">%1$sน - %2$sน</string>
     <string name="sort">เรียงลำดับ</string>
     <string name="distance">ระยะทาง</string>
+    <string name="sorted_by">เรียงลำดับตาม %1$s</string>
+    <string name="name_label">ชื่อ</string>
+    <string name="popularity">ความนิยม</string>
+    <string name="price">ระดับราคา</string>
+    <string name="reviews">%1$s รีวิว</string>
+    <string name="replies">การตอบกลับ</string>
+    <string name="no_replies">ยังไม่มีการตอบกลับ</string>
 
 </resources>

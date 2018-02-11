@@ -9,6 +9,28 @@
     tools:showIn="@layout/activity_result">
 
     <TextView
+        android:id="@+id/result_sort_by_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/my_default_margin"
+        android:text="@string/sorted_by"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/separator_result_layout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="@dimen/my_default_margin"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@id/store_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result_sort_by_tv" />
+
+    <TextView
         android:id="@+id/result_label_zero_results"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,11 +42,14 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/separator_result_layout" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/result_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/separator_result_layout" />
 
 </android.support.constraint.ConstraintLayout>
