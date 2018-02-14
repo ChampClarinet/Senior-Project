@@ -13,6 +13,13 @@
         <item>โรงพยาบาลสัตว์</item>
         <item>ฉันกำลังหา</item>
     </string-array>
+
+    <!--Image chooser items-->
+    <string-array name="image_chooser_options">
+        <item>เลือกภาพจากอัลบั้ม</item>
+        <item>ถ่ายภาพ</item>
+    </string-array>
+
     <string name="mock_available">บริการสำหรับสุนัข, แมว</string>
     <string name="clear">ล้างค่า</string>
     <string name="signing_in">กำลังเข้าสู่ระบบ</string>
@@ -52,5 +59,8 @@
     <string name="reviews">%1$s รีวิว</string>
     <string name="replies">การตอบกลับ</string>
     <string name="no_replies">ยังไม่มีการตอบกลับ</string>
+    <string name="post_success">โพสต์เรียบร้อย</string>
+    <string name="post_failed">โพสต์ล้มเหลว</string>
+    <string name="message_fill_review">กรุณากรอกข้อความ</string>
 
 </resources>

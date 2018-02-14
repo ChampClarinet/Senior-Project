@@ -13,6 +13,13 @@
         <item>ペットクリニック</item>
         <item>探索のタイプ</item>
     </string-array>
+
+    <!--Image chooser items-->
+    <string-array name="image_chooser_options">
+        <item>アルバムから選択</item>
+        <item>写真を撮る</item>
+    </string-array>
+
     <string name="SUN">日</string>
     <string name="MON">月</string>
     <string name="TUE">火</string>
@@ -52,5 +59,8 @@
     <string name="no_replies">返信はまだありません。</string>
     <string name="replies">返信</string>
     <string name="reviews">%1$s リービュー</string>
+    <string name="post_success">投稿は成功しました</string>
+    <string name="post_failed">投稿は失敗した</string>
+    <string name="message_fill_review">レビューをお書きしてください</string>
 
 </resources>

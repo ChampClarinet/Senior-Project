@@ -57,7 +57,13 @@ dependencies {
     //fab with text
     compile 'com.github.dimorinny:floating-text-button:0.0.4'
 
+    //imageLoader
+    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
+    implementation 'com.myhexaville:smart-image-picker:1.0.3'
+    //compile 'com.kbeanie:image-chooser-library:1.5.8@aar'
+
 }
+
 
 
 

@@ -90,7 +90,6 @@ public class StoreActivity extends AppCompatActivity {
                 //go to review part
                 Intent intent = new Intent(StoreActivity.this, ReviewActivity.class);
                 intent.putExtra(getString(R.string.model_name_store), store);
-                intent.putExtra("reviews", textViewReviewCount.getText().toString());
                 startActivity(intent);
             }
         });

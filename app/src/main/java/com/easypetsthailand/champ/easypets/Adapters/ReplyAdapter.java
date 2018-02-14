@@ -37,7 +37,7 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.GenericHolde
 
     @Override
     public GenericHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_review, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_post, parent, false);
         return new ViewHolder(v, store, context);
     }
 
@@ -69,16 +69,18 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.GenericHolde
     public static class ViewHolder extends GenericHolder {
 
         //bind cardview's widgets
-        @BindView(R.id.cv_review_card)
+        @BindView(R.id.cv_post_card)
         CardView cardView;
-        @BindView(R.id.tv_reviewer_name)
+        @BindView(R.id.tv_poster_name)
         TextView cv_name;
-        @BindView(R.id.imgview_reviewer_pic)
-        ImageView cv_reviewer_pic;
-        @BindView(R.id.tv_review_time)
-        TextView cv_reviewTime;
-        @BindView(R.id.tv_review_text)
-        TextView cv_reviewText;
+        @BindView(R.id.imgview_poster_pic)
+        ImageView cv_replier_pic;
+        @BindView(R.id.tv_post_time)
+        TextView cv_replyTime;
+        @BindView(R.id.tv_post_text)
+        TextView cv_replyText;
+        @BindView(R.id.img_post_image)
+        ImageView replyImageView;
         private Context context;
         private Store store;
 
@@ -100,13 +102,23 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.GenericHolde
 
             //user pic
             StorageReference reference = FirebaseStorage.getInstance().getReference().child(replierPicturePath);
-            Glide.with(context).using(new FirebaseImageLoader()).load(reference).into(cv_reviewer_pic);
+            Glide.with(context).using(new FirebaseImageLoader()).load(reference).into(cv_replier_pic);
 
             //time
-            cv_reviewTime.setText(reply.getTimeReplied());
+            cv_replyTime.setText(reply.getTimeReplied());
 
-            //review text
-            cv_reviewText.setText(reply.getReplyText());
+            //reply text
+            cv_replyText.setText(reply.getReplyText());
+
+            //reply image
+            Log.d("replyPic", reply.getReplyPicturePath());
+            if(!reply.getReplyPicturePath().equalsIgnoreCase("null")){
+                String imagePath = context.getString(R.string.reply_images_storage_ref) + reply.getReplyPicturePath();
+                StorageReference imgRef = FirebaseStorage.getInstance().getReference().child(imagePath);
+                Glide.with(context).using(new FirebaseImageLoader()).load(imgRef).centerCrop()
+                        .placeholder(android.R.drawable.ic_menu_report_image).into(replyImageView);
+                replyImageView.setVisibility(View.VISIBLE);
+            }
 
         }
 

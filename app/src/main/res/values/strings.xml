@@ -4,9 +4,10 @@
     <string name="action_settings">Settings</string>
     <string name="filter">Filter</string>
     <string name="result">Results</string>
+    <string name="write_review">Write a review</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
-    <string name="URL" translatable="false">http://03412caf.ngrok.io/easypets/</string>
+    <string name="URL" translatable="false">http://8bf7f8f4.ngrok.io/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ADD_REVIEW_URL" translatable="false">post_review.php?uid=%1$s&amp;text=%2$s</string>
     <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;store_id=%2$d</string>
@@ -18,7 +19,8 @@
     <string name="IS_USER_EXISTS_URL" translatable="false">is_user_exists.php?status=0&amp;uid=%1$s</string>
     <string name="LIKE_CONDITION_URL" translatable="false">like_condition.php?store_id=%1$d&amp;uid=%2$s</string>
     <string name="LIKES_COUNT_URL" translatable="false">likes_count.php?store_id=%1$d</string>
-    <string name="POST_REPLY_URL" translatable="false">post_reply.php?tits_key=%1$s&amp;uid=%2$s&amp;text=%3$s</string>
+    <string name="POST_REPLY_URL" translatable="false">post_reply.php?review_id=%1$d&amp;text=%2$s&amp;img=%3$s</string>
+    <string name="POST_REVIEW_URL" translatable="false">post_review.php?store_id=%1$d&amp;uid=%2$s&amp;text=%3$s&amp;img=%4$s</string>
     <string name="REVIEWS_COUNT_URL" translatable="false">reviews_count.php?store_id=%1$d</string>
 
     <!--system-->
@@ -28,6 +30,9 @@
     <!--toasts-->
     <string name="google_login_failed">Google login failed.</string>
     <string name="launch_google_maps">Launching Google Maps</string>
+    <string name="message_fill_review">Please fill the review form</string>
+    <string name="post_success">Post Successful</string>
+    <string name="post_failed">Post failed</string>
 
     <!--Days-->
     <string name="SUN">SUN</string>
@@ -70,6 +75,8 @@
     <string name="price_rate_range">Preferred Price Rate</string>
     <string name="sort">sort by</string>
     <string name="sorted_by">Sorted by %1$s</string>
+    <string name="add_a_photo">add a photo</string>
+    <string name="post">post</string>
 
     <!--Mock Strings-->
     <string name="mock_store_title">Store name</string>
@@ -82,6 +89,8 @@
 
     <!--Firebase References-->
     <string name="icon_storage_ref" translatable="false">StoreLogo/</string>
+    <string name="reply_images_storage_ref" translatable="false">ReplyImages/</string>
+    <string name="review_images_storage_ref" translatable="false">ReviewImages/</string>
     <string name="pictures_storage_ref" translatable="false">StorePictures/</string>
 
     <!--type filter-->
@@ -89,6 +98,12 @@
         <item>Pet Service</item>
         <item>Pet Hospital</item>
         <item>I\'m looking for</item>
+    </string-array>
+
+    <!--Image chooser items-->
+    <string-array name="image_chooser_options">
+        <item>Choose from album</item>
+        <item>Take a photo</item>
     </string-array>
 
     <!--Store attributes-->

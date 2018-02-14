@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,9 @@ import com.easypetsthailand.champ.easypets.Adapters.ReplyAdapter;
 import com.easypetsthailand.champ.easypets.Model.Reply;
 import com.easypetsthailand.champ.easypets.Model.Review;
 import com.easypetsthailand.champ.easypets.Model.Store;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +50,8 @@ public class ReplyActivity extends AppCompatActivity {
     TextView reviewTime;
     @BindView(R.id.reply_tv_review_text)
     TextView reviewText;
+    @BindView(R.id.reply_img_review_image)
+    ImageView reviewImageView;
     @BindView(R.id.reply_tv_reply_label)
     TextView replyLabel;
     @BindView(R.id.rv_replies)
@@ -105,6 +111,7 @@ public class ReplyActivity extends AppCompatActivity {
                 }catch (JSONException e){
                     Log.d(TAG, "error "+response);
                     Log.d("jsonException", e.getMessage());
+                    replyLabel.setText(R.string.no_replies);
                 }
             }
         }, new Response.ErrorListener() {
@@ -124,6 +131,12 @@ public class ReplyActivity extends AppCompatActivity {
         Glide.with(this).load(reviewerPicturePath).centerCrop().into(this.reviewerImageView);
         reviewTime.setText(review.getTimeReviewed());
         reviewText.setText(review.getReviewText());
+        if(!review.getReviewPicturePath().equalsIgnoreCase("null")) {
+            String imagePath = getString(R.string.review_images_storage_ref) + review.getReviewPicturePath();
+            StorageReference imgRef = FirebaseStorage.getInstance().getReference().child(imagePath);
+            Glide.with(this).using(new FirebaseImageLoader()).load(imgRef).centerCrop().into(reviewImageView);
+            reviewImageView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getBackIcon() {

@@ -12,15 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Model.Review;
 import com.easypetsthailand.champ.easypets.Model.Store;
 import com.easypetsthailand.champ.easypets.R;
 import com.easypetsthailand.champ.easypets.ReplyActivity;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,17 +38,19 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
     private ArrayList<Review> dataSet;
     private Store store;
     private Context context;
+    private RequestQueue requestQueue;
 
-    public ReviewAdapter(ArrayList<Review> dataSet, Store store, Context context) {
+    public ReviewAdapter(ArrayList<Review> dataSet, Store store, RequestQueue requestQueue, Context context) {
         this.dataSet = dataSet;
         this.store = store;
+        this.requestQueue = requestQueue;
         this.context = context;
     }
 
     @Override
     public GenericHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_review, parent, false);
-        return new ViewHolder(v, store,  context);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_post, parent, false);
+        return new ViewHolder(v, store, requestQueue, context);
     }
 
     @Override
@@ -76,24 +81,27 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
     public static class ViewHolder extends GenericHolder {
 
         //bind cardview's widgets
-        @BindView(R.id.cv_review_card)
+        @BindView(R.id.cv_post_card)
         CardView cardView;
-        @BindView(R.id.tv_reviewer_name)
+        @BindView(R.id.tv_poster_name)
         TextView cv_name;
-        @BindView(R.id.imgview_reviewer_pic)
+        @BindView(R.id.imgview_poster_pic)
         ImageView cv_reviewer_pic;
-        @BindView(R.id.tv_review_time)
+        @BindView(R.id.tv_post_time)
         TextView cv_reviewTime;
-        @BindView(R.id.tv_review_text)
+        @BindView(R.id.tv_post_text)
         TextView cv_reviewText;
-        //@BindView(R.id.review)
+        @BindView(R.id.img_post_image)
+        ImageView img_review_image;
         private Context context;
         private Store store;
+        private RequestQueue requestQueue;
 
-        public ViewHolder(View itemView, Store store,  Context context) {
+        public ViewHolder(View itemView, Store store, RequestQueue requestQueue, Context context) {
             super(itemView);
             this.context = context;
             this.store = store;
+            this.requestQueue = requestQueue;
             ButterKnife.bind(this, itemView);
         }
 
@@ -135,7 +143,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
                     Log.d("loading user", error.toString());
                 }
             });
-            Volley.newRequestQueue(context).add(request);
+            request.setTag("review");
+            requestQueue.add(request);
 
             //time
             cv_reviewTime.setText(review.getTimeReviewed());
@@ -144,7 +153,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
             cv_reviewText.setText(review.getReviewText());
 
             //review image
-            //Glide.with(context).load(review.getReviewPicturePath()).centerCrop().into(cv);
+            Log.d("reviewPic", review.getReviewPicturePath());
+            if(!review.getReviewPicturePath().equalsIgnoreCase("null")){
+                String imagePath = context.getString(R.string.review_images_storage_ref) + review.getReviewPicturePath();
+                StorageReference reference = FirebaseStorage.getInstance().getReference().child(imagePath);
+                Glide.with(context).using(new FirebaseImageLoader()).load(reference).centerCrop()
+                        .placeholder(android.R.drawable.ic_menu_report_image).into(img_review_image);
+                img_review_image.setVisibility(View.VISIBLE);
+            }
 
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
