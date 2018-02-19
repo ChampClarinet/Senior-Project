@@ -119,6 +119,7 @@ public class StoreActivity extends AppCompatActivity {
         StorageReference reference = FirebaseStorage.getInstance().getReference().child(picturePath);
         Glide.with(this).using(new FirebaseImageLoader()).load(reference).centerCrop()
                 .placeholder(android.R.drawable.ic_menu_report_image).into(imageViewStorePicture);
+        Log.d("picture location", reference.toString());
         //time
         String openTime = store.getOpenTime();
         String closeTime = store.getCloseTime();

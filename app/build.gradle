@@ -60,12 +60,7 @@ dependencies {
     //imageLoader
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
     implementation 'com.myhexaville:smart-image-picker:1.0.3'
-    //compile 'com.kbeanie:image-chooser-library:1.5.8@aar'
 
 }
-
-
-
-
 
 apply plugin: 'com.google.gms.google-services'

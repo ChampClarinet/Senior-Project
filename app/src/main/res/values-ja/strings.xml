@@ -62,5 +62,7 @@
     <string name="post_success">投稿は成功しました</string>
     <string name="post_failed">投稿は失敗した</string>
     <string name="message_fill_review">レビューをお書きしてください</string>
+    <string name="add_a_photo">写真を追加</string>
+    <string name="post">投稿</string>
 
 </resources>

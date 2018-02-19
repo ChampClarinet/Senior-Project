@@ -7,7 +7,7 @@
     <string name="write_review">Write a review</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
-    <string name="URL" translatable="false">http://8bf7f8f4.ngrok.io/easypets/</string>
+    <string name="URL" translatable="false">http://10.0.2.2/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ADD_REVIEW_URL" translatable="false">post_review.php?uid=%1$s&amp;text=%2$s</string>
     <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;store_id=%2$d</string>

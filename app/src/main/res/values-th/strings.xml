@@ -62,5 +62,7 @@
     <string name="post_success">โพสต์เรียบร้อย</string>
     <string name="post_failed">โพสต์ล้มเหลว</string>
     <string name="message_fill_review">กรุณากรอกข้อความ</string>
+    <string name="add_a_photo">เพิ่มรูปภาพ</string>
+    <string name="post">โพสต์</string>
 
 </resources>
