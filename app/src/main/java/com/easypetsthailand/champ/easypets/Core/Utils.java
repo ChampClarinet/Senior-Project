@@ -100,7 +100,7 @@ public class Utils {
         }
         else {
             button.setBackgroundResource(R.drawable.toggle_button);
-            button.setTextColor(context.getResources().getColor(R.color.colorAccent));
+            button.setTextColor(context.getResources().getColor(R.color.text));
         }
     }
 

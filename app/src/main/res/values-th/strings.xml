@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="search_hint">ค้นหาจากตำแหน่งของคุณ</string>
+    <string name="search_hint">ค้นหา</string>
     <string name="action_settings">ตั้งค่า</string>
     <string name="logout">ล็อคเอาท์</string>
     <string name="search">ค้นหา</string>
@@ -64,5 +64,18 @@
     <string name="message_fill_review">กรุณากรอกข้อความ</string>
     <string name="add_a_photo">เพิ่มรูปภาพ</string>
     <string name="post">โพสต์</string>
+    <string name="write_review">เขียนรีวิว</string>
+    <string name="title_grooming_uppercase">อาบน้ำ ตัดขน</string>
+    <string name="title_shop_uppercase">ร้านอุปกรณ์สัตว์เลี้ยง</string>
+    <string name="title_hospital_uppercase">สถานพยาบาลสัตว์</string>
+    <string name="title_deposit_uppercase">รับฝากสัตว์เลี้ยง</string>
+    <string name="title_grooming">อาบน้ำ ตัดขน</string>
+    <string name="title_shop">ร้านอุปกรณ์สัตว์เลี้ยง</string>
+    <string name="title_hospital">สถานพยาบาลสัตว์</string>
+    <string name="title_deposit">รับฝากสัตว์เลี้ยง</string>
+    <string name="sort_popularity">ความนิยม</string>
+    <string name="sort_price">ระดับราคา</string>
+    <string name="sort_name">ชื่อ</string>
+    <string name="sort_distance">ระยะทาง</string>
 
 </resources>

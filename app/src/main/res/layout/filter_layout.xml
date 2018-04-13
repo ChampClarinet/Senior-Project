@@ -23,7 +23,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/toggle_button_toggled"
         android:text="@string/clear"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/text"
         app:layout_constraintBottom_toTopOf="@id/filter_is_open"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -75,7 +75,7 @@
             android:layout_margin="@dimen/default_margin"
             android:layout_weight="1"
             android:background="@drawable/toggle_button"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textOff="@string/rate_symbol"
             android:textOn="@string/rate_symbol" />
 
@@ -86,7 +86,7 @@
             android:layout_margin="@dimen/default_margin"
             android:layout_weight="1"
             android:background="@drawable/toggle_button"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textOff="@string/rate_symbol_double"
             android:textOn="@string/rate_symbol_double" />
 
@@ -97,7 +97,7 @@
             android:layout_margin="@dimen/default_margin"
             android:layout_weight="1"
             android:background="@drawable/toggle_button"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textOff="@string/rate_symbol_triple"
             android:textOn="@string/rate_symbol_triple" />
 

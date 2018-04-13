@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDim">#8598D1</color>
-    <color name="colorPrimaryDark">#7386BF</color>
-    <color name="colorAccent">#7C8FC8</color>
+    <color name="colorPrimary">#7C8FC8</color>
+    <color name="colorPrimaryDim">#ADBFFB</color>
+    <color name="colorPrimaryDark">#4C6297</color>
+    <color name="colorAccent">#F38B9F</color>
     <color name="colorAccent_pressed">#7386BF</color>
-    <color name="text">@color/primary_dark_material_light</color>
-    <color name="icon">@color/text</color>
-    <color name="liked">#f97e77</color>
+    <color name="text">#FFFFFF</color>
+    <color name="text2">@color/primary_dark_material_light</color>
+    <color name="icon">@color/primary_dark_material_light</color>
+    <color name="liked">#F38B9F</color>
+    <color name="unliked">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="nav_header_background">@color/colorPrimaryDim</color>
     <color name="black_transparent">#77000000</color>
+    <!--<color name="title_tint">@color/colorAccent</color>-->
 
 </resources>

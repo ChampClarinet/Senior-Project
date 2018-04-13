@@ -159,7 +159,7 @@ public class StoreActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "error\n"+url);
+                Log.d(TAG, "error\n" + url);
             }
         });
         Volley.newRequestQueue(this).add(request);
@@ -167,9 +167,9 @@ public class StoreActivity extends AppCompatActivity {
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isCurrentUserLiked){
+                if (isCurrentUserLiked) {
                     unlike();
-                }else like();
+                } else like();
                 StoreManager.like(StoreActivity.this, store.getStoreId(), user.getUid());
             }
         });
@@ -185,13 +185,13 @@ public class StoreActivity extends AppCompatActivity {
         Log.d("like", "like");
         isCurrentUserLiked = true;
         likeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.liked)));
-        likeButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+        likeButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.unliked)));
     }
 
     private void unlike() {
         Log.d("like", "unlike");
         isCurrentUserLiked = false;
-        likeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+        likeButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.unliked)));
         likeButton.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.liked)));
     }
 

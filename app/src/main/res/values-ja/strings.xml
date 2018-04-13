@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="action_settings">設定</string>
-    <string name="search_hint">ここから探索</string>
+    <string name="search_hint">探索</string>
     <string name="logout">ログアウト</string>
     <string name="filter_button">探索のオプション</string>
     <string name="search">探索</string>
@@ -64,5 +64,18 @@
     <string name="message_fill_review">レビューをお書きしてください</string>
     <string name="add_a_photo">写真を追加</string>
     <string name="post">投稿</string>
+    <string name="write_review">レビューを書く</string>
+    <string name="title_shop">店</string>
+    <string name="title_hospital">獣医クリニック</string>
+    <string name="title_deposit">ペットを預金</string>
+    <string name="title_deposit_uppercase">ペットを預金</string>
+    <string name="title_shop_uppercase">店</string>
+    <string name="title_hospital_uppercase">獣医クリニック</string>
+    <string name="title_grooming">ペットグルーミング</string>
+    <string name="title_grooming_uppercase">ペットグルーミング</string>
+    <string name="sort_price">価格</string>
+    <string name="sort_popularity">好評</string>
+    <string name="sort_name">名前</string>
+    <string name="sort_distance">遠近</string>
 
 </resources>

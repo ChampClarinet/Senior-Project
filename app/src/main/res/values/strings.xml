@@ -5,6 +5,20 @@
     <string name="filter">Filter</string>
     <string name="result">Results</string>
     <string name="write_review">Write a review</string>
+    <string name="title_grooming_uppercase">GROOMING</string>
+    <string name="title_shop_uppercase">SHOP</string>
+    <string name="title_hospital_uppercase">HOSPITAL</string>
+    <string name="title_deposit_uppercase">DEPOSIT</string>
+    <string name="title_grooming">Grooming</string>
+    <string name="title_shop">Shop</string>
+    <string name="title_hospital">Hospital</string>
+    <string name="title_deposit">Deposit</string>
+
+    <!--Sort by-->
+    <string name="sort_name">Name</string>
+    <string name="sort_distance">Distance</string>
+    <string name="sort_price">Price</string>
+    <string name="sort_popularity">Popularity</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
     <string name="URL" translatable="false">http://10.0.2.2/easypets/</string>
@@ -45,7 +59,7 @@
 
     <!--labels-->
     <string name="logout">Logout</string>
-    <string name="search_hint">Search from your current location</string>
+    <string name="search_hint">Search</string>
     <string name="filter_button">Search Options</string>
     <string name="search">Search</string>
     <string name="clear">clear</string>

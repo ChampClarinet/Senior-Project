@@ -25,13 +25,13 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Hello World"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/text" />
 
     <TextView
         android:id="@+id/navbar_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="petza007@easypets.com"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/text" />
 
 </LinearLayout>

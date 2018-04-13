@@ -16,7 +16,7 @@
             android:id="@+id/replyActivity_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorAccent"
+            android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -45,14 +45,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_gallery"
-            android:tint="@color/colorAccent" />
+            android:tint="@color/colorPrimary" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_margin"
             android:text="@string/add_a_photo"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textSize="20sp" />
 
     </LinearLayout>
@@ -81,7 +81,7 @@
             android:layout_gravity="top|end"
             android:layout_marginEnd="4dp"
             android:layout_marginTop="5dp"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimary"
             android:src="@drawable/ic_close" />
 
     </FrameLayout>

@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     private void openMainActivity(FirebaseUser user) {
         importUserProfile(getApplicationContext(), user);
         Log.d(TAG, "signed in with " + user.getDisplayName());
-        startActivity(new Intent(this, SearchActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
         finish();
         if(signingInDialog != null) signingInDialog.dismiss();
     }
