@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imgview_store_picture"
+            android:id="@+id/imgview_service_picture"
             android:layout_width="150dp"
             android:layout_height="fill_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,11 +34,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imgview_store_picture"
+            app:layout_constraintStart_toEndOf="@+id/imgview_service_picture"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tv_store_name"
+                android:id="@+id/tv_service_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -63,7 +63,7 @@
                     android:tint="@color/liked" />
 
                 <TextView
-                    android:id="@+id/tv_likes_count"
+                    android:id="@+id/tv_service_likes_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="120"
@@ -72,7 +72,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_distance"
+                android:id="@+id/tv_service_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -89,21 +89,21 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_open"
+                    android:id="@+id/tv_service_open"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/default_margin"
                     android:text="@string/open" />
 
                 <TextView
-                    android:id="@+id/tv_close"
+                    android:id="@+id/tv_service_close"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/default_margin"
                     android:text="@string/close" />
 
                 <TextView
-                    android:id="@+id/tv_open_time"
+                    android:id="@+id/tv_service_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="09:00 - 16:00"
@@ -112,13 +112,13 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_price_rate"
+                android:id="@+id/tv_service_depositable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
                 android:singleLine="false"
-                android:text="@string/price_rate_label" />
+                android:text="@string/mock_is_depositable" />
 
         </LinearLayout>
 

@@ -65,11 +65,9 @@
     <string name="add_a_photo">写真を追加</string>
     <string name="post">投稿</string>
     <string name="write_review">レビューを書く</string>
-    <string name="title_shop">店</string>
     <string name="title_hospital">獣医クリニック</string>
-    <string name="title_deposit">ペットを預金</string>
-    <string name="title_deposit_uppercase">ペットを預金</string>
-    <string name="title_shop_uppercase">店</string>
+    <string name="title_hotel">ペットを預金</string>
+    <string name="title_hotel_uppercase">ペットを預金</string>
     <string name="title_hospital_uppercase">獣医クリニック</string>
     <string name="title_grooming">ペットグルーミング</string>
     <string name="title_grooming_uppercase">ペットグルーミング</string>
@@ -77,5 +75,9 @@
     <string name="sort_popularity">好評</string>
     <string name="sort_name">名前</string>
     <string name="sort_distance">遠近</string>
+    <string name="next_open_on">開店時間</string>
+    <string name="today">今日</string>
+    <string name="tomorrow">明日</string>
+    <string name="loading">読み込み中</string>
 
 </resources>

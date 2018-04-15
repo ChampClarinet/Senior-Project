@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Model.Review;
-import com.easypetsthailand.champ.easypets.Model.Store;
+import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.easypetsthailand.champ.easypets.R;
 import com.easypetsthailand.champ.easypets.ReplyActivity;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -36,13 +36,13 @@ import butterknife.ButterKnife;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHolder> {
 
     private ArrayList<Review> dataSet;
-    private Store store;
+    private Store_oldClass service;
     private Context context;
     private RequestQueue requestQueue;
 
-    public ReviewAdapter(ArrayList<Review> dataSet, Store store, RequestQueue requestQueue, Context context) {
+    public ReviewAdapter(ArrayList<Review> dataSet, Store_oldClass service, RequestQueue requestQueue, Context context) {
         this.dataSet = dataSet;
-        this.store = store;
+        this.service = service;
         this.requestQueue = requestQueue;
         this.context = context;
     }
@@ -50,7 +50,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
     @Override
     public GenericHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_post, parent, false);
-        return new ViewHolder(v, store, requestQueue, context);
+        return new ViewHolder(v, service, requestQueue, context);
     }
 
     @Override
@@ -94,20 +94,20 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
         @BindView(R.id.img_post_image)
         ImageView img_review_image;
         private Context context;
-        private Store store;
+        private Store_oldClass service;
         private RequestQueue requestQueue;
 
-        public ViewHolder(View itemView, Store store, RequestQueue requestQueue, Context context) {
+        public ViewHolder(View itemView, Store_oldClass service, RequestQueue requestQueue, Context context) {
             super(itemView);
             this.context = context;
-            this.store = store;
+            this.service = service;
             this.requestQueue = requestQueue;
             ButterKnife.bind(this, itemView);
         }
 
         private void openStoreActivity(Review review, String reviewerName, String reviewerPicturePath) throws Exception {
             Intent i = new Intent(context, ReplyActivity.class);
-            i.putExtra(context.getString(R.string.model_name_store), store);
+            i.putExtra(context.getString(R.string.model_name_service), service);
             i.putExtra("review", review);
             i.putExtra("reviewerName", reviewerName);
             i.putExtra("reviewerPicturePath", reviewerPicturePath);

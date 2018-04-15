@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Model.Reply;
-import com.easypetsthailand.champ.easypets.Model.Store;
+import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.easypetsthailand.champ.easypets.R;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,20 +25,20 @@ import butterknife.ButterKnife;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.GenericHolder> {
 
-    private Store store;
+    private Store_oldClass service;
     private ArrayList<Reply> dataSet;
     private Context context;
 
-    public ReplyAdapter(ArrayList<Reply> dataSet, Store store, Context context) {
+    public ReplyAdapter(ArrayList<Reply> dataSet, Store_oldClass service, Context context) {
         this.dataSet = dataSet;
-        this.store = store;
+        this.service = service;
         this.context = context;
     }
 
     @Override
     public GenericHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_post, parent, false);
-        return new ViewHolder(v, store, context);
+        return new ViewHolder(v, service, context);
     }
 
     @Override
@@ -82,19 +82,19 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.GenericHolde
         @BindView(R.id.img_post_image)
         ImageView replyImageView;
         private Context context;
-        private Store store;
+        private Store_oldClass service;
 
-        public ViewHolder(View itemView, Store store, Context context) {
+        public ViewHolder(View itemView, Store_oldClass service, Context context) {
             super(itemView);
             this.context = context;
-            this.store = store;
+            this.service = service;
             ButterKnife.bind(this, itemView);
         }
 
         @Override
         public void setViewData(final Reply reply) {
-            String replierName = store.getName();
-            String replierPicturePath = context.getString(R.string.icon_storage_ref) + store.getLogoPath();
+            String replierName = service.getName();
+            String replierPicturePath = context.getString(R.string.icon_storage_ref) + service.getLogoPath();
             Log.d("path", replierPicturePath);
 
             //cv_name

@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Adapters.ReplyAdapter;
 import com.easypetsthailand.champ.easypets.Model.Reply;
 import com.easypetsthailand.champ.easypets.Model.Review;
-import com.easypetsthailand.champ.easypets.Model.Store;
+import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -58,7 +58,7 @@ public class ReplyActivity extends AppCompatActivity {
     RecyclerView rvReplies;
 
     private Review review;
-    private Store store;
+    private Store_oldClass service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class ReplyActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         review = (Review) i.getSerializableExtra("review");
-        store = (Store) i.getSerializableExtra(getString(R.string.model_name_store));
+        service = (Store_oldClass) i.getSerializableExtra(getString(R.string.model_name_service));
 
         ButterKnife.bind(this);
         getBackIcon();
@@ -79,7 +79,7 @@ public class ReplyActivity extends AppCompatActivity {
 
     private void bindReplies() {
         replies = new ArrayList<>();
-        adapter = new ReplyAdapter(replies, store, this);
+        adapter = new ReplyAdapter(replies, service, this);
         rvReplies.setHasFixedSize(true);
         rvReplies.setLayoutManager(new LinearLayoutManager(this));
         rvReplies.setAdapter(adapter);

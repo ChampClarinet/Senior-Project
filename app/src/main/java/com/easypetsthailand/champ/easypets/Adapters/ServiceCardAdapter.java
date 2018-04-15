@@ -12,7 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.easypetsthailand.champ.easypets.Model.Store;
+import com.easypetsthailand.champ.easypets.Core.Utils;
+import com.easypetsthailand.champ.easypets.Model.Service.Service;
 import com.easypetsthailand.champ.easypets.R;
 import com.easypetsthailand.champ.easypets.StoreActivity;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -29,12 +30,12 @@ import static com.easypetsthailand.champ.easypets.Core.Utils.calculateDistance;
 import static com.easypetsthailand.champ.easypets.Core.Utils.createLoadDialog;
 import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 
-public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHolder> {
+public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.GenericHolder> {
 
-    private ArrayList<Store> dataSet;
+    private ArrayList<Service> dataSet;
     private Context context;
 
-    public ResultAdapter(ArrayList<Store> dataSet, Context context) {
+    public ServiceCardAdapter(ArrayList<Service> dataSet, Context context) {
         this.dataSet = dataSet;
         this.context = context;
     }
@@ -47,8 +48,8 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
 
     @Override
     public void onBindViewHolder(GenericHolder holder, int position) {
-        Store store = dataSet.get(position);
-        holder.setViewData(store);
+        Service service = dataSet.get(position);
+        holder.setViewData(service);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
             super(itemView);
         }
 
-        abstract public void setViewData(Store store);
+        abstract public void setViewData(Service service);
 
     }
 
@@ -75,21 +76,21 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
         //bind cardview's widgets
         @BindView(R.id.cv_store_card)
         CardView cardView;
-        @BindView(R.id.tv_store_name)
+        @BindView(R.id.tv_service_name)
         TextView cv_name;
-        @BindView(R.id.tv_likes_count)
+        @BindView(R.id.tv_service_likes_count)
         TextView cv_likes;
-        @BindView(R.id.imgview_store_picture)
+        @BindView(R.id.imgview_service_picture)
         ImageView cv_logo;
-        @BindView(R.id.tv_price_rate)
-        TextView cv_rate;
-        @BindView(R.id.tv_open)
+        @BindView(R.id.tv_service_depositable)
+        TextView cv_depositable;
+        @BindView(R.id.tv_service_open)
         TextView cv_openLabel;
-        @BindView(R.id.tv_close)
+        @BindView(R.id.tv_service_close)
         TextView cv_closeLabel;
-        @BindView(R.id.tv_open_time)
+        @BindView(R.id.tv_service_time)
         TextView cv_openTimeTextView;
-        @BindView(R.id.tv_distance)
+        @BindView(R.id.tv_service_distance)
         TextView cv_distance;
         private Context context;
 
@@ -99,55 +100,59 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
             ButterKnife.bind(this, itemView);
         }
 
-        private void openStoreActivity(Store store) throws Exception {
+        private void openStoreActivity(Service service) {
             Intent i = new Intent(context, StoreActivity.class);
-            i.putExtra(context.getString(R.string.model_name_store), store);
-            createLoadDialog(context, "loading");
+            i.putExtra(context.getString(R.string.model_name_service), service);
+            createLoadDialog(context, context.getString(R.string.loading));
             context.startActivity(i);
         }
 
         @Override
-        public void setViewData(final Store store) {
+        public void setViewData(final Service service) {
             //logo
-            String logoPath = context.getString(R.string.icon_storage_ref) + store.getLogoPath();
+            String logoPath = context.getString(R.string.icon_storage_ref) + service.getLogoPath();
             StorageReference reference = FirebaseStorage.getInstance().getReference().child(logoPath);
             Glide.with(context).using(new FirebaseImageLoader()).load(reference).centerCrop()
                     .placeholder(android.R.drawable.ic_menu_report_image).into(this.cv_logo);
 
             //cv_name
-            this.cv_name.setText(store.getName());
+            this.cv_name.setText(service.getName());
 
             //cv_likes
-            String s = Integer.toString(store.getLikes());
+            String s = Integer.toString(service.getLikes());
             this.cv_likes.setText(s);
 
-            //price cv_rate
-            String rateTextArgs = "";
-            for (int i = 0; i < store.getPriceRate(); ++i) {
+            //price cv_depositable
+            /*String rateTextArgs = "";
+            for (int i = 0; i < service.getPriceRate(); ++i) {
                 rateTextArgs += context.getString(R.string.rate_symbol);
             }
             String rateText = context.getString(R.string.price_rate_label, rateTextArgs);
-            cv_rate.setText(rateText);
+            cv_depositable.setText(rateText);*/
 
             //openTime
-            String openTime = store.getOpenTime();
-            String closeTime = store.getCloseTime();
-            boolean isOpening = isOpening(openTime, closeTime);
+            boolean[] openDays = service.getOpenDays();
+            String openTime = service.getOpenTime();
+            String closeTime = service.getCloseTime();
+            boolean isOpening = isOpening(openDays, openTime, closeTime);
             cv_openLabel.setTextColor(Color.GREEN);
             cv_closeLabel.setTextColor(Color.RED);
+            String timeLabel = "";
             if (isOpening) {
                 cv_openLabel.setVisibility(View.VISIBLE);
                 cv_closeLabel.setVisibility(View.GONE);
             } else {
                 cv_openLabel.setVisibility(View.GONE);
                 cv_closeLabel.setVisibility(View.VISIBLE);
+                timeLabel += Utils.getNextOpens(service, context);
             }
             if (openTime != null && closeTime != null)
-                cv_openTimeTextView.setText(context.getString(R.string.time_open_label, openTime, closeTime));
-            else cv_openTimeTextView.setText(context.getString(R.string.all_day_open));
+                timeLabel += context.getString(R.string.time_open_label, openTime, closeTime);
+            else timeLabel += context.getString(R.string.all_day_open);
+            cv_openTimeTextView.setText(timeLabel);
 
             //distance
-            double distance = calculateDistance(store.getLatitude(), store.getLongitude());
+            double distance = calculateDistance(service.getLatitude(), service.getLongitude());
             DecimalFormat format = new DecimalFormat("##.##");
             String distanceString = format.format(distance);
             if (distance > 1000) {
@@ -156,11 +161,13 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
             }
             cv_distance.setText(context.getString(R.string.distance_label, distanceString));
 
+            //depositability
+
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
-                        openStoreActivity(store);
+                        openStoreActivity(service);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -172,7 +179,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.GenericHol
 
     private String printList() {
         String out = "";
-        for (Store s : dataSet) out += s.getName() + ", ";
+        for (Service s : dataSet) out += s.getName() + ", ";
         return out;
     }
 

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.easypetsthailand.champ.easypets.Model.Service.Service;
 import com.easypetsthailand.champ.easypets.R;
 
 import java.util.Calendar;
@@ -19,7 +20,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 public class Utils {
 
     public static boolean[] openDaysStringToBooleanArray(String openDays) {
-        boolean b[] = new boolean[8];
+        boolean b[] = new boolean[7];
         for (int i = 0; i < openDays.length(); ++i) {
             b[i] = openDays.charAt(i) != '0';
         }
@@ -71,16 +72,18 @@ public class Utils {
         }
     }
 
-    public static boolean isOpening(String openTime, String closeTime) {
-        /*if (openTime != null && closeTime != null) {
-            Log.d("openTime", openTime);
-            Log.d("closeTime", closeTime);
-        } else {
-            Log.d("openTime", "null");
-            Log.d("closeTime", "null");
-        }*/
-        if (openTime == null || closeTime == null) return true;
+    public static boolean isOpening(String openDays, String openTime, String closeTime) {
+        boolean[] b = openDaysStringToBooleanArray(openDays);
+        return isOpening(b, openTime, closeTime);
+    }
+
+    public static boolean isOpening(boolean[] openDays, String openTime, String closeTime) {
         Calendar now = Calendar.getInstance();
+        //check days
+        int today = now.get(Calendar.DAY_OF_WEEK) - 1;
+        if (!openDays[today]) return false;
+        //check time
+        if (openTime == null || closeTime == null) return true;
         int hourOpen = Integer.parseInt(openTime.substring(0, 2));
         int minuteOpen = Integer.parseInt(openTime.substring(3, 5));
         int hourClose = Integer.parseInt(closeTime.substring(0, 2));
@@ -97,11 +100,60 @@ public class Utils {
         if (status) {
             button.setBackgroundResource(R.drawable.toggle_button_toggled);
             button.setTextColor(context.getResources().getColor(R.color.colorPrimary));
-        }
-        else {
+        } else {
             button.setBackgroundResource(R.drawable.toggle_button);
             button.setTextColor(context.getResources().getColor(R.color.text));
         }
     }
 
+    public static String getNextOpens(Service service, Context context) {
+        String s = "";
+        Calendar now = Calendar.getInstance();
+        int today = now.get(Calendar.DAY_OF_WEEK) - 1;
+        boolean[] openDays = service.getOpenDays();
+        int nextOpen = -1;
+        //open today but not open yet.
+        if (openDays[today] && now.get(Calendar.HOUR_OF_DAY) < Integer.parseInt(service.getOpenTime().substring(0, 2))) {
+            return s + context.getString(R.string.today) + " ";
+        }
+        //open on another day.
+        for (int i = 1; i < openDays.length; i++) {
+            int realIndex = (today + i) % openDays.length;
+            boolean b = openDays[realIndex];
+            if (b) {
+                nextOpen = realIndex;
+                break;
+            }
+        }
+        //tomorrow
+        if (Math.abs(nextOpen - today) == 1) {
+            return s + context.getString(R.string.tomorrow) + " ";
+        }
+        String openDay = null;
+        switch (nextOpen) {
+            case 0:
+                openDay = context.getString(R.string.SUN);
+                break;
+            case 1:
+                openDay = context.getString(R.string.MON);
+                break;
+            case 2:
+                openDay = context.getString(R.string.TUE);
+                break;
+            case 3:
+                openDay = context.getString(R.string.WED);
+                break;
+            case 4:
+                openDay = context.getString(R.string.THU);
+                break;
+            case 5:
+                openDay = context.getString(R.string.FRI);
+                break;
+            case 6:
+                openDay = context.getString(R.string.SAT);
+                break;
+        }
+        s += openDay + " ";
+        return s;
+    }
 }

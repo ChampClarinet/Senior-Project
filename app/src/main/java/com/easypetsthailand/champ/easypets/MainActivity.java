@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.CharacterPickerDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.easypetsthailand.champ.easypets.Core.GPSTracker;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
@@ -34,10 +34,12 @@ public class MainActivity extends AppCompatActivity{
 
         ButterKnife.bind(this);
 
+        GPSTracker.getInstance(getApplicationContext());
+
         depositButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenuActivity(getString(R.string.title_deposit));
+                openMenuActivity(getString(R.string.title_hotel));
             }
         });
         groomingButton.setOnClickListener(new View.OnClickListener() {
@@ -50,12 +52,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 openMenuActivity(getString(R.string.title_hospital));
-            }
-        });
-        shopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMenuActivity(getString(R.string.title_shop));
             }
         });
 

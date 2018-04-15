@@ -102,7 +102,7 @@ public class SearchActivity extends AppCompatActivity
                 Log.d(TAG, "result is\n" +
                         "query = " + filter_text + "\n" +
                         "type = " + filter_type);
-                Intent intent = new Intent(SearchActivity.this, ResultActivity.class);
+                Intent intent = new Intent(SearchActivity.this, ResultActivity_oldClass.class);
                 intent.putExtra("filter_text", filter_text);
                 intent.putExtra("filter_type", filter_type);
                 intent.putExtra("filter", filter);

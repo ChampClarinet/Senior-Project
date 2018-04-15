@@ -1,12 +1,20 @@
 package com.easypetsthailand.champ.easypets;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import com.easypetsthailand.champ.easypets.Adapters.ServiceCardAdapter;
+import com.easypetsthailand.champ.easypets.Model.Service.Service;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -14,10 +22,19 @@ import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
 public class MenuActivity extends AppCompatActivity {
 
+    private final String TAG = MenuActivity.class.getSimpleName();
+
     @BindView(R.id.fab_sort_by)
     FloatingTextButton fabSortBy;
+    @BindView(R.id.menu_activity_rv)
+    RecyclerView RVMenu;
+    @BindView(R.id.menu_activity_label_zero_results)
+    TextView tvZeroResults;
+    @BindView(R.id.menu_swipe_layout)
+    SwipeRefreshLayout swipeLayout;
 
     private String sortBy;
+    private ArrayList<Service> services;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +57,51 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        swipeLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d(TAG, "onRefresh");
+                swipeLayout.setRefreshing(true);
+                refresh();
+            }
+        });
+
+        //mock
+        /*MockService m = new MockService();
+        services = m.getMockService();
+        */
+        ServiceCardAdapter adapter = new ServiceCardAdapter(services, this);
+        RVMenu.setLayoutManager(new LinearLayoutManager(this));
+        RVMenu.setHasFixedSize(true);
+        RVMenu.setAdapter(adapter);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //query(text, type, filter, sortBy);
-        //adapter.notifyDataSetChanged();
-        //Log.d("sort by", sortBy);
+        refresh();
     }
 
+    private void refresh(){
+        Log.d(TAG, "refresh");
+        loadServices();
+        if(services.size() > 0){
+            RVMenu.setVisibility(View.VISIBLE);
+            tvZeroResults.setVisibility(View.GONE);
+        }else{
+            RVMenu.setVisibility(View.GONE);
+            tvZeroResults.setVisibility(View.VISIBLE);
+        }
+        swipeLayout.setRefreshing(false);
+    }
+
+    private void loadServices() {
+
+    }
+
+    //define sorting options dialog
     private void showSortOptions() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.sort);
@@ -88,5 +140,4 @@ public class MenuActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
 }

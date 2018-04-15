@@ -66,16 +66,18 @@
     <string name="post">โพสต์</string>
     <string name="write_review">เขียนรีวิว</string>
     <string name="title_grooming_uppercase">อาบน้ำ ตัดขน</string>
-    <string name="title_shop_uppercase">ร้านอุปกรณ์สัตว์เลี้ยง</string>
     <string name="title_hospital_uppercase">สถานพยาบาลสัตว์</string>
-    <string name="title_deposit_uppercase">รับฝากสัตว์เลี้ยง</string>
+    <string name="title_hotel_uppercase">รับฝากสัตว์เลี้ยง</string>
     <string name="title_grooming">อาบน้ำ ตัดขน</string>
-    <string name="title_shop">ร้านอุปกรณ์สัตว์เลี้ยง</string>
     <string name="title_hospital">สถานพยาบาลสัตว์</string>
-    <string name="title_deposit">รับฝากสัตว์เลี้ยง</string>
+    <string name="title_hotel">รับฝากสัตว์เลี้ยง</string>
     <string name="sort_popularity">ความนิยม</string>
     <string name="sort_price">ระดับราคา</string>
     <string name="sort_name">ชื่อ</string>
     <string name="sort_distance">ระยะทาง</string>
+    <string name="tomorrow">พรุ่งนี้</string>
+    <string name="today">วันนี้</string>
+    <string name="next_open_on">เปิด</string>
+    <string name="loading">กำลังโหลด</string>
 
 </resources>

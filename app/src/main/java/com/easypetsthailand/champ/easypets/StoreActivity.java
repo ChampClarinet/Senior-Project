@@ -23,7 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Core.StoreManager;
-import com.easypetsthailand.champ.easypets.Model.Store;
+import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,7 +61,7 @@ public class StoreActivity extends AppCompatActivity {
     @BindView(R.id.store_desc)
     TextView textViewStoreDesc;
 
-    private Store store;
+    private Store_oldClass service;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private boolean isCurrentUserLiked;
 
@@ -72,8 +72,8 @@ public class StoreActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.store_toolbar);
         setSupportActionBar(toolbar);
 
-        store = (Store) getIntent().getSerializableExtra(getString(R.string.model_name_store));
-        Log.d("store1", String.valueOf(store == null));
+        service = (Store_oldClass) getIntent().getSerializableExtra(getString(R.string.model_name_service));
+        Log.d("store1", String.valueOf(service == null));
 
         ButterKnife.bind(this);
         getBackIcon();
@@ -81,7 +81,7 @@ public class StoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(StoreActivity.this, getString(R.string.launch_google_maps), Toast.LENGTH_SHORT).show();
-                openGoogleMaps(store.getLatitude(), store.getLongitude());
+                openGoogleMaps(service.getLatitude(), service.getLongitude());
             }
         });
         storeOpenReviewButton.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +89,7 @@ public class StoreActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //go to review part
                 Intent intent = new Intent(StoreActivity.this, ReviewActivity.class);
-                intent.putExtra(getString(R.string.model_name_store), store);
+                intent.putExtra(getString(R.string.model_name_service), service);
                 startActivity(intent);
             }
         });
@@ -113,17 +113,18 @@ public class StoreActivity extends AppCompatActivity {
 
     private void setData() {
         //name
-        setTitle(store.getName());
+        setTitle(service.getName());
         //image
-        String picturePath = getString(R.string.pictures_storage_ref) + store.getPicturePath();
+        String picturePath = getString(R.string.pictures_storage_ref) + service.getPicturePath();
         StorageReference reference = FirebaseStorage.getInstance().getReference().child(picturePath);
         Glide.with(this).using(new FirebaseImageLoader()).load(reference).centerCrop()
                 .placeholder(android.R.drawable.ic_menu_report_image).into(imageViewStorePicture);
         Log.d("picture location", reference.toString());
         //time
-        String openTime = store.getOpenTime();
-        String closeTime = store.getCloseTime();
-        boolean isOpening = isOpening(openTime, closeTime);
+        boolean[] openDays = service.getOpenDays();
+        String openTime = service.getOpenTime();
+        String closeTime = service.getCloseTime();
+        boolean isOpening = isOpening(openDays, openTime, closeTime);
         if (isOpening) {
             textViewIsOpen.setText(getString(R.string.open));
             textViewIsOpen.setTextColor(Color.GREEN);
@@ -135,15 +136,15 @@ public class StoreActivity extends AppCompatActivity {
             textViewTimeOpen.setText(getString(R.string.time_open_label, openTime, closeTime));
         else textViewTimeOpen.setText(getString(R.string.all_day_open));
         //tel
-        textViewTel.setText(store.getTel());
+        textViewTel.setText(service.getTel());
         //reviews
-        bindReviewsCountToTextView(this, store.getStoreId(), textViewReviewCount);
+        bindReviewsCountToTextView(this, service.getStoreId(), textViewReviewCount);
         //desc
-        textViewStoreDesc.setText(store.getDescription());
+        textViewStoreDesc.setText(service.getDescription());
     }
 
     private void setLikeButton() {
-        final String url = getString(R.string.URL) + getString(R.string.LIKE_CONDITION_URL, store.getStoreId(), user.getUid());
+        final String url = getString(R.string.URL) + getString(R.string.LIKE_CONDITION_URL, service.getStoreId(), user.getUid());
         Log.d("check like", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -170,7 +171,7 @@ public class StoreActivity extends AppCompatActivity {
                 if (isCurrentUserLiked) {
                     unlike();
                 } else like();
-                StoreManager.like(StoreActivity.this, store.getStoreId(), user.getUid());
+                StoreManager.like(StoreActivity.this, service.getStoreId(), user.getUid());
             }
         });
     }

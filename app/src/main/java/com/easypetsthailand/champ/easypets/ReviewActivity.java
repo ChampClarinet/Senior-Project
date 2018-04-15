@@ -20,7 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.Adapters.ReviewAdapter;
 import com.easypetsthailand.champ.easypets.Model.Review;
-import com.easypetsthailand.champ.easypets.Model.Store;
+import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +36,7 @@ public class ReviewActivity extends AppCompatActivity {
     private final String TAG = ReviewActivity.class.getSimpleName();
     private ArrayList<Review> reviews = new ArrayList<>();
     private ReviewAdapter adapter;
-    private Store store;
+    private Store_oldClass service;
     private RequestQueue requestQueue;
 
     @BindView(R.id.rv_review)
@@ -59,18 +59,18 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReviewActivity.this, WriteReviewActivity.class);
-                intent.putExtra("store_id", store.getStoreId());
+                intent.putExtra("store_id", service.getStoreId());
                 intent.putExtra("review_count", reviews.size());
                 startActivity(intent);
             }
         });
 
-        store = (Store) getIntent().getSerializableExtra(getString(R.string.model_name_store));
+        service = (Store_oldClass) getIntent().getSerializableExtra(getString(R.string.model_name_service));
         setTitle(getString(R.string.reviews, ""));
 
         requestQueue = Volley.newRequestQueue(this);
 
-        adapter = new ReviewAdapter(reviews, store, requestQueue, this);
+        adapter = new ReviewAdapter(reviews, service, requestQueue, this);
         rvReview.setAdapter(adapter);
         rvReview.setHasFixedSize(true);
         rvReview.setLayoutManager(new LinearLayoutManager(this));
@@ -79,11 +79,11 @@ public class ReviewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (store != null) bindData();
+        if (service != null) bindData();
     }
 
     private void bindData() {
-        String url = getString(R.string.URL) + getString(R.string.GET_REVIEW_BY_STORE_ID_URL, store.getStoreId());
+        String url = getString(R.string.URL) + getString(R.string.GET_REVIEW_BY_STORE_ID_URL, service.getStoreId());
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

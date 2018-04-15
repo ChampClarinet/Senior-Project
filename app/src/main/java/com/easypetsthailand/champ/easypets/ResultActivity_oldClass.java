@@ -1,11 +1,9 @@
 package com.easypetsthailand.champ.easypets;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,10 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.easypetsthailand.champ.easypets.Adapters.ResultAdapter;
-import com.easypetsthailand.champ.easypets.Core.GPSTracker;
+import com.easypetsthailand.champ.easypets.Adapters.ServiceCardAdapter;
 import com.easypetsthailand.champ.easypets.Model.Filter;
-import com.easypetsthailand.champ.easypets.Model.Store;
+import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +35,7 @@ import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 import static com.easypetsthailand.champ.easypets.Core.Utils.calculateDistance;
 import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity_oldClass extends AppCompatActivity {
 
     @BindView(R.id.result_label_zero_results)
     TextView zeroResultsLabel;
@@ -49,8 +46,8 @@ public class ResultActivity extends AppCompatActivity {
     @BindView(R.id.result_sort_by_tv)
     TextView sortByTextView;
 
-    private ArrayList<Store> stores = new ArrayList<>();
-    private ResultAdapter adapter;
+    private ArrayList<Store_oldClass> services = new ArrayList<>();
+    private ServiceCardAdapter adapter;
     private String text;
     private String type;
     private Filter filter;
@@ -65,7 +62,7 @@ public class ResultActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        GPSTracker.getInstance(getApplicationContext());
+        /*GPSTracker.getInstance(getApplicationContext());
 
         Intent i = getIntent();
         text = i.getStringExtra("filter_text");
@@ -73,7 +70,7 @@ public class ResultActivity extends AppCompatActivity {
         filter = (Filter) i.getSerializableExtra("filter");
         sortBy = "";
 
-        adapter = new ResultAdapter(stores, this);
+        adapter = new ServiceCardAdapter(services, this);
         resultRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         resultRecyclerView.setHasFixedSize(true);
         resultRecyclerView.setAdapter(adapter);
@@ -88,14 +85,14 @@ public class ResultActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
+        }*/
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        query(text, type, filter, sortBy);
+        /*query(text, type, filter, sortBy);
         adapter.notifyDataSetChanged();
         Log.d("sort by", sortBy);
         String sortByText = sortBy;
@@ -103,7 +100,7 @@ public class ResultActivity extends AppCompatActivity {
         else if(sortByText.equals(getString(R.string.price_rate))) sortByText = getString(R.string.price);
         else if(sortByText.equals("popularity")) sortByText = getString(R.string.popularity);
         else sortByText = getString(R.string.distance);
-        sortByTextView.setText(getString(R.string.sorted_by, sortByText));
+        sortByTextView.setText(getString(R.string.sorted_by, sortByText));*/
     }
 
     public void query(String query, String type, final Filter filter, final String sortBy) {
@@ -137,10 +134,10 @@ public class ResultActivity extends AppCompatActivity {
                 }
                 try {
                     JSONArray array = new JSONArray(response);
-                    stores.clear();
+                    services.clear();
                     for (int i = 0; i < array.length(); ++i) {
                         JSONObject object = array.getJSONObject(i);
-                        int storeId = object.getInt(getString(R.string.store_id));
+                        int storeId = object.getInt(getString(R.string.service_id));
                         String name = object.getString(getString(R.string.name));
                         String logoPath = object.getString(getString(R.string.logo_path));
                         String picturePath = object.getString(getString(R.string.picture_path));
@@ -160,19 +157,19 @@ public class ResultActivity extends AppCompatActivity {
                         String description = object.getString(getString(R.string.description));
 
                         if (filter != null) {
-                            if (filter.getOpen() != null && filter.getOpen() && !isOpening(openTime, closeTime)) {
+                            if (filter.getOpen() != null && filter.getOpen() && !isOpening(openDays, openTime, closeTime)) {
                                 continue;
                             }
                         }
 
-                        Store newStore = new Store(storeId, name, logoPath, picturePath, type,
+                        Store_oldClass newService = new Store_oldClass(storeId, name, logoPath, picturePath, type,
                                 openDays, openTime, closeTime, tel, priceRate, likes, latitude,
                                 longitude, description);
-                        stores.add(newStore);
+                        services.add(newService);
                         if(sortBy.length() == 0 || sortBy.equals("distance")) sortByDistance();
                         if (sortBy.equals("popularity")) sortByPopularity();
                         adapter.notifyDataSetChanged();
-                        if (stores.size() == 0) {
+                        if (services.size() == 0) {
                             zeroResultsLabel.setVisibility(View.VISIBLE);
                         } else zeroResultsLabel.setVisibility(View.GONE);
                     }
@@ -192,9 +189,9 @@ public class ResultActivity extends AppCompatActivity {
 
     private void sortByDistance() {
         Log.d("sorting by", "distance");
-        Comparator<Store> comparator = new Comparator<Store>() {
+        Comparator<Store_oldClass> comparator = new Comparator<Store_oldClass>() {
             @Override
-            public int compare(Store o1, Store o2) {
+            public int compare(Store_oldClass o1, Store_oldClass o2) {
                 double d1 = calculateDistance(o1.getLatitude(), o1.getLongitude());
                 double d2 = calculateDistance(o2.getLatitude(), o2.getLongitude());
                 return d1 < d2 ? -1
@@ -202,20 +199,20 @@ public class ResultActivity extends AppCompatActivity {
                         : 0;
             }
         };
-        Collections.sort(stores, comparator);
+        Collections.sort(services, comparator);
     }
 
     private void sortByPopularity() {
         Log.d("sorting by", "popularity");
-        Comparator<Store> comparator = new Comparator<Store>() {
+        Comparator<Store_oldClass> comparator = new Comparator<Store_oldClass>() {
             @Override
-            public int compare(Store o1, Store o2) {
+            public int compare(Store_oldClass o1, Store_oldClass o2) {
                 int l1 = o1.getLikes();
                 int l2 = o2.getLikes();
                 return l2 - l1;
             }
         };
-        Collections.sort(stores, comparator);
+        Collections.sort(services, comparator);
     }
 
     private void showSortOptions() {
