@@ -44,7 +44,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
-                android:text="Store name"
+                android:text="Service name"
                 tools:ignore="HardcodedText" />
 
             <LinearLayout
@@ -111,14 +111,30 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_service_depositable"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginStart="@dimen/default_margin"
-                android:singleLine="false"
-                android:text="@string/mock_is_depositable" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:text="@string/pet_deposit" />
+
+                <TextView
+                    android:id="@+id/tv_service_depositable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:singleLine="false"
+                    android:text="@string/mock_is_depositable" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

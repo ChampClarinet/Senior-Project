@@ -83,7 +83,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     private void bindData() {
-        String url = getString(R.string.URL) + getString(R.string.GET_REVIEW_BY_STORE_ID_URL, service.getStoreId());
+        String url = getString(R.string.URL) + getString(R.string.GET_REVIEW_BY_SERVICE_ID_URL, service.getStoreId());
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

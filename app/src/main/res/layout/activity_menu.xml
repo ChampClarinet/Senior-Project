@@ -8,7 +8,8 @@
     android:focusableInTouchMode="true"
     tools:context=".MenuActivity">
 
-    <include layout="@layout/content_menu" />
+    <include
+        layout="@layout/content_menu" />
 
     <ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:id="@+id/fab_sort_by"

@@ -103,7 +103,7 @@ public class ResultActivity_oldClass extends AppCompatActivity {
         sortByTextView.setText(getString(R.string.sorted_by, sortByText));*/
     }
 
-    public void query(String query, String type, final Filter filter, final String sortBy) {
+    /*public void query(String query, String type, final Filter filter, final String sortBy) {
         if (type == null) type = "";
         if (query == null) query = "";
         String sort = sortBy;
@@ -123,7 +123,7 @@ public class ResultActivity_oldClass extends AppCompatActivity {
             }
         }
         if (sort.equals("distance") || sort.equals("popularity")) sort = "";
-        String url = getString(R.string.URL) + getString(R.string.GET_STORE_URL, query, type, filterUrl, sort);
+        String url = getString(R.string.URL) + getString(R.string.GET_SERVICE_LIST_URL, query, type, filterUrl, sort);
         Log.d("querying store", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -185,7 +185,7 @@ public class ResultActivity_oldClass extends AppCompatActivity {
             }
         });
         Volley.newRequestQueue(this).add(request);
-    }
+    }*/
 
     private void sortByDistance() {
         Log.d("sorting by", "distance");
@@ -214,8 +214,9 @@ public class ResultActivity_oldClass extends AppCompatActivity {
         };
         Collections.sort(services, comparator);
     }
-
+/*
     private void showSortOptions() {
+
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.sort);
         builder.setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -259,5 +260,5 @@ public class ResultActivity_oldClass extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }

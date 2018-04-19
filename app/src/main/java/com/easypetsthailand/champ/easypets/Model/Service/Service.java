@@ -8,7 +8,8 @@ import static com.easypetsthailand.champ.easypets.Core.Utils.openDaysStringToBoo
 
 public class Service implements Serializable {
 
-    private int storeId;
+    private int serviceId;
+    private String ownerUid;
     private String name;
     private String logoPath;
     private String picturePath;
@@ -16,34 +17,37 @@ public class Service implements Serializable {
     private String openTime;
     private String closeTime;
     private String tel;
-    private int priceRate;
+    private String address;
     private int likes;
     private double latitude;
     private double longitude;
     private String description;
 
-    public Service(int storeId, String name, String logoPath, String picturePath, String openDays,
-                   @Nullable String openTime, @Nullable String closeTime, String tel, int likes,
-                   double latitude, double longitude, String description) {
-        this.storeId = storeId;
+    public Service(int serviceId, String ownerUid, String name, String logoPath, String picturePath,
+                   String openDays, String openTime, String closeTime, String tel,
+                   String address, int likes, double latitude, double longitude, String description) {
+        this.serviceId = serviceId;
+        this.ownerUid = ownerUid;
         this.name = name;
         this.logoPath = logoPath;
         this.picturePath = picturePath;
         this.openDays = openDaysStringToBooleanArray(openDays);
-        if(openTime == null) this.openTime = "nope";
-        else this.openTime = openTime;
-        if(closeTime == null) this.closeTime = "nope";
+        this.openTime = openTime;
         this.closeTime = closeTime;
         this.tel = tel;
-        this.priceRate = priceRate;
+        this.address = address;
         this.likes = likes;
         this.latitude = latitude;
         this.longitude = longitude;
         this.description = description;
     }
 
-    public int getStoreId() {
-        return storeId;
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    public String getOwnerUid() {
+        return ownerUid;
     }
 
     public String getName() {
@@ -74,8 +78,8 @@ public class Service implements Serializable {
         return tel;
     }
 
-    public int getPriceRate() {
-        return priceRate;
+    public String getAddress() {
+        return address;
     }
 
     public int getLikes() {

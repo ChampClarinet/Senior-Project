@@ -5,20 +5,29 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Core.Utils;
 import com.easypetsthailand.champ.easypets.Model.Service.Service;
 import com.easypetsthailand.champ.easypets.R;
-import com.easypetsthailand.champ.easypets.StoreActivity;
+import com.easypetsthailand.champ.easypets.ServiceActivity;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -28,6 +37,7 @@ import butterknife.ButterKnife;
 
 import static com.easypetsthailand.champ.easypets.Core.Utils.calculateDistance;
 import static com.easypetsthailand.champ.easypets.Core.Utils.createLoadDialog;
+import static com.easypetsthailand.champ.easypets.Core.Utils.dissmissLoadDialog;
 import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 
 public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.GenericHolder> {
@@ -42,7 +52,7 @@ public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.
 
     @Override
     public GenericHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_store, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_service, parent, false);
         return new ViewHolder(v, context);
     }
 
@@ -101,7 +111,7 @@ public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.
         }
 
         private void openStoreActivity(Service service) {
-            Intent i = new Intent(context, StoreActivity.class);
+            Intent i = new Intent(context, ServiceActivity.class);
             i.putExtra(context.getString(R.string.model_name_service), service);
             createLoadDialog(context, context.getString(R.string.loading));
             context.startActivity(i);
@@ -109,6 +119,7 @@ public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.
 
         @Override
         public void setViewData(final Service service) {
+            //Log.d("adapter", "setting view for "+service.getName());
             //logo
             String logoPath = context.getString(R.string.icon_storage_ref) + service.getLogoPath();
             StorageReference reference = FirebaseStorage.getInstance().getReference().child(logoPath);
@@ -122,13 +133,8 @@ public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.
             String s = Integer.toString(service.getLikes());
             this.cv_likes.setText(s);
 
-            //price cv_depositable
-            /*String rateTextArgs = "";
-            for (int i = 0; i < service.getPriceRate(); ++i) {
-                rateTextArgs += context.getString(R.string.rate_symbol);
-            }
-            String rateText = context.getString(R.string.price_rate_label, rateTextArgs);
-            cv_depositable.setText(rateText);*/
+            //cv_depositable
+            setDepositable(service);
 
             //openTime
             boolean[] openDays = service.getOpenDays();
@@ -161,8 +167,6 @@ public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.
             }
             cv_distance.setText(context.getString(R.string.distance_label, distanceString));
 
-            //depositability
-
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -175,9 +179,39 @@ public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.
             });
         }
 
+        private void setDepositable(Service service) {
+            String url = context.getString(R.string.URL) + context.getString(R.string.GET_HOTEL_BY_SERVICE_ID_URL, Integer.toString(service.getServiceId()));
+            StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (response.equals("404")) {
+                        cv_depositable.setText(context.getString(R.string.unavailable));
+                        return;
+                    }
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        int isAcceptOvernight = object.getInt(context.getString(R.string.is_accept_overnight));
+                        if (isAcceptOvernight == 1) {
+                            String s = context.getString(R.string.available) + " " + context.getString(R.string.accept_overnight);
+                            cv_depositable.setText(s);
+                        }else{
+                            cv_depositable.setText(context.getString(R.string.available));
+                        }
+                    } catch (JSONException e) {
+                        Log.d("adapter.depositable", "json error");
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("adapter.depositable", "error response");
+                }
+            });
+            Volley.newRequestQueue(context).add(request);
+        }
     }
 
-    private String printList() {
+    public String printList() {
         String out = "";
         for (Service s : dataSet) out += s.getName() + ", ";
         return out;

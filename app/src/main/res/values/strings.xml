@@ -19,21 +19,27 @@
     <string name="sort_popularity">Popularity</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
-    <string name="URL" translatable="false">http://10.0.2.2/easypets/</string>
+    <string name="URL" translatable="false">http://e3458756.ngrok.io/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ADD_REVIEW_URL" translatable="false">post_review.php?uid=%1$s&amp;text=%2$s</string>
     <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;store_id=%2$d</string>
+    <string name="GET_AVAILABLE_PETS_FOR_SERVICE_URL" translatable="false">get_available_pets_for_service.php?service_id=%1$s</string>
+    <string name="GET_GROOM_BY_SERVICE_ID_URL" translatable="false">get_groom_by_service_id.php?service_id=%1$s</string>
+    <string name="GET_HOSPITAL_BY_SERVICE_ID_URL" translatable="false">get_hospital_by_service_id.php?service_id=%1$s</string>
+    <string name="GET_HOTEL_BY_SERVICE_ID_URL" translatable="false">get_hotel_by_service_id.php?service_id=%1$s</string>
+    <string name="GET_OTHERS_BY_SERVICE_ID_URL" translatable="false">get_others_by_service_id.php?service_id=%1$s</string>
     <string name="GET_REPLIES_BY_REVIEW_ID_URL" translatable="false">get_replies.php?review_id=%1$d</string>
     <string name="GET_REVIEW_BY_KEY_URL" translatable="false">get_review_by_key.php?key=%1$d</string>
-    <string name="GET_REVIEW_BY_STORE_ID_URL" translatable="false">get_review_by_store_id.php?id=%1$d</string>
-    <string name="GET_STORE_URL" translatable="false">get_store.php?keyword=%1$s&amp;type=%2$s&amp;price_rate_filter_out=%3$s&amp;order_by=%4$s</string>
+    <string name="GET_REVIEW_BY_SERVICE_ID_URL" translatable="false">get_review_by_service_id.php?id=%1$d</string>
+    <string name="GET_SERVICE_BY_SERVICE_ID_URL" translatable="false">get_service_by_service_id.php?service_id=%1$s</string>
+    <string name="GET_SERVICE_LIST_URL" translatable="false">get_service_list.php?keyword=%1$s&amp;type=%2$s</string>
     <string name="GET_USER_BY_UID_URL" translatable="false">get_user_by_uid.php?uid=%1$s</string>
     <string name="IS_USER_EXISTS_URL" translatable="false">is_user_exists.php?status=0&amp;uid=%1$s</string>
-    <string name="LIKE_CONDITION_URL" translatable="false">like_condition.php?store_id=%1$d&amp;uid=%2$s</string>
-    <string name="LIKES_COUNT_URL" translatable="false">likes_count.php?store_id=%1$d</string>
+    <string name="LIKE_CONDITION_URL" translatable="false">like_condition.php?service_id=%1$d&amp;uid=%2$s</string>
+    <string name="LIKES_COUNT_URL" translatable="false">likes_count.php?service_id=%1$d</string>
     <string name="POST_REPLY_URL" translatable="false">post_reply.php?review_id=%1$d&amp;text=%2$s&amp;img=%3$s</string>
-    <string name="POST_REVIEW_URL" translatable="false">post_review.php?store_id=%1$d&amp;uid=%2$s&amp;text=%3$s&amp;img=%4$s</string>
-    <string name="REVIEWS_COUNT_URL" translatable="false">reviews_count.php?store_id=%1$d</string>
+    <string name="POST_REVIEW_URL" translatable="false">post_review.php?service_id=%1$d&amp;uid=%2$s&amp;text=%3$s&amp;img=%4$s</string>
+    <string name="REVIEWS_COUNT_URL" translatable="false">reviews_count.php?service_id=%1$d</string>
 
     <!--system-->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
@@ -56,6 +62,7 @@
     <string name="SAT">SAT</string>
 
     <!--labels-->
+    <string name="pet_deposit">Pet deposit</string>
     <string name="loading">loading</string>
     <string name="next_open_on">opens on</string>
     <string name="today">today</string>
@@ -93,22 +100,33 @@
     <string name="sorted_by">Sorted by %1$s</string>
     <string name="add_a_photo">add a photo</string>
     <string name="post">post</string>
+    <string name="available">available</string>
+    <string name="unavailable">unavailable</string>
+    <string name="accept_overnight">and accept overnight</string>
+    <string name="special_pets_acceptance">Special pets acceptance:</string>
+    <string name="none">none</string>
 
     <!--Mock Strings-->
-    <string name="mock_store_title">Store name</string>
+    <string name="mock_store_title">Service name</string>
     <string name="mock_address" translatable="false">221B Baker St, Marylebone, London</string>
     <string name="mock_time" translatable="false">09:00 - 20:00</string>
     <string name="mock_tel" translatable="false">0632724678</string>
     <string name="mock_likes_quantity" translatable="false">592</string>
     <string name="mock_description" translatable="false">Duis sed tempus tortor. Integer commodo quis metus a maximus. Duis a laoreet urna. Nam ut nisi rhoncus, vestibulum elit at, euismod neque. Mauris posuere leo ipsum, nec scelerisque erat scelerisque ac.</string>
     <string name="mock_available">Available for dog, cat</string>
-    <string name="mock_is_depositable" translatable="false">depositability</string>
+    <string name="mock_is_depositable" translatable="false">available</string>
 
     <!--Firebase References-->
     <string name="icon_storage_ref" translatable="false">StoreLogo/</string>
     <string name="reply_images_storage_ref" translatable="false">ReplyImages/</string>
     <string name="review_images_storage_ref" translatable="false">ReviewImages/</string>
     <string name="pictures_storage_ref" translatable="false">StorePictures/</string>
+
+    <!--Special pets-->
+    <string name="lizard">lizard</string>
+    <string name="pig">pig</string>
+    <string name="snake">snake</string>
+    <string name="fennec_fox">fennec fox</string>
 
     <!--type filter-->
     <string-array name="type_list">
@@ -123,9 +141,12 @@
         <item>Take a photo</item>
     </string-array>
 
-    <!--Store_oldClass attributes-->
+    <!--json object attributes-->
+    <string name="is_accept_overnight" translatable="false">is_accept_overnight</string>
+    <string name="hotel_price" translatable="false">hotel_price</string>
     <string name="model_name_service" translatable="false">service</string>
     <string name="service_id" translatable="false">service_id</string>
+    <string name="owner_uid" translatable="false">owner_uid</string>
     <string name="name" translatable="false">name</string>
     <string name="logo_path" translatable="false">logo_path</string>
     <string name="picture_path" translatable="false">picture_path</string>
@@ -134,10 +155,11 @@
     <string name="open_time" translatable="false">open_time</string>
     <string name="close_time" translatable="false">close_time</string>
     <string name="tel" translatable="false">tel</string>
-    <string name="price_rate" translatable="false">price_rate</string>
+    <string name="address" translatable="false">address</string>
     <string name="likes_count" translatable="false">likes_count</string>
     <string name="latitude" translatable="false">latitude</string>
     <string name="longitude" translatable="false">longitude</string>
     <string name="description" translatable="false">description</string>
+    <string name="pet_name" translatable="false">pet_name</string>
 
 </resources>

@@ -23,12 +23,17 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Core.StoreManager;
-import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
+import com.easypetsthailand.champ.easypets.Core.Utils;
+import com.easypetsthailand.champ.easypets.Model.Service.Service;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,57 +43,66 @@ import static com.easypetsthailand.champ.easypets.Core.Utils.dissmissLoadDialog;
 import static com.easypetsthailand.champ.easypets.Core.Utils.getGoogleMapsUri;
 import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 
-public class StoreActivity extends AppCompatActivity {
+public class ServiceActivity extends AppCompatActivity {
 
-    private final String TAG = StoreActivity.class.getSimpleName();
+    private final String TAG = ServiceActivity.class.getSimpleName();
 
-    @BindView(R.id.store_like_button)
+    @BindView(R.id.service_like_button)
     FloatingActionButton likeButton;
-    @BindView(R.id.store_open_map_button)
-    RelativeLayout storeOpenMapButton;
-    @BindView(R.id.store_open_review_button)
-    RelativeLayout storeOpenReviewButton;
-    @BindView(R.id.imgView_store)
+    @BindView(R.id.service_open_map_button)
+    RelativeLayout serviceOpenMapButton;
+    @BindView(R.id.service_open_review_button)
+    RelativeLayout serviceOpenReviewButton;
+    @BindView(R.id.service_acceptance)
+    TextView textViewPetAcceptance;
+    @BindView(R.id.imgView_service)
     ImageView imageViewStorePicture;
-    @BindView(R.id.store_time_open)
+    @BindView(R.id.service_time_open)
     TextView textViewTimeOpen;
-    @BindView(R.id.store_is_open)
+    @BindView(R.id.service_is_open)
     TextView textViewIsOpen;
-    @BindView(R.id.store_tel)
+    @BindView(R.id.service_tel)
     TextView textViewTel;
-    @BindView(R.id.store_tv_review_count)
+    @BindView(R.id.service_address)
+    TextView textViewAddress;
+    @BindView(R.id.service_tv_review_count)
     TextView textViewReviewCount;
-    @BindView(R.id.store_desc)
+    @BindView(R.id.service_desc)
     TextView textViewStoreDesc;
 
-    private Store_oldClass service;
+    private Service service;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private boolean isCurrentUserLiked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store);
+        setContentView(R.layout.activity_service);
         Toolbar toolbar = findViewById(R.id.store_toolbar);
         setSupportActionBar(toolbar);
 
-        service = (Store_oldClass) getIntent().getSerializableExtra(getString(R.string.model_name_service));
-        Log.d("store1", String.valueOf(service == null));
+        service = (Service) getIntent().getSerializableExtra(getString(R.string.model_name_service));
+        Log.d(TAG + ": is service null", String.valueOf(service == null));
+
+        getIntent().putExtra("lizard", getString(R.string.lizard));
+        getIntent().putExtra("pig", getString(R.string.pig));
+        getIntent().putExtra("snake", getString(R.string.snake));
+        getIntent().putExtra("fennec fox", getString(R.string.fennec_fox));
 
         ButterKnife.bind(this);
         getBackIcon();
-        storeOpenMapButton.setOnClickListener(new View.OnClickListener() {
+        serviceOpenMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(StoreActivity.this, getString(R.string.launch_google_maps), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ServiceActivity.this, getString(R.string.launch_google_maps), Toast.LENGTH_SHORT).show();
                 openGoogleMaps(service.getLatitude(), service.getLongitude());
             }
         });
-        storeOpenReviewButton.setOnClickListener(new View.OnClickListener() {
+        serviceOpenReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //go to review part
-                Intent intent = new Intent(StoreActivity.this, ReviewActivity.class);
+                Intent intent = new Intent(ServiceActivity.this, ReviewActivity.class);
                 intent.putExtra(getString(R.string.model_name_service), service);
                 startActivity(intent);
             }
@@ -120,7 +134,28 @@ public class StoreActivity extends AppCompatActivity {
         Glide.with(this).using(new FirebaseImageLoader()).load(reference).centerCrop()
                 .placeholder(android.R.drawable.ic_menu_report_image).into(imageViewStorePicture);
         Log.d("picture location", reference.toString());
+
+        setSpecialPets();
+
         //time
+        boolean[] openDays = service.getOpenDays();
+        String openTime = service.getOpenTime();
+        String closeTime = service.getCloseTime();
+        boolean isOpening = isOpening(openDays, openTime, closeTime);
+        String timeLabel = "";
+        if (isOpening) {
+            textViewIsOpen.setText(getString(R.string.open));
+            textViewIsOpen.setTextColor(Color.GREEN);
+        } else {
+            textViewIsOpen.setText(getString(R.string.close));
+            textViewIsOpen.setTextColor(Color.RED);
+            timeLabel += Utils.getNextOpens(service, this);
+        }
+        if (openTime != null && closeTime != null)
+            timeLabel += getString(R.string.time_open_label, openTime, closeTime);
+        else timeLabel += getString(R.string.all_day_open);
+        textViewTimeOpen.setText(timeLabel);
+        /*
         boolean[] openDays = service.getOpenDays();
         String openTime = service.getOpenTime();
         String closeTime = service.getCloseTime();
@@ -134,17 +169,54 @@ public class StoreActivity extends AppCompatActivity {
         }
         if (openTime != null && closeTime != null)
             textViewTimeOpen.setText(getString(R.string.time_open_label, openTime, closeTime));
-        else textViewTimeOpen.setText(getString(R.string.all_day_open));
+        else textViewTimeOpen.setText(getString(R.string.all_day_open));*/
         //tel
         textViewTel.setText(service.getTel());
+        //address
+        textViewAddress.setText(service.getAddress());
         //reviews
-        bindReviewsCountToTextView(this, service.getStoreId(), textViewReviewCount);
+        bindReviewsCountToTextView(this, service.getServiceId(), textViewReviewCount);
         //desc
         textViewStoreDesc.setText(service.getDescription());
     }
 
+    private void setSpecialPets() {
+        final String url = getString(R.string.URL) + getString(R.string.GET_AVAILABLE_PETS_FOR_SERVICE_URL, Integer.toString(service.getServiceId()));
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.equals("404")) {
+                    textViewPetAcceptance.setText(getString(R.string.none));
+                    return;
+                }
+                try {
+                    JSONArray array = new JSONArray(response);
+                    String s = "";
+                    for (int i = 0; i < array.length(); ++i) {
+                        JSONObject object = array.getJSONObject(i);
+                        String pet = object.getString(getString(R.string.pet_name));
+                        if (pet != null && pet.length() > 0) {
+                            if (s.length() != 0) s += ", ";
+                            s += getIntent().getStringExtra(pet);
+                        }
+                    }
+                    textViewPetAcceptance.setText(s);
+                } catch (JSONException e) {
+                    Log.d(TAG, "special pet json error");
+                    textViewPetAcceptance.setText(getString(R.string.none));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "error on " + url);
+            }
+        });
+        Volley.newRequestQueue(this).add(request);
+    }
+
     private void setLikeButton() {
-        final String url = getString(R.string.URL) + getString(R.string.LIKE_CONDITION_URL, service.getStoreId(), user.getUid());
+        final String url = getString(R.string.URL) + getString(R.string.LIKE_CONDITION_URL, service.getServiceId(), user.getUid());
         Log.d("check like", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -171,7 +243,7 @@ public class StoreActivity extends AppCompatActivity {
                 if (isCurrentUserLiked) {
                     unlike();
                 } else like();
-                StoreManager.like(StoreActivity.this, service.getStoreId(), user.getUid());
+                StoreManager.like(ServiceActivity.this, service.getServiceId(), user.getUid());
             }
         });
     }
