@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.Adapters.ReviewAdapter;
 import com.easypetsthailand.champ.easypets.Model.Review;
+import com.easypetsthailand.champ.easypets.Model.Service;
 import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 
 import org.json.JSONArray;
@@ -36,7 +37,7 @@ public class ReviewActivity extends AppCompatActivity {
     private final String TAG = ReviewActivity.class.getSimpleName();
     private ArrayList<Review> reviews = new ArrayList<>();
     private ReviewAdapter adapter;
-    private Store_oldClass service;
+    private Service service;
     private RequestQueue requestQueue;
 
     @BindView(R.id.rv_review)
@@ -59,13 +60,13 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ReviewActivity.this, WriteReviewActivity.class);
-                intent.putExtra("store_id", service.getStoreId());
+                intent.putExtra("service_id", service.getServiceId());
                 intent.putExtra("review_count", reviews.size());
                 startActivity(intent);
             }
         });
 
-        service = (Store_oldClass) getIntent().getSerializableExtra(getString(R.string.model_name_service));
+        service = (Service) getIntent().getSerializableExtra(getString(R.string.model_name_service));
         setTitle(getString(R.string.reviews, ""));
 
         requestQueue = Volley.newRequestQueue(this);
@@ -83,7 +84,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     private void bindData() {
-        String url = getString(R.string.URL) + getString(R.string.GET_REVIEW_BY_SERVICE_ID_URL, service.getStoreId());
+        String url = getString(R.string.URL) + getString(R.string.GET_REVIEW_BY_SERVICE_ID_URL, service.getServiceId());
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

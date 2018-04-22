@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Model.Review;
+import com.easypetsthailand.champ.easypets.Model.Service;
 import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.easypetsthailand.champ.easypets.R;
 import com.easypetsthailand.champ.easypets.ReplyActivity;
@@ -36,11 +37,11 @@ import butterknife.ButterKnife;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHolder> {
 
     private ArrayList<Review> dataSet;
-    private Store_oldClass service;
+    private Service service;
     private Context context;
     private RequestQueue requestQueue;
 
-    public ReviewAdapter(ArrayList<Review> dataSet, Store_oldClass service, RequestQueue requestQueue, Context context) {
+    public ReviewAdapter(ArrayList<Review> dataSet, Service service, RequestQueue requestQueue, Context context) {
         this.dataSet = dataSet;
         this.service = service;
         this.requestQueue = requestQueue;
@@ -94,10 +95,10 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
         @BindView(R.id.img_post_image)
         ImageView img_review_image;
         private Context context;
-        private Store_oldClass service;
+        private Service service;
         private RequestQueue requestQueue;
 
-        public ViewHolder(View itemView, Store_oldClass service, RequestQueue requestQueue, Context context) {
+        public ViewHolder(View itemView, Service service, RequestQueue requestQueue, Context context) {
             super(itemView);
             this.context = context;
             this.service = service;

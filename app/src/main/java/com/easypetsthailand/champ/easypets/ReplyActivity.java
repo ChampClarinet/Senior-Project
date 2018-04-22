@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Adapters.ReplyAdapter;
 import com.easypetsthailand.champ.easypets.Model.Reply;
 import com.easypetsthailand.champ.easypets.Model.Review;
+import com.easypetsthailand.champ.easypets.Model.Service;
 import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
@@ -58,7 +59,7 @@ public class ReplyActivity extends AppCompatActivity {
     RecyclerView rvReplies;
 
     private Review review;
-    private Store_oldClass service;
+    private Service service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class ReplyActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         review = (Review) i.getSerializableExtra("review");
-        service = (Store_oldClass) i.getSerializableExtra(getString(R.string.model_name_service));
+        service = (Service) i.getSerializableExtra(getString(R.string.model_name_service));
 
         ButterKnife.bind(this);
         getBackIcon();

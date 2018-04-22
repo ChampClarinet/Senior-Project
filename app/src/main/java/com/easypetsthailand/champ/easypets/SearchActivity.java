@@ -98,7 +98,7 @@ public class SearchActivity extends AppCompatActivity
         searchSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filter_text = searchFilterEditText.getText().toString();
+               /* filter_text = searchFilterEditText.getText().toString();
                 Log.d(TAG, "result is\n" +
                         "query = " + filter_text + "\n" +
                         "type = " + filter_type);
@@ -106,7 +106,7 @@ public class SearchActivity extends AppCompatActivity
                 intent.putExtra("filter_text", filter_text);
                 intent.putExtra("filter_type", filter_type);
                 intent.putExtra("filter", filter);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
     }

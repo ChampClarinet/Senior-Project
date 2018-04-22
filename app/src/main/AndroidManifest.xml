@@ -28,10 +28,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ResultActivity_oldClass"
-            android:label="@string/result"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

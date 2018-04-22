@@ -66,7 +66,7 @@ public class WriteReviewActivity extends AppCompatActivity implements OnImagePic
         ButterKnife.bind(this);
 
         new_review_id = getIntent().getIntExtra("reviews_count", -1) + 1;
-        store_id = getIntent().getIntExtra("store_id", -1);
+        store_id = getIntent().getIntExtra("service_id", -1);
 
         imagePicker = new ImagePicker(this,
                 null, this);

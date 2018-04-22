@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Model.Reply;
+import com.easypetsthailand.champ.easypets.Model.Service;
 import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.easypetsthailand.champ.easypets.R;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -25,11 +26,11 @@ import butterknife.ButterKnife;
 
 public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.GenericHolder> {
 
-    private Store_oldClass service;
+    private Service service;
     private ArrayList<Reply> dataSet;
     private Context context;
 
-    public ReplyAdapter(ArrayList<Reply> dataSet, Store_oldClass service, Context context) {
+    public ReplyAdapter(ArrayList<Reply> dataSet, Service service, Context context) {
         this.dataSet = dataSet;
         this.service = service;
         this.context = context;
@@ -82,9 +83,9 @@ public class ReplyAdapter extends RecyclerView.Adapter<ReplyAdapter.GenericHolde
         @BindView(R.id.img_post_image)
         ImageView replyImageView;
         private Context context;
-        private Store_oldClass service;
+        private Service service;
 
-        public ViewHolder(View itemView, Store_oldClass service, Context context) {
+        public ViewHolder(View itemView, Service service, Context context) {
             super(itemView);
             this.context = context;
             this.service = service;
