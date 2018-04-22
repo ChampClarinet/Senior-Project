@@ -19,7 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Core.Utils;
-import com.easypetsthailand.champ.easypets.Model.Service.Service;
+import com.easypetsthailand.champ.easypets.Model.Service;
 import com.easypetsthailand.champ.easypets.R;
 import com.easypetsthailand.champ.easypets.ServiceActivity;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -37,7 +37,6 @@ import butterknife.ButterKnife;
 
 import static com.easypetsthailand.champ.easypets.Core.Utils.calculateDistance;
 import static com.easypetsthailand.champ.easypets.Core.Utils.createLoadDialog;
-import static com.easypetsthailand.champ.easypets.Core.Utils.dissmissLoadDialog;
 import static com.easypetsthailand.champ.easypets.Core.Utils.isOpening;
 
 public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.GenericHolder> {
@@ -185,17 +184,17 @@ public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.
                 @Override
                 public void onResponse(String response) {
                     if (response.equals("404")) {
-                        cv_depositable.setText(context.getString(R.string.unavailable));
+                        cv_depositable.setText(context.getString(R.string.deposit_unavailable));
                         return;
                     }
                     try {
                         JSONObject object = new JSONObject(response);
                         int isAcceptOvernight = object.getInt(context.getString(R.string.is_accept_overnight));
                         if (isAcceptOvernight == 1) {
-                            String s = context.getString(R.string.available) + " " + context.getString(R.string.accept_overnight);
+                            String s = context.getString(R.string.deposit_available) + "\n" + context.getString(R.string.accept_overnight);
                             cv_depositable.setText(s);
                         }else{
-                            cv_depositable.setText(context.getString(R.string.available));
+                            cv_depositable.setText(context.getString(R.string.deposit_available));
                         }
                     } catch (JSONException e) {
                         Log.d("adapter.depositable", "json error");

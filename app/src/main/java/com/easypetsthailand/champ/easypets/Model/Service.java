@@ -1,4 +1,4 @@
-package com.easypetsthailand.champ.easypets.Model.Service;
+package com.easypetsthailand.champ.easypets.Model;
 
 import android.support.annotation.Nullable;
 
@@ -13,6 +13,7 @@ public class Service implements Serializable {
     private String name;
     private String logoPath;
     private String picturePath;
+    private String facebookUrl;
     private boolean[] openDays; //true if open, 0 for Sunday, 1 for Tuesday etc.
     private String openTime;
     private String closeTime;
@@ -24,13 +25,14 @@ public class Service implements Serializable {
     private String description;
 
     public Service(int serviceId, String ownerUid, String name, String logoPath, String picturePath,
-                   String openDays, String openTime, String closeTime, String tel,
+                   String facebookUrl, String openDays, String openTime, String closeTime, String tel,
                    String address, int likes, double latitude, double longitude, String description) {
         this.serviceId = serviceId;
         this.ownerUid = ownerUid;
         this.name = name;
         this.logoPath = logoPath;
         this.picturePath = picturePath;
+        this.facebookUrl = facebookUrl;
         this.openDays = openDaysStringToBooleanArray(openDays);
         this.openTime = openTime;
         this.closeTime = closeTime;
@@ -60,6 +62,10 @@ public class Service implements Serializable {
 
     public String getPicturePath() {
         return picturePath;
+    }
+
+    public String getFacebookUrl() {
+        return facebookUrl;
     }
 
     public boolean[] getOpenDays() {

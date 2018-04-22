@@ -12,7 +12,7 @@
             android:id="@+id/tv_no_review"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_margin="@dimen/my_margin"
             android:text="@string/review_no_review"
             android:textAlignment="center"
             android:textSize="20sp"

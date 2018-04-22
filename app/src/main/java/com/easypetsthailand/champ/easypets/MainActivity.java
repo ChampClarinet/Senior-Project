@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity{
         ButterKnife.bind(this);
 
         GPSTracker.getInstance(getApplicationContext());
+        requestPermissions();
 
         depositButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,4 +81,9 @@ public class MainActivity extends AppCompatActivity{
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void requestPermissions(){
+
+    }
+
 }

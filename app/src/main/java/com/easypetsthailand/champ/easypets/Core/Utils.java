@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.easypetsthailand.champ.easypets.Model.Service.Service;
+import com.easypetsthailand.champ.easypets.Model.Service;
 import com.easypetsthailand.champ.easypets.R;
 
 import java.util.Calendar;

@@ -19,10 +19,10 @@
     <string name="sort_popularity">Popularity</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
-    <string name="URL" translatable="false">http://e3458756.ngrok.io/easypets/</string>
+    <string name="URL" translatable="false">http://efde4749.ngrok.io/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ADD_REVIEW_URL" translatable="false">post_review.php?uid=%1$s&amp;text=%2$s</string>
-    <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;store_id=%2$d</string>
+    <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;service_id=%2$d</string>
     <string name="GET_AVAILABLE_PETS_FOR_SERVICE_URL" translatable="false">get_available_pets_for_service.php?service_id=%1$s</string>
     <string name="GET_GROOM_BY_SERVICE_ID_URL" translatable="false">get_groom_by_service_id.php?service_id=%1$s</string>
     <string name="GET_HOSPITAL_BY_SERVICE_ID_URL" translatable="false">get_hospital_by_service_id.php?service_id=%1$s</string>
@@ -100,11 +100,16 @@
     <string name="sorted_by">Sorted by %1$s</string>
     <string name="add_a_photo">add a photo</string>
     <string name="post">post</string>
-    <string name="available">available</string>
-    <string name="unavailable">unavailable</string>
-    <string name="accept_overnight">and accept overnight</string>
-    <string name="special_pets_acceptance">Special pets acceptance:</string>
+    <string name="deposit_available">deposit available</string>
+    <string name="deposit_unavailable">deposit unavailable</string>
+    <string name="accept_overnight">accept overnight</string>
+    <string name="special_pets_acceptance">Special pets acceptance</string>
     <string name="none">none</string>
+    <string name="pet_grooming_label">Grooming details</string>
+    <string name="pet_hospital_label">Pet care details</string>
+    <string name="pet_hotel_label">Pet hotel details</string>
+    <string name="pet_other_label">Other service details</string>
+    <string name="facebook" translatable="false">Facebook</string>
 
     <!--Mock Strings-->
     <string name="mock_store_title">Service name</string>
@@ -161,5 +166,8 @@
     <string name="longitude" translatable="false">longitude</string>
     <string name="description" translatable="false">description</string>
     <string name="pet_name" translatable="false">pet_name</string>
+    <string name="grooming_rate_label">Grooming price</string>
+    <string name="details">services details</string>
+    <string name="facebook_url">facebook_url</string>
 
 </resources>

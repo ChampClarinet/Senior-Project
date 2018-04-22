@@ -18,7 +18,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/textview"
         android:hint="@string/search_hint"
-        android:padding="@dimen/my_default_margin"
+        android:padding="@dimen/my_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

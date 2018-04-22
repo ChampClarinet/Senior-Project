@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -23,7 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.Adapters.ServiceCardAdapter;
-import com.easypetsthailand.champ.easypets.Model.Service.Service;
+import com.easypetsthailand.champ.easypets.Model.Service;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -129,6 +128,7 @@ public class MenuActivity extends AppCompatActivity {
                         String name = object.getString(getString(R.string.name));
                         String logoPath = object.getString(getString(R.string.logo_path));
                         String picturePath = object.getString(getString(R.string.picture_path));
+                        String facebookUrl = object.getString(getString(R.string.facebook_url));
                         String openDays = object.getString(getString(R.string.open_days));
                         String openTime = object.getString(getString(R.string.open_time));
                         if (openTime.equals("null")) openTime = null;
@@ -149,7 +149,7 @@ public class MenuActivity extends AppCompatActivity {
                             }
                         }*/
 
-                        Service newService = new Service(storeId, ownerUid, name, logoPath, picturePath,
+                        Service newService = new Service(storeId, ownerUid, name, logoPath, picturePath, facebookUrl,
                                 openDays, openTime, closeTime, tel, address, likes, latitude, longitude, description);
                         services.add(newService);
                         /*if(sortBy.length() == 0 || sortBy.equals("distance")) sortByDistance();

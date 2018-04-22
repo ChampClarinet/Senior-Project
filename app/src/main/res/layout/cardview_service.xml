@@ -5,8 +5,8 @@
     android:id="@+id/cv_store_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/default_margin"
-    android:layout_marginTop="@dimen/default_margin"
+    android:layout_marginBottom="@dimen/my_margin"
+    android:layout_marginTop="@dimen/my_margin"
     android:clickable="true"
     android:focusable="true">
 
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginStart="@dimen/my_margin"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,8 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/my_margin"
+                android:layout_marginStart="@dimen/my_margin"
                 android:text="Service name"
                 tools:ignore="HardcodedText" />
 
@@ -51,14 +51,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/my_margin"
+                android:layout_marginStart="@dimen/my_margin"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/my_margin"
                     android:src="@drawable/ic_action_like"
                     android:tint="@color/liked" />
 
@@ -76,30 +76,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/my_margin"
+                android:layout_marginStart="@dimen/my_margin"
                 android:text="@string/distance_label" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/my_margin"
+                android:layout_marginStart="@dimen/my_margin"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_service_open"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/my_margin"
                     android:text="@string/open" />
 
                 <TextView
                     android:id="@+id/tv_service_close"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/my_margin"
                     android:text="@string/close" />
 
                 <TextView
@@ -115,22 +115,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:layout_marginEnd="@dimen/default_margin"
-                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/my_margin"
+                android:layout_marginStart="@dimen/my_margin"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:text="@string/pet_deposit" />
 
                 <TextView
                     android:id="@+id/tv_service_depositable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:layout_marginStart="@dimen/default_margin"
                     android:singleLine="false"
                     android:text="@string/mock_is_depositable" />
 

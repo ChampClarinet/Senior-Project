@@ -11,14 +11,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.R;
 
-public class StoreManager {
+public class ServiceManager {
 
-    private static final String TAG = StoreManager.class.getSimpleName();
+    private static final String TAG = ServiceManager.class.getSimpleName();
     private static final int timeOut = 3000;
 
-    public static void like(Context context, int storeId, String userUid){
+    public static void like(Context context, int serviceId, String userUid){
+        Log.d("like", "toggling like for "+serviceId+":"+userUid);
         final Boolean returnValue[] = {null};
-        final String url = context.getString(R.string.URL) + context.getString(R.string.ATTEMPT_LIKE_URL, userUid, storeId);
+        final String url = context.getString(R.string.URL) + context.getString(R.string.ATTEMPT_LIKE_URL, userUid, serviceId);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
