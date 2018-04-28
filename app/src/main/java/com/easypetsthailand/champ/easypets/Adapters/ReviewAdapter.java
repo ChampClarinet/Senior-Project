@@ -19,12 +19,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Model.Review;
 import com.easypetsthailand.champ.easypets.Model.Service;
-import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.easypetsthailand.champ.easypets.R;
 import com.easypetsthailand.champ.easypets.ReplyActivity;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -155,11 +151,12 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.GenericHol
 
             //review image
             Log.d("reviewPic", review.getReviewPicturePath());
-            if(!review.getReviewPicturePath().equalsIgnoreCase("null")){
-                String imagePath = context.getString(R.string.review_images_storage_ref) + review.getReviewPicturePath();
-                StorageReference reference = FirebaseStorage.getInstance().getReference().child(imagePath);
+            if (!review.getReviewPicturePath().equalsIgnoreCase("null")) {
+                String imagePath = context.getString(R.string.URL) + context.getString(R.string.review_bucket) + review.getReviewPicturePath();
+                /*StorageReference reference = FirebaseStorage.getInstance().getReference().child(imagePath);
                 Glide.with(context).using(new FirebaseImageLoader()).load(reference).centerCrop()
-                        .placeholder(android.R.drawable.ic_menu_report_image).into(img_review_image);
+                        .placeholder(android.R.drawable.ic_menu_report_image).into(img_review_image);*/
+                Glide.with(context).load(imagePath).centerCrop().into(img_review_image);
                 img_review_image.setVisibility(View.VISIBLE);
             }
 

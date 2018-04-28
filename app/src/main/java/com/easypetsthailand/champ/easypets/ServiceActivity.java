@@ -12,10 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,17 +26,12 @@ import com.bumptech.glide.Glide;
 import com.easypetsthailand.champ.easypets.Core.ServiceManager;
 import com.easypetsthailand.champ.easypets.Core.Utils;
 import com.easypetsthailand.champ.easypets.Model.Service;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -100,11 +93,13 @@ public class ServiceActivity extends AppCompatActivity {
         //name
         setTitle(service.getName());
         //image
-        String picturePath = getString(R.string.pictures_storage_ref) + service.getPicturePath();
-        StorageReference reference = FirebaseStorage.getInstance().getReference().child(picturePath);
+        String picturePath = getString(R.string.URL)+getString(R.string.pictures_bucket) + service.getPicturePath();
+        /*StorageReference reference = FirebaseStorage.getInstance().getReference().child(picturePath);
         Glide.with(this).using(new FirebaseImageLoader()).load(reference).centerCrop()
+                .placeholder(android.R.drawable.ic_menu_report_image).into(imageViewStorePicture);*/
+        //Log.d("picture location", reference.toString());
+        Glide.with(this).load(picturePath).centerCrop()
                 .placeholder(android.R.drawable.ic_menu_report_image).into(imageViewStorePicture);
-        Log.d("picture location", reference.toString());
 
         //time
         boolean[] openDays = service.getOpenDays();
@@ -157,6 +152,9 @@ public class ServiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //go to details
+                Intent intent = new Intent(ServiceActivity.this, DetailActivity.class);
+                intent.putExtra(getString(R.string.model_name_service), service);
+                startActivity(intent);
             }
         });
         //reviews
@@ -180,7 +178,7 @@ public class ServiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
-        Toolbar toolbar = findViewById(R.id.store_toolbar);
+        Toolbar toolbar = findViewById(R.id.service_toolbar);
         setSupportActionBar(toolbar);
 
         service = (Service) getIntent().getSerializableExtra(getString(R.string.model_name_service));

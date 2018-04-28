@@ -32,14 +32,17 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.dimorinny.floatingtextbutton.FloatingTextButton;
 
 public class MenuActivity extends AppCompatActivity {
 
     private final String TAG = MenuActivity.class.getSimpleName();
 
-    @BindView(R.id.fab_sort_by)
-    FloatingTextButton fabSortBy;
+    /*@BindView(R.id.fab_sort_by)
+    FloatingTextButton textSortBy;*/
+    @BindView(R.id.sort)
+    TextView textSortBy;
+    @BindView(R.id.filter_button)
+    TextView filterButton;
     @BindView(R.id.menu_activity_rv)
     RecyclerView RVMenu;
     @BindView(R.id.menu_activity_label_zero_results)
@@ -64,9 +67,9 @@ public class MenuActivity extends AppCompatActivity {
 
         sortBy = getString(R.string.distance);
 
-        fabSortBy.setTitle(getString(R.string.sorted_by, sortBy));
+        textSortBy.setText(getString(R.string.sorted_by, sortBy));
 
-        fabSortBy.setOnClickListener(new View.OnClickListener() {
+        textSortBy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showSortOptions();
@@ -79,6 +82,13 @@ public class MenuActivity extends AppCompatActivity {
             public void onRefresh() {
                 Log.d(TAG, "onRefresh");
                 refresh();
+            }
+        });
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MenuActivity.this, SearchActivity.class));
             }
         });
 
@@ -205,7 +215,7 @@ public class MenuActivity extends AppCompatActivity {
                         sortBy = getString(R.string.sort_distance);
                         break;
                 }
-                fabSortBy.setTitle(getString(R.string.sorted_by, sortBy));
+                textSortBy.setText(getString(R.string.sorted_by, sortBy));
                 onResume();
                 dialog.dismiss();
             }

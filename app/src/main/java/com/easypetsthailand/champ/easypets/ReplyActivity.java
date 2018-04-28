@@ -22,7 +22,6 @@ import com.easypetsthailand.champ.easypets.Adapters.ReplyAdapter;
 import com.easypetsthailand.champ.easypets.Model.Reply;
 import com.easypetsthailand.champ.easypets.Model.Review;
 import com.easypetsthailand.champ.easypets.Model.Service;
-import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;

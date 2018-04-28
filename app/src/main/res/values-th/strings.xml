@@ -66,11 +66,8 @@
     <string name="post">โพสต์</string>
     <string name="write_review">เขียนรีวิว</string>
     <string name="title_grooming_uppercase">อาบน้ำ ตัดขน</string>
-    <string name="title_hospital_uppercase">สถานพยาบาลสัตว์</string>
+    <string name="title_hospital_uppercase">โรงพยาบาล</string>
     <string name="title_hotel_uppercase">รับฝากสัตว์เลี้ยง</string>
-    <string name="title_grooming">อาบน้ำ ตัดขน</string>
-    <string name="title_hospital">สถานพยาบาลสัตว์</string>
-    <string name="title_hotel">รับฝากสัตว์เลี้ยง</string>
     <string name="sort_popularity">ความนิยม</string>
     <string name="sort_price">ระดับราคา</string>
     <string name="sort_name">ชื่อ</string>
@@ -79,5 +76,29 @@
     <string name="today">วันนี้</string>
     <string name="next_open_on">เปิด</string>
     <string name="loading">กำลังโหลด</string>
+    <string name="suffix_not">はありません。</string>
+    <string name="pet_deposit">รับฝากสัตว์เลี้ยง</string>
+    <string name="deposit_available">รองรับการฝากสัตว์เลี้ยง</string>
+    <string name="deposit_unavailable">ไม่รองรับการฝากสัตว์เลี้ยง</string>
+    <string name="accept_overnight">รองรับการฝากค้างคืน</string>
+    <string name="special_pets_acceptance">สัตว์พิเศษที่รองรับ</string>
+    <string name="none">ไม่มี</string>
+    <string name="groom_heading">รายละเอียดการอาบน้ำ ตัดขน</string>
+    <string name="hospital_heading">รายละเอียดการรักษาพยาบาล</string>
+    <string name="hotel_heading">รายละเอียดการรับฝากสัตว์เลี้ยง</string>
+    <string name="groom_start_price_label">อาบน้ำ / ตัดขน เริ่มต้นที่</string>
+    <string name="vaccine_start_price_label">วัคซีนเริ่มต้นที่</string>
+    <string name="operation_start_price_label">ผ่าตัดทั่วไปเริ่มต้นที่</string>
+    <string name="checkup_start_price_label">ตรวจทั่วไปเริ่มต้นที่</string>
+    <string name="hotel_start_price_label">รับฝากเริ่มต้นที่</string>
+    <string name="other_start_price_label">ราคา</string>
+    <string name="operation_acceptance">รองรับการผ่าตัดใหญ่</string>
+    <string name="overnight_acceptance">รองรับการฝากค้างคืน</string>
+    <string name="prefix_not">ไม่</string>
+    <string name="lizard">กิ้งก่า</string>
+    <string name="pig">หมูแคระ</string>
+    <string name="snake">งู</string>
+    <string name="details_button">การให้บริการ</string>
+    <string name="vary">ขึ้นอยู่กับสิ้นค้า</string>
 
 </resources>

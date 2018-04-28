@@ -8,9 +8,9 @@
     <string name="title_grooming_uppercase">GROOMING</string>
     <string name="title_hospital_uppercase">HOSPITAL</string>
     <string name="title_hotel_uppercase">HOTEL</string>
-    <string name="title_grooming">Grooming</string>
-    <string name="title_hospital">Hospitals</string>
-    <string name="title_hotel">Hotels</string>
+    <string name="title_grooming" translatable="false">Grooming</string>
+    <string name="title_hospital" translatable="false">Hospitals</string>
+    <string name="title_hotel" translatable="false">Hotels</string>
 
     <!--Sort by-->
     <string name="sort_name">Name</string>
@@ -19,7 +19,7 @@
     <string name="sort_popularity">Popularity</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
-    <string name="URL" translatable="false">http://efde4749.ngrok.io/easypets/</string>
+    <string name="URL" translatable="false">http://10.0.2.2/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ADD_REVIEW_URL" translatable="false">post_review.php?uid=%1$s&amp;text=%2$s</string>
     <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;service_id=%2$d</string>
@@ -40,6 +40,10 @@
     <string name="POST_REPLY_URL" translatable="false">post_reply.php?review_id=%1$d&amp;text=%2$s&amp;img=%3$s</string>
     <string name="POST_REVIEW_URL" translatable="false">post_review.php?service_id=%1$d&amp;uid=%2$s&amp;text=%3$s&amp;img=%4$s</string>
     <string name="REVIEWS_COUNT_URL" translatable="false">reviews_count.php?service_id=%1$d</string>
+    <string name="logo_bucket" translatable="false">../EasyPetsWeb/bucket/logo/</string>
+    <string name="reply_bucket" translatable="false">../EasyPetsWeb/bucket/replyPictures/</string>
+    <string name="review_bucket" translatable="false">../EasyPetsWeb/bucket/reviewPictures/</string>
+    <string name="pictures_bucket" translatable="false">../EasyPetsWeb/bucket/picture/</string>
 
     <!--system-->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
@@ -69,7 +73,7 @@
     <string name="tomorrow">tomorrow</string>
     <string name="logout">Logout</string>
     <string name="search_hint">Search</string>
-    <string name="filter_button">Search Options</string>
+    <string name="filter_button">Filter and Sort</string>
     <string name="search">Search</string>
     <string name="clear">clear</string>
     <string name="signing_in">Signing in</string>
@@ -105,11 +109,21 @@
     <string name="accept_overnight">accept overnight</string>
     <string name="special_pets_acceptance">Special pets acceptance</string>
     <string name="none">none</string>
-    <string name="pet_grooming_label">Grooming details</string>
-    <string name="pet_hospital_label">Pet care details</string>
-    <string name="pet_hotel_label">Pet hotel details</string>
-    <string name="pet_other_label">Other service details</string>
     <string name="facebook" translatable="false">Facebook</string>
+    <string name="groom_start_price_label">Groom starting price</string>
+    <string name="vaccine_start_price_label">Vaccine starting price</string>
+    <string name="operation_start_price_label">Operation starting price</string>
+    <string name="checkup_start_price_label">Checkup starting price</string>
+    <string name="hotel_start_price_label">Hotel starting price</string>
+    <string name="other_start_price_label">Price</string>
+    <string name="hospital_heading">Pet Hospital Details</string>
+    <string name="groom_heading">Groom Details</string>
+    <string name="hotel_heading">Hotel Details</string>
+    <string name="operation_acceptance">serious operation</string>
+    <string name="overnight_acceptance">accept overnight</string>
+    <string name="prefix_not">"not "</string>
+    <string name="details_button">services details</string>
+    <string name="vary">Vary by products</string>
 
     <!--Mock Strings-->
     <string name="mock_store_title">Service name</string>
@@ -131,7 +145,7 @@
     <string name="lizard">lizard</string>
     <string name="pig">pig</string>
     <string name="snake">snake</string>
-    <string name="fennec_fox">fennec fox</string>
+    <string name="fennec_fox" translatable="false">fennec fox</string>
 
     <!--type filter-->
     <string-array name="type_list">
@@ -166,8 +180,6 @@
     <string name="longitude" translatable="false">longitude</string>
     <string name="description" translatable="false">description</string>
     <string name="pet_name" translatable="false">pet_name</string>
-    <string name="grooming_rate_label">Grooming price</string>
-    <string name="details">services details</string>
-    <string name="facebook_url">facebook_url</string>
+    <string name="facebook_url" translatable="false">facebook_url</string>
 
 </resources>

@@ -21,7 +21,6 @@ import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.Adapters.ReviewAdapter;
 import com.easypetsthailand.champ.easypets.Model.Review;
 import com.easypetsthailand.champ.easypets.Model.Service;
-import com.easypetsthailand.champ.easypets.Model.Store_oldClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -120,10 +120,11 @@ public class ServiceCardAdapter extends RecyclerView.Adapter<ServiceCardAdapter.
         public void setViewData(final Service service) {
             //Log.d("adapter", "setting view for "+service.getName());
             //logo
-            String logoPath = context.getString(R.string.icon_storage_ref) + service.getLogoPath();
-            StorageReference reference = FirebaseStorage.getInstance().getReference().child(logoPath);
+            String logoPath = context.getString(R.string.URL) +context.getString(R.string.logo_bucket) + service.getLogoPath();
+            Glide.with(context).load(logoPath).centerCrop().placeholder(android.R.drawable.ic_menu_report_image).into(cv_logo);
+            /*StorageReference reference = FirebaseStorage.getInstance().getReference().child(logoPath);
             Glide.with(context).using(new FirebaseImageLoader()).load(reference).centerCrop()
-                    .placeholder(android.R.drawable.ic_menu_report_image).into(this.cv_logo);
+                    .placeholder(android.R.drawable.ic_menu_report_image).into(this.cv_logo);*/
 
             //cv_name
             this.cv_name.setText(service.getName());

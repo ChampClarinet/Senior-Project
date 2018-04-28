@@ -11,7 +11,7 @@
     <include
         layout="@layout/content_menu" />
 
-    <ru.dimorinny.floatingtextbutton.FloatingTextButton
+    <!--<ru.dimorinny.floatingtextbutton.FloatingTextButton
         android:id="@+id/fab_sort_by"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +20,6 @@
         app:floating_background_color="@color/colorPrimary"
         app:floating_left_icon="@android:drawable/ic_menu_sort_by_size"
         app:floating_title="@string/sorted_by"
-        app:floating_title_color="@color/text" />
+        app:floating_title_color="@color/text" />-->
 
 </android.support.design.widget.CoordinatorLayout>

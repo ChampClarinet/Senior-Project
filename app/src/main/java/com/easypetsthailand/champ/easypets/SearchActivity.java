@@ -66,7 +66,7 @@ public class SearchActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
-        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        /*final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -98,7 +98,7 @@ public class SearchActivity extends AppCompatActivity
         searchSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* filter_text = searchFilterEditText.getText().toString();
+               *//* filter_text = searchFilterEditText.getText().toString();
                 Log.d(TAG, "result is\n" +
                         "query = " + filter_text + "\n" +
                         "type = " + filter_type);
@@ -106,15 +106,15 @@ public class SearchActivity extends AppCompatActivity
                 intent.putExtra("filter_text", filter_text);
                 intent.putExtra("filter_type", filter_type);
                 intent.putExtra("filter", filter);
-                startActivity(intent);*/
+                startActivity(intent);*//*
             }
-        });
+        });*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setSpinner();
+        //setSpinner();
     }
 
     private void filterDialog() {
