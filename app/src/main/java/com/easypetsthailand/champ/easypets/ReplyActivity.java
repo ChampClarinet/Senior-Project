@@ -132,9 +132,8 @@ public class ReplyActivity extends AppCompatActivity {
         reviewTime.setText(review.getTimeReviewed());
         reviewText.setText(review.getReviewText());
         if(!review.getReviewPicturePath().equalsIgnoreCase("null")) {
-            String imagePath = getString(R.string.review_images_storage_ref) + review.getReviewPicturePath();
-            StorageReference imgRef = FirebaseStorage.getInstance().getReference().child(imagePath);
-            Glide.with(this).using(new FirebaseImageLoader()).load(imgRef).centerCrop().into(reviewImageView);
+            String imagePath = getString(R.string.URL)+getString(R.string.review_bucket) + review.getReviewPicturePath();
+            Glide.with(this).load(imagePath).centerCrop().into(reviewImageView);
             reviewImageView.setVisibility(View.VISIBLE);
         }
     }

@@ -37,27 +37,28 @@ public class MainActivity extends AppCompatActivity{
         depositButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenuActivity(getString(R.string.title_hotel));
+                openMenuActivity(getString(R.string.title_hotel), getString(R.string.title_hotel_uppercase));
             }
         });
         groomingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenuActivity(getString(R.string.title_grooming));
+                openMenuActivity(getString(R.string.title_grooming), getString(R.string.title_grooming_uppercase));
             }
         });
         hospitalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenuActivity(getString(R.string.title_hospital));
+                openMenuActivity(getString(R.string.title_hospital), getString(R.string.title_hospital_uppercase));
             }
         });
 
     }
 
-    private void openMenuActivity(String type){
+    private void openMenuActivity(String type, String title){
         Intent i = new Intent(this, MenuActivity.class);
         i.putExtra("type", type);
+        i.putExtra("title", title);
         startActivity(i);
     }
 

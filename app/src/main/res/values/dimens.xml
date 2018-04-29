@@ -6,7 +6,7 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="my_margin">10dp</dimen>
-    <dimen name="title_text">40sp</dimen>
+    <dimen name="title_text">35sp</dimen>
     <dimen name="heading_text">20sp</dimen>
     <dimen name="title_box_height">140sp</dimen>
     <dimen name="app_bar_height">180dp</dimen>

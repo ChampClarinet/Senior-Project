@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="search_hint">ค้นหา</string>
+    <string name="search_hint">ใส่คำค้นหา</string>
     <string name="action_settings">ตั้งค่า</string>
     <string name="logout">ล็อคเอาท์</string>
     <string name="search">ค้นหา</string>
@@ -52,7 +52,8 @@
     <string name="time_open_label">%1$sน - %2$sน</string>
     <string name="sort">เรียงลำดับ</string>
     <string name="distance">ระยะทาง</string>
-    <string name="sorted_by">เรียงลำดับตาม %1$s</string>
+    <string name="search_for">ค้นหา: "%1$s"</string>
+    <string name="click_for_reset">(คลิกเพื่อรีเซ็ต)</string>
     <string name="name_label">ชื่อ</string>
     <string name="popularity">ความนิยม</string>
     <string name="price">ระดับราคา</string>

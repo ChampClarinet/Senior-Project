@@ -1,12 +1,10 @@
 package com.easypetsthailand.champ.easypets;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,23 +35,13 @@ public class MenuActivity extends AppCompatActivity {
 
     private final String TAG = MenuActivity.class.getSimpleName();
 
-    /*@BindView(R.id.fab_sort_by)
-    FloatingTextButton textSortBy;*/
-    @BindView(R.id.sort)
-    TextView textSortBy;
-    @BindView(R.id.filter_button)
-    TextView filterButton;
-    @BindView(R.id.menu_activity_rv)
-    RecyclerView RVMenu;
-    @BindView(R.id.menu_activity_label_zero_results)
-    TextView tvZeroResults;
-    @BindView(R.id.menu_swipe_layout)
-    SwipeRefreshLayout swipeLayout;
+    private final int REQUEST_CODE_SEARCH = 592;
+    private final int REQUEST_CODE_FILTER = 159;
 
     private String serviceType;
-    private String sortBy;
     private ArrayList<Service> services = new ArrayList<>();
     private ServiceCardAdapter adapter;
+    private String keyword = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,16 +51,16 @@ public class MenuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         serviceType = getIntent().getStringExtra("type");
-        setTitle(serviceType);
+        String title = getIntent().getStringExtra("title");
+        setTitle(title);
 
-        sortBy = getString(R.string.distance);
-
-        textSortBy.setText(getString(R.string.sorted_by, sortBy));
-
-        textSortBy.setOnClickListener(new View.OnClickListener() {
+        textSearchFor.setText(getString(R.string.search_for, getString(R.string.none)));
+        textSearchFor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showSortOptions();
+                keyword = "";
+                textSearchFor.setText(getString(R.string.search_for, getString(R.string.none)));
+                refresh();
             }
         });
 
@@ -88,7 +76,7 @@ public class MenuActivity extends AppCompatActivity {
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MenuActivity.this, SearchActivity.class));
+                startActivityForResult(new Intent(MenuActivity.this, ServiceActivity.class), REQUEST_CODE_FILTER);
             }
         });
 
@@ -99,6 +87,28 @@ public class MenuActivity extends AppCompatActivity {
 
         getBackIcon();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SEARCH) {
+            String k = "";
+            try {
+                k = data.getStringExtra("keyword");
+                Log.d("keywordResult", k);
+            } catch (NullPointerException e) {
+                Log.d("keywordResult", "null");
+            }
+            if (k.length() > 0) {
+                keyword = k;
+                String text = getString(R.string.search_for, k) + " " + getString(R.string.click_for_reset);
+                textSearchFor.setText(text);
+                refresh();
+            }
+        } else if (requestCode == REQUEST_CODE_FILTER) {
+
+        }
     }
 
     @Override
@@ -133,7 +143,7 @@ public class MenuActivity extends AppCompatActivity {
                     services.clear();
                     for (int i = 0; i < array.length(); ++i) {
                         JSONObject object = array.getJSONObject(i);
-                        int storeId = object.getInt(getString(R.string.service_id));
+                        int serviceId = object.getInt(getString(R.string.service_id));
                         String ownerUid = object.getString(getString(R.string.owner_uid));
                         String name = object.getString(getString(R.string.name));
                         String logoPath = object.getString(getString(R.string.logo_path));
@@ -159,16 +169,20 @@ public class MenuActivity extends AppCompatActivity {
                             }
                         }*/
 
-                        Service newService = new Service(storeId, ownerUid, name, logoPath, picturePath, facebookUrl,
+                        //filter by keyword
+                        if (!name.contains(keyword)) continue;
+
+                        Service newService = new Service(serviceId, ownerUid, name, logoPath, picturePath, facebookUrl,
                                 openDays, openTime, closeTime, tel, address, likes, latitude, longitude, description);
                         services.add(newService);
-                        /*if(sortBy.length() == 0 || sortBy.equals("distance")) sortByDistance();
-                        if (sortBy.equals("popularity")) sortByPopularity();*/
-                        adapter.notifyDataSetChanged();
-                        if (services.size() == 0) {
-                            tvZeroResults.setVisibility(View.VISIBLE);
-                        } else tvZeroResults.setVisibility(View.GONE);
+                        /*if(searchFor.length() == 0 || searchFor.equals("distance")) sortByDistance();
+                        if (searchFor.equals("popularity")) sortByPopularity();*/
                     }
+                    //services = filterAndSort(services);
+                    adapter.notifyDataSetChanged();
+                    if (services.size() == 0) {
+                        tvZeroResults.setVisibility(View.VISIBLE);
+                    } else tvZeroResults.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d("json_error", response);
@@ -185,6 +199,7 @@ public class MenuActivity extends AppCompatActivity {
 
     //define sorting options dialog
     private void showSortOptions() {
+        /*
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.sort);
         builder.setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -200,35 +215,36 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        sortBy = getString(R.string.sort_name);
+                        searchFor = getString(R.string.sort_name);
                         break;
                     case 1:
-                        sortBy = getString(R.string.sort_distance);
+                        searchFor = getString(R.string.sort_distance);
                         break;
                     case 2:
-                        sortBy = getString(R.string.sort_price);
+                        searchFor = getString(R.string.sort_price);
                         break;
                     case 3:
-                        sortBy = getString(R.string.sort_popularity);
+                        searchFor = getString(R.string.sort_popularity);
                         break;
                     default:
-                        sortBy = getString(R.string.sort_distance);
+                        searchFor = getString(R.string.sort_distance);
                         break;
                 }
-                textSortBy.setText(getString(R.string.sorted_by, sortBy));
+                textSearchFor.setText(getString(R.string.search_for, searchFor));
                 onResume();
                 dialog.dismiss();
             }
         });
         builder.show();
+        */
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
-        for(int i = 0; i < menu.size(); i++){
+        for (int i = 0; i < menu.size(); i++) {
             Drawable drawable = menu.getItem(i).getIcon();
-            if(drawable != null) {
+            if (drawable != null) {
                 drawable.mutate();
                 drawable.setColorFilter(getResources().getColor(R.color.text), PorterDuff.Mode.SRC_ATOP);
             }
@@ -240,14 +256,11 @@ public class MenuActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.action_search){
+        if (id == R.id.action_search) {
             Intent i = new Intent(this, SearchActivity.class);
-            String type = serviceType;
-            if (type.charAt(type.length() - 1) == 's')
-                type = type.substring(0, type.length() - 1); //cut 's'
-            i.putExtra("type", type);
             //go to search
-        }else if(id == android.R.id.home){
+            startActivityForResult(i, REQUEST_CODE_SEARCH);
+        } else if (id == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -259,5 +272,18 @@ public class MenuActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
+
+    /*@BindView(R.id.fab_sort_by)
+    FloatingTextButton textSearchFor;*/
+    @BindView(R.id.search_for)
+    TextView textSearchFor;
+    @BindView(R.id.filter_button)
+    TextView filterButton;
+    @BindView(R.id.menu_activity_rv)
+    RecyclerView RVMenu;
+    @BindView(R.id.menu_activity_label_zero_results)
+    TextView tvZeroResults;
+    @BindView(R.id.menu_swipe_layout)
+    SwipeRefreshLayout swipeLayout;
 
 }

@@ -19,7 +19,7 @@
     <string name="sort_popularity">Popularity</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
-    <string name="URL" translatable="false">http://10.0.2.2/easypets/</string>
+    <string name="URL" translatable="false">http://192.168.1.137/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ADD_REVIEW_URL" translatable="false">post_review.php?uid=%1$s&amp;text=%2$s</string>
     <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;service_id=%2$d</string>
@@ -101,7 +101,8 @@
     <string name="opening">Opening</string>
     <string name="price_rate_range">Preferred Price Rate</string>
     <string name="sort">sort by</string>
-    <string name="sorted_by">Sorted by %1$s</string>
+    <string name="search_for">Search for: "%1$s"</string>
+    <string name="click_for_reset">(click for reset)</string>
     <string name="add_a_photo">add a photo</string>
     <string name="post">post</string>
     <string name="deposit_available">deposit available</string>
