@@ -55,7 +55,7 @@
     <string name="search_for">並べ替え %1$s</string>
     <string name="price">価格</string>
     <string name="popularity">好評</string>
-    <string name="name_label">名前</string>
+    <string name="name_untranslated">名前</string>
     <string name="no_replies">返信はまだありません。</string>
     <string name="replies">返信</string>
     <string name="reviews">%1$s リービュー</string>

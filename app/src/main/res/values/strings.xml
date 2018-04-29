@@ -17,6 +17,17 @@
     <string name="sort_distance">Distance</string>
     <string name="sort_price">Price</string>
     <string name="sort_popularity">Popularity</string>
+    <string name="sort_price_checkup">checkup price</string>
+    <string name="sort_price_vaccine">vaccine price</string>
+    <string name="sort_price_operation">operation price</string>
+    <string name="name_untranslated" translatable="false">name</string>
+    <string name="distance_untranslated" translatable="false">Distance</string>
+    <string name="popularity_untranslated" translatable="false">Popularity</string>
+    <string name="hotel_price_untranslated" translatable="false">hotel_price</string>
+    <string name="price_checkup_untranslated" translatable="false">checkup_price_rate</string>
+    <string name="price_vaccine_untranslated" translatable="false">vaccine_price_rate</string>
+    <string name="price_operation_untranslated" translatable="false">operation_price_rate</string>
+    <string name="groom_price_untranslated" translatable="false">grooming_price_rate</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
     <string name="URL" translatable="false">http://192.168.1.137/easypets/</string>
@@ -93,10 +104,6 @@
     <string name="review_no_review">No reviews yet</string>
     <string name="replies">Replies</string>
     <string name="no_replies">There is no replies</string>
-    <string name="name_label">Name</string>
-    <string name="distance">Distance</string>
-    <string name="popularity">Popularity</string>
-    <string name="price">Price</string>
     <string name="distance_label" translatable="false">%1$sm</string>
     <string name="opening">Opening</string>
     <string name="price_rate_range">Preferred Price Rate</string>
@@ -125,6 +132,7 @@
     <string name="prefix_not">"not "</string>
     <string name="details_button">services details</string>
     <string name="vary">Vary by products</string>
+    <string name="change">change</string>
 
     <!--Mock Strings-->
     <string name="mock_store_title">Service name</string>

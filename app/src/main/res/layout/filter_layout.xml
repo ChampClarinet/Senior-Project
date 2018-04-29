@@ -104,7 +104,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/search_filter_submit_button"
+        android:id="@+id/sort_by_change_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -54,7 +54,6 @@
     <string name="distance">ระยะทาง</string>
     <string name="search_for">ค้นหา: "%1$s"</string>
     <string name="click_for_reset">(คลิกเพื่อรีเซ็ต)</string>
-    <string name="name_label">ชื่อ</string>
     <string name="popularity">ความนิยม</string>
     <string name="price">ระดับราคา</string>
     <string name="reviews">%1$s รีวิว</string>
@@ -101,5 +100,9 @@
     <string name="snake">งู</string>
     <string name="details_button">การให้บริการ</string>
     <string name="vary">ขึ้นอยู่กับสิ้นค้า</string>
+    <string name="change">เปลี่ยน</string>
+    <string name="sort_price_checkup">ราคาตรวจทั่วไป</string>
+    <string name="sort_price_vaccine">ราคาวัคซีน</string>
+    <string name="sort_price_operation">ราคาผ่าตัดทั่วไป</string>
 
 </resources>

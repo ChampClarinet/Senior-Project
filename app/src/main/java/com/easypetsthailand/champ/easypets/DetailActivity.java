@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
     private ArrayList<OtherService> otherServiceArrayList = new ArrayList<>();
     private OtherServiceAdapter otherServiceAdapter;
 
-    private void setGroom(){
+    private void setGroom() {
         String url = getString(R.string.URL) + getString(R.string.GET_GROOM_BY_SERVICE_ID_URL, Integer.toString(service.getServiceId()));
         Log.d("querying groom", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -49,21 +49,8 @@ public class DetailActivity extends AppCompatActivity {
                 }
                 try {
                     JSONObject object = new JSONObject(response);
-                    int groomPrice = object.getInt("grooming_price_rate");
-                    String price = "200";
-                    switch (groomPrice){
-                        case 1: price = "200";
-                        break;
-                        case 2: price = "300";
-                        break;
-                        case 3: price = "500";
-                        break;
-                        case 4: price = "800";
-                        break;
-                        case 5: price = "1000";
-                        break;
-                    }
-                    groomStartPriceTextView.setText(price);
+                    String groomPrice = Integer.toString(object.getInt("grooming_price_rate")) + " " + getString(R.string.rate_symbol);
+                    groomStartPriceTextView.setText(groomPrice);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d("json_error", response);
@@ -78,7 +65,7 @@ public class DetailActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(request);
     }
 
-    private void setHospital(){
+    private void setHospital() {
         String url = getString(R.string.URL) + getString(R.string.GET_HOSPITAL_BY_SERVICE_ID_URL, Integer.toString(service.getServiceId()));
         Log.d("querying hospital", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -92,46 +79,17 @@ public class DetailActivity extends AppCompatActivity {
                 try {
                     JSONObject object = new JSONObject(response);
                     int isAcceptBigOperation = object.getInt("is_accept_big_operation");
-                    int checkupPriceRate = object.getInt("checkup_price_rate");
-                    int vaccinePriceRate = object.getInt("vaccine_price_rate");
-                    int operationPriceRate = object.getInt("operation_price_rate");
-                    if(isAcceptBigOperation==0){
-                        String x = getString(R.string.prefix_not)+getString(R.string.operation_acceptance);
+                    String checkupPriceRate = Integer.toString(object.getInt("checkup_price_rate")) + " " + getString(R.string.rate_symbol);
+                    String vaccinePriceRate = Integer.toString(object.getInt("vaccine_price_rate")) + " " + getString(R.string.rate_symbol);
+                    String operationPriceRate = Integer.toString(object.getInt("operation_price_rate")) + " " + getString(R.string.rate_symbol);
+                    if (isAcceptBigOperation == 0) {
+                        String x = getString(R.string.prefix_not) + getString(R.string.operation_acceptance);
                         isAcceptBigOperationTextView.setText(x);
-                    }
-                    else isAcceptBigOperationTextView.setText(getString(R.string.operation_acceptance));
-                    String price = "50";
-                    switch (checkupPriceRate){
-                        case 1: price = "50";
-                        break;
-                        case 2: price = "100";
-                        break;
-                        case 3: price = "200";
-                        break;
-                        case 4: price = "500";
-                        break;
-                    }
-                    checkupStartPrice.setText(price);
-                    switch (vaccinePriceRate){
-                        case 1: price = "50";
-                        break;
-                        case 2: price = "100";
-                        break;
-                        case 3: price = "200";
-                        break;
-                        case 4: price = "500";
-                        break;
-                    }
-                    vaccineStartPrice.setText(price);
-                    switch (operationPriceRate){
-                        case 1: price = "100";
-                        break;
-                        case 2: price = "300";
-                        break;
-                        case 3: price = "500";
-                        break;
-                    }
-                    operationStartPrice.setText(price);
+                    } else
+                        isAcceptBigOperationTextView.setText(getString(R.string.operation_acceptance));
+                    checkupStartPrice.setText(checkupPriceRate);
+                    vaccineStartPrice.setText(vaccinePriceRate);
+                    operationStartPrice.setText(operationPriceRate);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d("json_error", response);
@@ -146,7 +104,7 @@ public class DetailActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(request);
     }
 
-    private void setHotel(){
+    private void setHotel() {
         String url = getString(R.string.URL) + getString(R.string.GET_HOTEL_BY_SERVICE_ID_URL, Integer.toString(service.getServiceId()));
         Log.d("querying hotel", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -160,26 +118,14 @@ public class DetailActivity extends AppCompatActivity {
                 try {
                     JSONObject object = new JSONObject(response);
                     int isAcceptOvernight = object.getInt("is_accept_overnight");
-                    int hotelPrice = object.getInt("hotel_price");
-                    if(isAcceptOvernight==0) {
-                        String x = getString(R.string.prefix_not)+getString(R.string.overnight_acceptance);
+                    String hotelPrice = Integer.toString(object.getInt("hotel_price")) + " " + getString(R.string.rate_symbol);
+                    Log.d("hotel_price", hotelPrice);
+                    if (isAcceptOvernight == 0) {
+                        String x = getString(R.string.prefix_not) + getString(R.string.overnight_acceptance);
                         isAcceptOvernightTextView.setText(x);
-                    }
-                    else isAcceptOvernightTextView.setText(getString(R.string.overnight_acceptance));
-                    String price = "100";
-                    switch (hotelPrice){
-                        case 1: price = "100";
-                        break;
-                        case 2: price = "200";
-                        break;
-                        case 3: price = "300";
-                        break;
-                        case 4: price = "500";
-                        break;
-                        case 5: price = "1000";
-                        break;
-                    }
-                    checkupStartPrice.setText(price);
+                    } else
+                        isAcceptOvernightTextView.setText(getString(R.string.overnight_acceptance));
+                    hotelStartPriceTextView.setText(hotelPrice);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d("json_error", response);
@@ -194,7 +140,7 @@ public class DetailActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(request);
     }
 
-    private void setOther(){
+    private void setOther() {
         String url = getString(R.string.URL) + getString(R.string.GET_OTHERS_BY_SERVICE_ID_URL, Integer.toString(service.getServiceId()));
         Log.d("querying other", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -206,7 +152,7 @@ public class DetailActivity extends AppCompatActivity {
                 }
                 try {
                     JSONArray array = new JSONArray(response);
-                    for(int i=0;i<array.length();++i){
+                    for (int i = 0; i < array.length(); ++i) {
                         JSONObject object = array.getJSONObject(i);
                         String details = object.getString("service_details");
                         String price = object.getString("service_price");
@@ -238,7 +184,7 @@ public class DetailActivity extends AppCompatActivity {
         getBackIcon();
 
         otherServiceAdapter = new OtherServiceAdapter(otherServiceArrayList, this);
-        otherServiceRV.setLayoutManager(new LinearLayoutManager(this){
+        otherServiceRV.setLayoutManager(new LinearLayoutManager(this) {
             @Override
             public boolean canScrollVertically() {
                 return false;
@@ -256,7 +202,7 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == android.R.id.home){
+        if (id == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

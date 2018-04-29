@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,6 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.Adapters.ServiceCardAdapter;
+import com.easypetsthailand.champ.easypets.Model.Groom;
+import com.easypetsthailand.champ.easypets.Model.Hospital;
+import com.easypetsthailand.champ.easypets.Model.Hotel;
 import com.easypetsthailand.champ.easypets.Model.Service;
 
 import org.json.JSONArray;
@@ -27,9 +31,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.easypetsthailand.champ.easypets.Core.Utils.calculateDistance;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -42,6 +50,7 @@ public class MenuActivity extends AppCompatActivity {
     private ArrayList<Service> services = new ArrayList<>();
     private ServiceCardAdapter adapter;
     private String keyword = "";
+    private String sortBy = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +62,8 @@ public class MenuActivity extends AppCompatActivity {
         serviceType = getIntent().getStringExtra("type");
         String title = getIntent().getStringExtra("title");
         setTitle(title);
+
+        sortBy = getString(R.string.distance_untranslated);
 
         textSearchFor.setText(getString(R.string.search_for, getString(R.string.none)));
         textSearchFor.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +87,10 @@ public class MenuActivity extends AppCompatActivity {
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(MenuActivity.this, ServiceActivity.class), REQUEST_CODE_FILTER);
+                Intent intent = new Intent(MenuActivity.this, SortAndFilterActivity.class);
+                intent.putExtra("type", serviceType);
+                intent.putExtra("lastSortBy", sortBy);
+                startActivityForResult(intent, REQUEST_CODE_FILTER);
             }
         });
 
@@ -107,7 +121,14 @@ public class MenuActivity extends AppCompatActivity {
                 refresh();
             }
         } else if (requestCode == REQUEST_CODE_FILTER) {
-
+            try {
+                String sort = data.getStringExtra("sort_by");
+                sortBy = sort;
+                Toast.makeText(this, sort, Toast.LENGTH_SHORT).show();
+                refresh();
+            } catch (NullPointerException e) {
+                Log.d("filterResult", "null");
+            }
         }
     }
 
@@ -120,8 +141,8 @@ public class MenuActivity extends AppCompatActivity {
     private void refresh() {
         Log.d(TAG, "refresh");
         swipeLayout.setRefreshing(true);
-        adapter.notifyDataSetChanged();
         loadServices();
+        adapter.notifyDataSetChanged();
         swipeLayout.setRefreshing(false);
     }
 
@@ -129,13 +150,13 @@ public class MenuActivity extends AppCompatActivity {
         String type = serviceType;
         if (type.charAt(type.length() - 1) == 's')
             type = type.substring(0, type.length() - 1); //cut 's'
-        String url = getString(R.string.URL) + getString(R.string.GET_SERVICE_LIST_URL, "", type);
+        String url = getString(R.string.URL) + getString(R.string.GET_SERVICE_LIST_URL, keyword, type);
         Log.d("querying service", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response.equals("404")) {
-                    Log.d("response", "empty result");
+                    Log.d(TAG + ": service response", "empty result");
                     return;
                 }
                 try {
@@ -143,46 +164,58 @@ public class MenuActivity extends AppCompatActivity {
                     services.clear();
                     for (int i = 0; i < array.length(); ++i) {
                         JSONObject object = array.getJSONObject(i);
-                        int serviceId = object.getInt(getString(R.string.service_id));
-                        String ownerUid = object.getString(getString(R.string.owner_uid));
-                        String name = object.getString(getString(R.string.name));
-                        String logoPath = object.getString(getString(R.string.logo_path));
-                        String picturePath = object.getString(getString(R.string.picture_path));
-                        String facebookUrl = object.getString(getString(R.string.facebook_url));
-                        String openDays = object.getString(getString(R.string.open_days));
+                        final int serviceId = object.getInt(getString(R.string.service_id));
+                        final String ownerUid = object.getString(getString(R.string.owner_uid));
+                        final String name = object.getString(getString(R.string.name));
+                        final String logoPath = object.getString(getString(R.string.logo_path));
+                        final String picturePath = object.getString(getString(R.string.picture_path));
+                        final String facebookUrl = object.getString(getString(R.string.facebook_url));
+                        final String openDays = object.getString(getString(R.string.open_days));
                         String openTime = object.getString(getString(R.string.open_time));
                         if (openTime.equals("null")) openTime = null;
                         else openTime = openTime.substring(0, openTime.length() - 3);
                         String closeTime = object.getString(getString(R.string.close_time));
                         if (closeTime.equals("null")) closeTime = null;
                         else closeTime = closeTime.substring(0, closeTime.length() - 3);
-                        String tel = object.getString(getString(R.string.tel));
-                        String address = object.getString(getString(R.string.address));
-                        int likes = object.getInt(getString(R.string.likes_count));
-                        double latitude = object.getDouble(getString(R.string.latitude));
-                        double longitude = object.getDouble(getString(R.string.longitude));
-                        String description = object.getString(getString(R.string.description));
+                        final String tel = object.getString(getString(R.string.tel));
+                        final String address = object.getString(getString(R.string.address));
+                        final int likes = object.getInt(getString(R.string.likes_count));
+                        final double latitude = object.getDouble(getString(R.string.latitude));
+                        final double longitude = object.getDouble(getString(R.string.longitude));
+                        final String description = object.getString(getString(R.string.description));
 
-                        /*if (filter != null) {
-                            if (filter.getOpen() != null && filter.getOpen() && !isOpening(openDays, openTime, closeTime)) {
-                                continue;
-                            }
-                        }*/
+                        if (serviceType.equalsIgnoreCase(getString(R.string.title_grooming))) {
+                            int groomPrice = object.getInt("grooming_price_rate");
+                            Groom newService = new Groom(serviceId, ownerUid, name
+                                    , logoPath, picturePath, facebookUrl, openDays
+                                    , openTime, closeTime, tel, address, likes
+                                    , latitude, longitude, description, groomPrice);
+                            services.add(newService);
+                        } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hospital))) {
+                            int isAcceptBigOperation = object.getInt("is_accept_big_operation");
+                            int checkupPriceRate = object.getInt("checkup_price_rate");
+                            int vaccinePriceRate = object.getInt("vaccine_price_rate");
+                            int operationPriceRate = object.getInt("operation_price_rate");
+                            Hospital newService = new Hospital(serviceId, ownerUid, name
+                                    , logoPath, picturePath, facebookUrl, openDays
+                                    , openTime, closeTime, tel, address, likes
+                                    , latitude, longitude, description
+                                    , isAcceptBigOperation, checkupPriceRate
+                                    , vaccinePriceRate, operationPriceRate);
+                            services.add(newService);
+                        } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hotel))) {
+                            int isAcceptOvernight = object.getInt("is_accept_overnight");
+                            int hotelPrice = object.getInt("hotel_price");
+                            Hotel newService = new Hotel(serviceId, ownerUid, name
+                                    , logoPath, picturePath, facebookUrl, openDays
+                                    , openTime, closeTime, tel, address, likes
+                                    , latitude, longitude, description
+                                    , isAcceptOvernight, hotelPrice);
+                            services.add(newService);
 
-                        //filter by keyword
-                        if (!name.contains(keyword)) continue;
-
-                        Service newService = new Service(serviceId, ownerUid, name, logoPath, picturePath, facebookUrl,
-                                openDays, openTime, closeTime, tel, address, likes, latitude, longitude, description);
-                        services.add(newService);
-                        /*if(searchFor.length() == 0 || searchFor.equals("distance")) sortByDistance();
-                        if (searchFor.equals("popularity")) sortByPopularity();*/
+                        }
+                        onServiceLoaded();
                     }
-                    //services = filterAndSort(services);
-                    adapter.notifyDataSetChanged();
-                    if (services.size() == 0) {
-                        tvZeroResults.setVisibility(View.VISIBLE);
-                    } else tvZeroResults.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d("json_error", response);
@@ -191,52 +224,61 @@ public class MenuActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("reply", "get reply error: " + error);
+                Log.d(TAG + ": Service", "get Service error: " + error);
             }
         });
         Volley.newRequestQueue(this).add(request);
     }
 
-    //define sorting options dialog
-    private void showSortOptions() {
-        /*
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.sort);
-        builder.setNeutralButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+    private void onServiceLoaded() {
+        sort();
+        adapter.notifyDataSetChanged();
+        if (services.size() == 0) {
+            tvZeroResults.setVisibility(View.VISIBLE);
+        } else tvZeroResults.setVisibility(View.GONE);
+    }
+
+    private void sort() {
+        if (sortBy.equalsIgnoreCase(getString(R.string.distance_untranslated))) {
+            Collections.sort(services, distanceComparator);
+        } else if (sortBy.equalsIgnoreCase(getString(R.string.popularity_untranslated))) {
+            Collections.sort(services, popularityComparator);
+        } else if (sortBy.equalsIgnoreCase(getString(R.string.name_untranslated))) {
+            Collections.sort(services, nameComparator);
+        } else if (sortBy.equalsIgnoreCase(getString(R.string.groom_price_untranslated))) {
+            ArrayList<Groom> grooms = new ArrayList<>();
+            for (Service s : services) {
+                Groom g = (Groom) s;
+                grooms.add(g);
             }
-        });
-        String[] choice = {getString(R.string.sort_name), getString(R.string.sort_distance)
-                , getString(R.string.sort_price), getString(R.string.sort_popularity)};
-        builder.setItems(choice, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        searchFor = getString(R.string.sort_name);
-                        break;
-                    case 1:
-                        searchFor = getString(R.string.sort_distance);
-                        break;
-                    case 2:
-                        searchFor = getString(R.string.sort_price);
-                        break;
-                    case 3:
-                        searchFor = getString(R.string.sort_popularity);
-                        break;
-                    default:
-                        searchFor = getString(R.string.sort_distance);
-                        break;
-                }
-                textSearchFor.setText(getString(R.string.search_for, searchFor));
-                onResume();
-                dialog.dismiss();
+            Collections.sort(grooms, groomPriceComparator);
+            services.clear();
+            services.addAll(grooms);
+        } else if (sortBy.equalsIgnoreCase(getString(R.string.hotel_price_untranslated))) {
+            ArrayList<Hotel> hotels = new ArrayList<>();
+            for (Service s : services) {
+                Hotel h = (Hotel) s;
+                hotels.add(h);
             }
-        });
-        builder.show();
-        */
+            Collections.sort(hotels, hotelPriceComparator);
+            services.clear();
+            services.addAll(hotels);
+        } else {
+            ArrayList<Hospital> hospitals = new ArrayList<>();
+            for (Service s : services) {
+                Hospital h = (Hospital) s;
+                hospitals.add(h);
+            }
+            if (sortBy.equalsIgnoreCase(getString(R.string.price_checkup_untranslated))) {
+                Collections.sort(hospitals, checkupComparator);
+            } else if (sortBy.equalsIgnoreCase(getString(R.string.price_vaccine_untranslated))) {
+                Collections.sort(hospitals, vaccineComparator);
+            } else if (sortBy.equalsIgnoreCase(getString(R.string.price_operation_untranslated))) {
+                Collections.sort(hospitals, operationComparator);
+            }
+            services.clear();
+            services.addAll(hospitals);
+        }
     }
 
     @Override
@@ -273,8 +315,64 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    /*@BindView(R.id.fab_sort_by)
-    FloatingTextButton textSearchFor;*/
+    private final Comparator<Service> distanceComparator = new Comparator<Service>() {
+        @Override
+        public int compare(Service o1, Service o2) {
+            Double d1 = calculateDistance(o1.getLatitude(), o1.getLongitude());
+            Double d2 = calculateDistance(o2.getLatitude(), o2.getLongitude());
+            return d1.compareTo(d2);
+        }
+    };
+
+    private final Comparator<Service> popularityComparator = new Comparator<Service>() {
+        @Override
+        public int compare(Service o1, Service o2) {
+            return o2.getLikes() - o1.getLikes();
+        }
+    };
+
+    private final Comparator<Service> nameComparator = new Comparator<Service>() {
+        @Override
+        public int compare(Service o1, Service o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    };
+
+    private final Comparator<Groom> groomPriceComparator = new Comparator<Groom>() {
+        @Override
+        public int compare(Groom o1, Groom o2) {
+            return o1.getPriceRate() - o2.getPriceRate();
+        }
+    };
+
+    private final Comparator<Hotel> hotelPriceComparator = new Comparator<Hotel>() {
+        @Override
+        public int compare(Hotel o1, Hotel o2) {
+            return o1.getHotelPrice() - o2.getHotelPrice();
+        }
+    };
+
+    private final Comparator<Hospital> checkupComparator = new Comparator<Hospital>() {
+        @Override
+        public int compare(Hospital o1, Hospital o2) {
+            return o1.getCheckupPriceRate() - o2.getCheckupPriceRate();
+        }
+    };
+
+    private final Comparator<Hospital> vaccineComparator = new Comparator<Hospital>() {
+        @Override
+        public int compare(Hospital o1, Hospital o2) {
+            return o1.getVaccinePriceRate() - o2.getVaccinePriceRate();
+        }
+    };
+
+    private final Comparator<Hospital> operationComparator = new Comparator<Hospital>() {
+        @Override
+        public int compare(Hospital o1, Hospital o2) {
+            return o1.getOperationPriceRate() - o2.getOperationPriceRate();
+        }
+    };
+
     @BindView(R.id.search_for)
     TextView textSearchFor;
     @BindView(R.id.filter_button)
