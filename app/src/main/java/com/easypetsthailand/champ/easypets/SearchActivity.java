@@ -3,6 +3,7 @@ package com.easypetsthailand.champ.easypets;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         ButterKnife.bind(this);
 
         searchSubmitButton.setOnClickListener(this);
+        getBackIcon();
 
     }
 
@@ -33,6 +35,23 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             intent.putExtra("keyword", keyword);
             setResult(REQUEST_CODE_SEARCH, intent);
             finish();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void getBackIcon() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
 

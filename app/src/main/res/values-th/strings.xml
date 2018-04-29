@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_hint">ใส่คำค้นหา</string>
-    <string name="action_settings">ตั้งค่า</string>
     <string name="logout">ล็อคเอาท์</string>
     <string name="search">ค้นหา</string>
     <string name="filter_button">เพิ่มตัวกรองการค้นหา</string>
     <string name="google_login_failed">การล็อคอินด้วย Google ผิดพลาด</string>
 
     <!--type filter-->
-    <string-array name="type_list">
-        <item>สถานบริการสัตว์เลี้ยง</item>
-        <item>โรงพยาบาลสัตว์</item>
-        <item>ฉันกำลังหา</item>
-    </string-array>
 
     <!--Image chooser items-->
     <string-array name="image_chooser_options">
@@ -20,16 +14,10 @@
         <item>ถ่ายภาพ</item>
     </string-array>
 
-    <string name="mock_available">บริการสำหรับสุนัข, แมว</string>
-    <string name="clear">ล้างค่า</string>
     <string name="signing_in">กำลังเข้าสู่ระบบ</string>
-    <string name="filter">ตัวกรอง</string>
-    <string name="result">ผลการค้นหา</string>
     <string name="open">เปิด</string>
     <string name="close">ปิด</string>
-    <string name="mock_store_title">ชื่อร้าน</string>
     <string name="app_name">EasyPets</string>
-    <string name="open_maps">ที่อยู่ร้าน</string>
     <string name="SUN">อา</string>
     <string name="MON">จ</string>
     <string name="TUE">อ</string>
@@ -37,24 +25,17 @@
     <string name="THU">พฤ</string>
     <string name="FRI">ศ</string>
     <string name="SAT">ส</string>
-    <string name="info">ข้อมูล</string>
-    <string name="review">รีวิว</string>
-    <string name="price_rate_label">เรทราคา %1$s</string>
     <string name="zero_results">ไม่พบข้อมูล</string>
     <string name="rate_symbol">฿</string>
     <string name="all_day_open">ให้บริการตลอด 24 ชม.</string>
     <string name="launch_google_maps">กำลังเปิด Google Maps</string>
     <string name="review_no_review">ไม่มีรีวิว</string>
-    <string name="rate_symbol_double">฿฿</string>
-    <string name="rate_symbol_triple">฿฿฿</string>
-    <string name="price_rate_range">ระดับราคาที่สนใจ</string>
     <string name="opening">กำลังเปิดให้บริการ</string>
     <string name="time_open_label">%1$sน - %2$sน</string>
     <string name="sort">เรียงลำดับ</string>
     <string name="distance">ระยะทาง</string>
     <string name="search_for">ค้นหา: "%1$s"</string>
     <string name="click_for_reset">(คลิกเพื่อรีเซ็ต)</string>
-    <string name="popularity">ความนิยม</string>
     <string name="price">ระดับราคา</string>
     <string name="reviews">%1$s รีวิว</string>
     <string name="replies">การตอบกลับ</string>
@@ -74,10 +55,7 @@
     <string name="sort_distance">ระยะทาง</string>
     <string name="tomorrow">พรุ่งนี้</string>
     <string name="today">วันนี้</string>
-    <string name="next_open_on">เปิด</string>
     <string name="loading">กำลังโหลด</string>
-    <string name="suffix_not">はありません。</string>
-    <string name="pet_deposit">รับฝากสัตว์เลี้ยง</string>
     <string name="deposit_available">รองรับการฝากสัตว์เลี้ยง</string>
     <string name="deposit_unavailable">ไม่รองรับการฝากสัตว์เลี้ยง</string>
     <string name="accept_overnight">รองรับการฝากค้างคืน</string>
