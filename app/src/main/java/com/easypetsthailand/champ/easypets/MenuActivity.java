@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +52,89 @@ public class MenuActivity extends AppCompatActivity {
     private ServiceCardAdapter adapter;
     private String keyword = "";
     private String sortBy = "";
+
+    //filters
+    private boolean isOpen;
+    private boolean isAcceptOvernight;
+    private boolean isAcceptOperation;
+    private int min;
+    private int max;
+    private int checkUpMin;
+    private int checkUpMax;
+    private int vaccineMin;
+    private int vaccineMax;
+    private int operationMin;
+    private int operationMax;
+
+    private boolean filter(Groom groom) {
+        return true;
+    }
+
+    private boolean filter(Hospital hospital) {
+        return true;
+    }
+
+    private boolean filter(Hotel hotel) {
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SEARCH) {
+            String k = "";
+            try {
+                k = data.getStringExtra("keyword");
+                Log.d("keywordResult", k);
+            } catch (NullPointerException e) {
+                Log.d("keywordResult", "null");
+            }
+            if (k.length() > 0) {
+                keyword = k;
+                String text = getString(R.string.search_for, k) + " " + getString(R.string.click_for_reset);
+                textSearchFor.setText(text);
+            }
+        } else if (requestCode == REQUEST_CODE_FILTER) {
+            try {
+                sortBy = data.getStringExtra("sort_by");
+                isOpen = data.getBooleanExtra("is_open", isOpen);
+                if (serviceType.equalsIgnoreCase(getString(R.string.title_grooming))) {
+                    min = data.getIntExtra("groom_min_price", min);
+                    max = data.getIntExtra("groom_max_price", max);
+                } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hotel))) {
+                    isAcceptOvernight = data.getBooleanExtra("is_accept_overnight", isAcceptOvernight);
+                    min = data.getIntExtra("hotel_min_price", min);
+                    max = data.getIntExtra("hotel_max_price", max);
+                } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hospital))) {
+                    isAcceptOperation = data.getBooleanExtra("is_accept_operation", isAcceptOperation);
+                    checkUpMin = data.getIntExtra("checkup_min_price", checkUpMin);
+                    checkUpMax = data.getIntExtra("checkup_max_price", checkUpMax);
+                    vaccineMin = data.getIntExtra("vaccine_min_price", vaccineMin);
+                    vaccineMax = data.getIntExtra("vaccine_max_price", vaccineMax);
+                    operationMin = data.getIntExtra("operation_min_price", operationMin);
+                    operationMax = data.getIntExtra("operation_max_price", operationMax);
+                }
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Filters");
+                String message = "isOpen = " + isOpen + "\n" +
+                        "isAcceptOvernight = " + isAcceptOvernight + "\n" +
+                        "isAcceptOperation = " + isAcceptOperation + "\n" +
+                        "min = " + min + "\n" +
+                        "max = " + max + "\n" +
+                        "checkUpMin = " + checkUpMin + "\n" +
+                        "checkUpMax = " + checkUpMax + "\n" +
+                        "vaccineMin = " + vaccineMin + "\n" +
+                        "vaccineMax = " + vaccineMax + "\n" +
+                        "operationMin = " + operationMin + "\n" +
+                        "operationMax = " + operationMax;
+                builder.setMessage(message);
+                builder.show();*/
+            } catch (NullPointerException e) {
+                Log.d("filterResult", "null");
+            }
+        }
+        refresh();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,34 +187,6 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_SEARCH) {
-            String k = "";
-            try {
-                k = data.getStringExtra("keyword");
-                Log.d("keywordResult", k);
-            } catch (NullPointerException e) {
-                Log.d("keywordResult", "null");
-            }
-            if (k.length() > 0) {
-                keyword = k;
-                String text = getString(R.string.search_for, k) + " " + getString(R.string.click_for_reset);
-                textSearchFor.setText(text);
-                refresh();
-            }
-        } else if (requestCode == REQUEST_CODE_FILTER) {
-            try {
-                String sort = data.getStringExtra("sort_by");
-                sortBy = sort;
-                Toast.makeText(this, sort, Toast.LENGTH_SHORT).show();
-                refresh();
-            } catch (NullPointerException e) {
-                Log.d("filterResult", "null");
-            }
-        }
-    }
 
     @Override
     protected void onResume() {
@@ -190,7 +246,7 @@ public class MenuActivity extends AppCompatActivity {
                                     , logoPath, picturePath, facebookUrl, openDays
                                     , openTime, closeTime, tel, address, likes
                                     , latitude, longitude, description, groomPrice);
-                            services.add(newService);
+                            if(filter(newService)) services.add(newService);
                         } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hospital))) {
                             int isAcceptBigOperation = object.getInt("is_accept_big_operation");
                             int checkupPriceRate = object.getInt("checkup_price_rate");
@@ -202,7 +258,7 @@ public class MenuActivity extends AppCompatActivity {
                                     , latitude, longitude, description
                                     , isAcceptBigOperation, checkupPriceRate
                                     , vaccinePriceRate, operationPriceRate);
-                            services.add(newService);
+                            if(filter(newService)) services.add(newService);
                         } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hotel))) {
                             int isAcceptOvernight = object.getInt("is_accept_overnight");
                             int hotelPrice = object.getInt("hotel_price");
@@ -211,11 +267,10 @@ public class MenuActivity extends AppCompatActivity {
                                     , openTime, closeTime, tel, address, likes
                                     , latitude, longitude, description
                                     , isAcceptOvernight, hotelPrice);
-                            services.add(newService);
-
+                            if(filter(newService)) services.add(newService);
                         }
-                        onServiceLoaded();
                     }
+                    onServiceLoaded();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.d("json_error", response);

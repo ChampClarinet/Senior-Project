@@ -101,8 +101,15 @@
     <string name="details_button">การให้บริการ</string>
     <string name="vary">ขึ้นอยู่กับสิ้นค้า</string>
     <string name="change">เปลี่ยน</string>
-    <string name="sort_price_checkup">ราคาตรวจทั่วไป</string>
-    <string name="sort_price_vaccine">ราคาวัคซีน</string>
-    <string name="sort_price_operation">ราคาผ่าตัดทั่วไป</string>
+    <string name="sort_price_checkup">ค่าบริการตรวจทั่วไป</string>
+    <string name="sort_price_vaccine">ค่าบริการวัคซีน</string>
+    <string name="sort_price_operation">ค่าบริการผ่าตัดทั่วไป</string>
+    <string name="filter_label">ตัวกรอง</string>
+    <string name="checkup_price">ค่าบริการตรวจทั่วไป</string>
+    <string name="vaccine_price">ค่าบริการวัคซีน</string>
+    <string name="operation_price">ค่าบริการผ่าตัดทั่วไป</string>
+    <string name="accept_operation">รองรับการผ่าตัดใหญ่</string>
+    <string name="min_price">ต่ำสุด</string>
+    <string name="max_price">สูงสุด</string>
 
 </resources>

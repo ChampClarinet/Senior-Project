@@ -76,6 +76,11 @@
     <string name="FRI">FRI</string>
     <string name="SAT">SAT</string>
 
+    <!--hints-->
+    <string name="search_hint">Search</string>
+    <string name="min_price">preferred min price</string>
+    <string name="max_price">preferred max price</string>
+
     <!--labels-->
     <string name="pet_deposit">Pet deposit</string>
     <string name="loading">loading</string>
@@ -83,7 +88,6 @@
     <string name="today">today</string>
     <string name="tomorrow">tomorrow</string>
     <string name="logout">Logout</string>
-    <string name="search_hint">Search</string>
     <string name="filter_button">Filter and Sort</string>
     <string name="search">Search</string>
     <string name="clear">clear</string>
@@ -133,6 +137,12 @@
     <string name="details_button">services details</string>
     <string name="vary">Vary by products</string>
     <string name="change">change</string>
+    <string name="filter_label">Filter</string>
+    <string name="checkup_price">Checkup price</string>
+    <string name="price">Price</string>
+    <string name="vaccine_price">Vaccine price</string>
+    <string name="operation_price">Operation price</string>
+    <string name="accept_operation">accept serious operation</string>
 
     <!--Mock Strings-->
     <string name="mock_store_title">Service name</string>

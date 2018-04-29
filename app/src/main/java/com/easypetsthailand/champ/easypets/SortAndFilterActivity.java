@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -46,11 +48,64 @@ public class SortAndFilterActivity extends AppCompatActivity {
 
         getBackIcon();
 
+        showFilter();
+
     }
 
     private void returnResult() {
         Intent intent = new Intent();
         intent.putExtra("sort_by", sortBy);
+        //collect data from filter
+        boolean isOpen = isOpenSwitch.isChecked();
+        intent.putExtra("is_open", isOpen);
+        if(serviceType.equalsIgnoreCase(getString(R.string.title_grooming))){
+            int min = -1;
+            int max = -1;
+            String s = groomHotelMinTextView.getText().toString();
+            if(s.length() > 0) min = Integer.parseInt(s);
+            s = groomHotelMaxTextView.getText().toString();
+            if(s.length() > 0) max = Integer.parseInt(s);
+            intent.putExtra("groom_min_price", min);
+            intent.putExtra("groom_max_price", max);
+        }else if(serviceType.equalsIgnoreCase(getString(R.string.title_hotel))){
+            boolean isAcceptOvernight = isAcceptedSwitch.isChecked();
+            int min = -1;
+            int max = -1;
+            String s = groomHotelMinTextView.getText().toString();
+            if(s.length() > 0) min = Integer.parseInt(s);
+            s = groomHotelMaxTextView.getText().toString();
+            if(s.length() > 0) max = Integer.parseInt(s);
+            intent.putExtra("is_accept_overnight", isAcceptOvernight);
+            intent.putExtra("hotel_min_price", min);
+            intent.putExtra("hotel_max_price", max);
+        }else if(serviceType.equalsIgnoreCase(getString(R.string.title_hospital))){
+            boolean isAcceptOperation = isAcceptedSwitch.isChecked();
+            int checkupMin = -1;
+            int checkupMax = -1;
+            int vaccineMin = -1;
+            int vaccineMax = -1;
+            int operationMin = -1;
+            int operationMax = -1;
+            String s = checkupMinTextView.getText().toString();
+            if(s.length() > 0) checkupMin = Integer.parseInt(s);
+            s = checkupMaxTextView.getText().toString();
+            if(s.length() > 0) checkupMax = Integer.parseInt(s);
+            s = vaccineMinTextView.getText().toString();
+            if(s.length() > 0) vaccineMin = Integer.parseInt(s);
+            s = vaccineMaxTextView.getText().toString();
+            if(s.length() > 0) vaccineMax = Integer.parseInt(s);
+            s = operationMinTextView.getText().toString();
+            if(s.length() > 0) operationMin = Integer.parseInt(s);
+            s = operationMaxTextView.getText().toString();
+            if(s.length() > 0) operationMax = Integer.parseInt(s);
+            intent.putExtra("is_accept_operation", isAcceptOperation);
+            intent.putExtra("checkup_min_price", checkupMin);
+            intent.putExtra("checkup_max_price", checkupMax);
+            intent.putExtra("vaccine_min_price", vaccineMin);
+            intent.putExtra("vaccine_max_price", vaccineMax);
+            intent.putExtra("operation_min_price", operationMin);
+            intent.putExtra("operation_max_price", operationMax);
+        }
         setResult(REQUEST_CODE_FILTER, intent);
         finish();
     }
@@ -79,6 +134,20 @@ public class SortAndFilterActivity extends AppCompatActivity {
             t = getString(R.string.sort_price_operation);
         }
         textSortBy.setText(t);
+    }
+
+    private void showFilter() {
+        if(serviceType.equalsIgnoreCase(getString(R.string.title_grooming))){
+            groomHotelPriceGroup.setVisibility(View.VISIBLE);
+        }else if(serviceType.equalsIgnoreCase(getString(R.string.title_hotel))){
+            groomHotelPriceGroup.setVisibility(View.VISIBLE);
+            isAcceptedSwitch.setVisibility(View.VISIBLE);
+            isAcceptedSwitch.setText(R.string.accept_overnight);
+        }else if(serviceType.equalsIgnoreCase(getString(R.string.title_hospital))){
+            isAcceptedSwitch.setVisibility(View.VISIBLE);
+            isAcceptedSwitch.setText(R.string.accept_operation);
+            hospitalPriceGroup.setVisibility(View.VISIBLE);
+        }
     }
 
     private void showSortOptions() {
@@ -180,5 +249,29 @@ public class SortAndFilterActivity extends AppCompatActivity {
     Button changeSortByButton;
     @BindView(R.id.filter_submit_button)
     Button filterSubmitButton;
+    @BindView(R.id.switch_is_open)
+    Switch isOpenSwitch;
+    @BindView(R.id.switch_is_accepted)
+    Switch isAcceptedSwitch;
+    @BindView(R.id.groom_hotel_price_group)
+    LinearLayout groomHotelPriceGroup;
+    @BindView(R.id.groom_hotel_min_price)
+    TextView groomHotelMinTextView;
+    @BindView(R.id.groom_hotel_max_price)
+    TextView groomHotelMaxTextView;
+    @BindView(R.id.hospital_price_group)
+    LinearLayout hospitalPriceGroup;
+    @BindView(R.id.checkup_min_price)
+    TextView checkupMinTextView;
+    @BindView(R.id.checkup_max_price)
+    TextView checkupMaxTextView;
+    @BindView(R.id.vaccine_min_price)
+    TextView vaccineMinTextView;
+    @BindView(R.id.vaccine_max_price)
+    TextView vaccineMaxTextView;
+    @BindView(R.id.operation_min_price)
+    TextView operationMinTextView;
+    @BindView(R.id.operation_max_price)
+    TextView operationMaxTextView;
 
 }
