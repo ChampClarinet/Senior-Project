@@ -36,7 +36,6 @@
     <string name="distance">遠近</string>
     <string name="search_for">並べ替え %1$s</string>
     <string name="price">価格</string>
-    <string name="name_untranslated">名前</string>
     <string name="no_replies">返信はまだありません。</string>
     <string name="replies">返信</string>
     <string name="reviews">%1$s リービュー</string>
@@ -56,5 +55,8 @@
     <string name="today">今日</string>
     <string name="tomorrow">明日</string>
     <string name="loading">読み込み中</string>
+    <string name="reptiles">爬虫類</string>
+    <string name="birds">鳥</string>
+    <string name="aquatics">水産物</string>
 
 </resources>

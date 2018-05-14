@@ -194,6 +194,30 @@ public class SortAndFilterActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             });
+        }else if(serviceType.equalsIgnoreCase(getString(R.string.title_all_uppercase))){
+            String[] choices = {getString(R.string.sort_name), getString(R.string.sort_distance)
+                    , getString(R.string.sort_popularity)};
+            builder.setItems(choices, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case 0:
+                            sortBy = getString(R.string.name_untranslated);
+                            break;
+                        case 1:
+                            sortBy = getString(R.string.distance_untranslated);
+                            break;
+                        case 2:
+                            sortBy = getString(R.string.popularity_untranslated);
+                            break;
+                        default:
+                            sortBy = getString(R.string.distance_untranslated);
+                            break;
+                    }
+                    onResume();
+                    dialog.dismiss();
+                }
+            });
         }else{
             String[] choices = {getString(R.string.sort_name), getString(R.string.sort_distance)
                     , getString(R.string.sort_price), getString(R.string.sort_popularity)};

@@ -73,9 +73,9 @@
     <string name="operation_acceptance">รองรับการผ่าตัดใหญ่</string>
     <string name="overnight_acceptance">รองรับการฝากค้างคืน</string>
     <string name="prefix_not">ไม่</string>
-    <string name="lizard">กิ้งก่า</string>
-    <string name="pig">หมูแคระ</string>
-    <string name="snake">งู</string>
+    <string name="reptiles">สัตว์เลื้อยคลาน</string>
+    <string name="birds">สัตว์ปีก</string>
+    <string name="aquatics">สัตว์น้ำ</string>
     <string name="details_button">การให้บริการ</string>
     <string name="vary">ขึ้นอยู่กับสิ้นค้า</string>
     <string name="change">เปลี่ยน</string>
@@ -89,5 +89,9 @@
     <string name="accept_operation">รองรับการผ่าตัดใหญ่</string>
     <string name="min_price">ต่ำสุด</string>
     <string name="max_price">สูงสุด</string>
+    <string name="search_all_hint">ค้นหาสถานบริการจากชื่อ</string>
+    <string name="search_results">ผลการค้นหา</string>
+    <string name="title_special_uppercase">รองรับสัตว์พิเศษ</string>
+    <string name="title_all_uppercase">ทั้งหมด</string>
 
 </resources>

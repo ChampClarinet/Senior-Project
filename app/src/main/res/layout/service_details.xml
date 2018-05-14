@@ -287,39 +287,30 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/lizard"
+            android:id="@+id/reptiles"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/my_margin"
             android:layout_marginTop="@dimen/my_margin"
-            android:text="@string/lizard"
+            android:text="@string/reptiles"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/pig"
+            android:id="@+id/birds"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/my_margin"
             android:layout_marginTop="@dimen/my_margin"
-            android:text="@string/pig"
+            android:text="@string/birds"
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/snake"
+            android:id="@+id/aquatics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/my_margin"
             android:layout_marginTop="@dimen/my_margin"
-            android:text="@string/snake"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/fennec_fox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/my_margin"
-            android:layout_marginTop="@dimen/my_margin"
-            android:text="@string/fennec_fox"
+            android:text="@string/aquatics"
             android:visibility="gone" />
 
     </LinearLayout>

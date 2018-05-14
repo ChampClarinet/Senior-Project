@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -24,6 +23,10 @@ public class MainActivity extends AppCompatActivity{
     ConstraintLayout groomingButton;
     @BindView(R.id.title_hospital)
     ConstraintLayout hospitalButton;
+    @BindView(R.id.title_special)
+    ConstraintLayout specialButton;
+    @BindView(R.id.title_all)
+    ConstraintLayout searchAll;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +53,20 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 openMenuActivity(getString(R.string.title_hospital), getString(R.string.title_hospital_uppercase));
+            }
+        });
+
+        specialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SpecialPetsActivity.class));
+            }
+        });
+
+        searchAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMenuActivity(getString(R.string.title_all), getString(R.string.title_all_uppercase));
             }
         });
 

@@ -5,9 +5,13 @@
     <string name="title_grooming_uppercase">GROOMING</string>
     <string name="title_hospital_uppercase">HOSPITAL</string>
     <string name="title_hotel_uppercase">HOTEL</string>
+    <string name="title_special_uppercase">SPECIAL PETS CARE</string>
+    <string name="title_all_uppercase">ALL</string>
     <string name="title_grooming" translatable="false">Grooming</string>
     <string name="title_hospital" translatable="false">Hospitals</string>
     <string name="title_hotel" translatable="false">Hotels</string>
+    <string name="title_special" translatable="false">Special Pets Care</string>
+    <string name="title_all" translatable="false">All</string>
 
     <!--Sort by-->
     <string name="sort_name">Name</string>
@@ -27,7 +31,7 @@
     <string name="groom_price_untranslated" translatable="false">grooming_price_rate</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
-    <string name="URL" translatable="false">http://192.168.1.137/easypets/</string>
+    <string name="URL" translatable="false">http://10.0.2.2/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;service_id=%2$d</string>
     <string name="GET_AVAILABLE_PETS_FOR_SERVICE_URL" translatable="false">get_available_pets_for_service.php?service_id=%1$s</string>
@@ -37,6 +41,7 @@
     <string name="GET_OTHERS_BY_SERVICE_ID_URL" translatable="false">get_others_by_service_id.php?service_id=%1$s</string>
     <string name="GET_REPLIES_BY_REVIEW_ID_URL" translatable="false">get_replies.php?review_id=%1$d</string>
     <string name="GET_REVIEW_BY_SERVICE_ID_URL" translatable="false">get_review_by_service_id.php?id=%1$d</string>
+    <string name="GET_SERVICE_BY_PET_ID_URL" translatable="false">get_service_by_pet_id.php?</string>
     <string name="GET_SERVICE_LIST_URL" translatable="false">get_service_list.php?keyword=%1$s&amp;type=%2$s</string>
     <string name="GET_USER_BY_UID_URL" translatable="false">get_user_by_uid.php?uid=%1$s</string>
     <string name="IS_USER_EXISTS_URL" translatable="false">is_user_exists.php?status=0&amp;uid=%1$s</string>
@@ -47,8 +52,6 @@
     <string name="reply_bucket" translatable="false">../EasyPetsWeb/bucket/replyPictures/</string>
     <string name="review_bucket" translatable="false">../EasyPetsWeb/bucket/reviewPictures/</string>
     <string name="pictures_bucket" translatable="false">../EasyPetsWeb/bucket/picture/</string>
-
-    <!--system-->
 
     <!--toasts-->
     <string name="google_login_failed">Google login failed.</string>
@@ -68,6 +71,7 @@
 
     <!--hints-->
     <string name="search_hint">Search</string>
+    <string name="search_all_hint">Search by service name</string>
     <string name="min_price">preferred min price</string>
     <string name="max_price">preferred max price</string>
 
@@ -93,6 +97,7 @@
     <string name="opening">Opening</string>
     <string name="sort">sort by</string>
     <string name="search_for">Search for: "%1$s"</string>
+    <string name="search_results">Search results</string>
     <string name="click_for_reset">(click for reset)</string>
     <string name="add_a_photo">add a photo</string>
     <string name="post">post</string>
@@ -135,10 +140,9 @@
     <string name="review_images_storage_ref" translatable="false">ReviewImages/</string>
 
     <!--Special pets-->
-    <string name="lizard">lizard</string>
-    <string name="pig">pig</string>
-    <string name="snake">snake</string>
-    <string name="fennec_fox" translatable="false">fennec fox</string>
+    <string name="reptiles">reptiles</string>
+    <string name="birds">birds</string>
+    <string name="aquatics">aquatics</string>
 
     <!--type filter-->
 
@@ -167,5 +171,7 @@
     <string name="description" translatable="false">description</string>
     <string name="pet_name" translatable="false">pet_name</string>
     <string name="facebook_url" translatable="false">facebook_url</string>
+    <string name="distance">distance</string>
+    <string name="title_activity_special_pets">SpecialPetsActivity</string>
 
 </resources>

@@ -5,7 +5,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -22,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.easypetsthailand.champ.easypets.Adapters.ServiceCardAdapter;
+import com.easypetsthailand.champ.easypets.Core.Utils;
 import com.easypetsthailand.champ.easypets.Model.Groom;
 import com.easypetsthailand.champ.easypets.Model.Hospital;
 import com.easypetsthailand.champ.easypets.Model.Hotel;
@@ -33,12 +32,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.easypetsthailand.champ.easypets.Core.Utils.calculateDistance;
+import static com.easypetsthailand.champ.easypets.Core.Comparators.checkupComparator;
+import static com.easypetsthailand.champ.easypets.Core.Comparators.distanceComparator;
+import static com.easypetsthailand.champ.easypets.Core.Comparators.groomPriceComparator;
+import static com.easypetsthailand.champ.easypets.Core.Comparators.hotelPriceComparator;
+import static com.easypetsthailand.champ.easypets.Core.Comparators.nameComparator;
+import static com.easypetsthailand.champ.easypets.Core.Comparators.operationComparator;
+import static com.easypetsthailand.champ.easypets.Core.Comparators.popularityComparator;
+import static com.easypetsthailand.champ.easypets.Core.Comparators.vaccineComparator;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -67,15 +72,55 @@ public class MenuActivity extends AppCompatActivity {
     private int operationMax;
 
     private boolean filter(Groom groom) {
+        if (isOpen) {
+            if (!Utils.isOpening(groom.getOpenDays(), groom.getOpenTime(), groom.getCloseTime())) {
+                return false;
+            }
+        }
+        if (min > 0 && max > 0 && min < max){
+            if(groom.getPriceRate() < min || groom.getPriceRate() > max) return false;
+        }
         return true;
     }
 
     private boolean filter(Hospital hospital) {
+        if (isOpen) {
+            if (!Utils.isOpening(hospital.getOpenDays(), hospital.getOpenTime(), hospital.getCloseTime())) {
+                return false;
+            }
+        }
+        if (isAcceptOperation) {
+            if (!hospital.isAcceptBigOperation()) return false;
+        }
+        if (checkUpMin > 0 && checkUpMax > 0 && checkUpMin < checkUpMax){
+            if(hospital.getCheckupPriceRate() < checkUpMin || hospital.getCheckupPriceRate() > checkUpMax) return false;
+        }
+        if (vaccineMin > 0 && vaccineMax > 0 && vaccineMin < vaccineMax){
+            if(hospital.getVaccinePriceRate() < vaccineMin || hospital.getVaccinePriceRate() > vaccineMax) return false;
+        }
+        if (operationMin > 0 && operationMax > 0 && operationMin < operationMax){
+            if(hospital.getOperationPriceRate() < operationMin || hospital.getOperationPriceRate() > operationMax) return false;
+        }
         return true;
     }
 
     private boolean filter(Hotel hotel) {
+        if (isOpen) {
+            if (!Utils.isOpening(hotel.getOpenDays(), hotel.getOpenTime(), hotel.getCloseTime())) {
+                return false;
+            }
+        }
+        if (isAcceptOperation) {
+            if (!hotel.isAcceptOvernight()) return false;
+        }
+        if (min > 0 && max > 0 && min < max){
+            if(hotel.getHotelPrice() < min || hotel.getHotelPrice() > max) return false;
+        }
         return true;
+    }
+
+    private boolean filter(Service service) {
+        return !isOpen || Utils.isOpening(service.getOpenDays(), service.getOpenTime(), service.getCloseTime());
     }
 
     @Override
@@ -147,6 +192,10 @@ public class MenuActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("title");
         setTitle(title);
 
+        if(getIntent().getStringExtra("keyword") != null){
+            keyword = getIntent().getStringExtra("keyword");
+        }
+
         sortBy = getString(R.string.distance_untranslated);
 
         textSearchFor.setText(getString(R.string.search_for, getString(R.string.none)));
@@ -213,6 +262,8 @@ public class MenuActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.equals("404")) {
                     Log.d(TAG + ": service response", "empty result");
+                    services.clear();
+                    onServiceLoaded();
                     return;
                 }
                 try {
@@ -246,7 +297,7 @@ public class MenuActivity extends AppCompatActivity {
                                     , logoPath, picturePath, facebookUrl, openDays
                                     , openTime, closeTime, tel, address, likes
                                     , latitude, longitude, description, groomPrice);
-                            if(filter(newService)) services.add(newService);
+                            if (filter(newService)) services.add(newService);
                         } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hospital))) {
                             int isAcceptBigOperation = object.getInt("is_accept_big_operation");
                             int checkupPriceRate = object.getInt("checkup_price_rate");
@@ -258,7 +309,7 @@ public class MenuActivity extends AppCompatActivity {
                                     , latitude, longitude, description
                                     , isAcceptBigOperation, checkupPriceRate
                                     , vaccinePriceRate, operationPriceRate);
-                            if(filter(newService)) services.add(newService);
+                            if (filter(newService)) services.add(newService);
                         } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hotel))) {
                             int isAcceptOvernight = object.getInt("is_accept_overnight");
                             int hotelPrice = object.getInt("hotel_price");
@@ -267,6 +318,12 @@ public class MenuActivity extends AppCompatActivity {
                                     , openTime, closeTime, tel, address, likes
                                     , latitude, longitude, description
                                     , isAcceptOvernight, hotelPrice);
+                            if (filter(newService)) services.add(newService);
+                        }else if(serviceType.equalsIgnoreCase(getString(R.string.title_all))){
+                            Service newService = new Service(serviceId, ownerUid, name
+                                    , logoPath, picturePath, facebookUrl, openDays
+                                    , openTime, closeTime, tel, address, likes
+                                    , latitude, longitude, description);
                             if(filter(newService)) services.add(newService);
                         }
                     }
@@ -369,64 +426,6 @@ public class MenuActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
     }
-
-    private final Comparator<Service> distanceComparator = new Comparator<Service>() {
-        @Override
-        public int compare(Service o1, Service o2) {
-            Double d1 = calculateDistance(o1.getLatitude(), o1.getLongitude());
-            Double d2 = calculateDistance(o2.getLatitude(), o2.getLongitude());
-            return d1.compareTo(d2);
-        }
-    };
-
-    private final Comparator<Service> popularityComparator = new Comparator<Service>() {
-        @Override
-        public int compare(Service o1, Service o2) {
-            return o2.getLikes() - o1.getLikes();
-        }
-    };
-
-    private final Comparator<Service> nameComparator = new Comparator<Service>() {
-        @Override
-        public int compare(Service o1, Service o2) {
-            return o1.getName().compareTo(o2.getName());
-        }
-    };
-
-    private final Comparator<Groom> groomPriceComparator = new Comparator<Groom>() {
-        @Override
-        public int compare(Groom o1, Groom o2) {
-            return o1.getPriceRate() - o2.getPriceRate();
-        }
-    };
-
-    private final Comparator<Hotel> hotelPriceComparator = new Comparator<Hotel>() {
-        @Override
-        public int compare(Hotel o1, Hotel o2) {
-            return o1.getHotelPrice() - o2.getHotelPrice();
-        }
-    };
-
-    private final Comparator<Hospital> checkupComparator = new Comparator<Hospital>() {
-        @Override
-        public int compare(Hospital o1, Hospital o2) {
-            return o1.getCheckupPriceRate() - o2.getCheckupPriceRate();
-        }
-    };
-
-    private final Comparator<Hospital> vaccineComparator = new Comparator<Hospital>() {
-        @Override
-        public int compare(Hospital o1, Hospital o2) {
-            return o1.getVaccinePriceRate() - o2.getVaccinePriceRate();
-        }
-    };
-
-    private final Comparator<Hospital> operationComparator = new Comparator<Hospital>() {
-        @Override
-        public int compare(Hospital o1, Hospital o2) {
-            return o1.getOperationPriceRate() - o2.getOperationPriceRate();
-        }
-    };
 
     @BindView(R.id.search_for)
     TextView textSearchFor;

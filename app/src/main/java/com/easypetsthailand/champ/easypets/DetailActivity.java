@@ -6,7 +6,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -196,6 +195,7 @@ public class DetailActivity extends AppCompatActivity {
         setHospital();
         setHotel();
         setOther();
+
     }
 
     @Override

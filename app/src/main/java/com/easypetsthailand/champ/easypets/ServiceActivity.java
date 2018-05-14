@@ -76,14 +76,12 @@ public class ServiceActivity extends AppCompatActivity {
     TextView textViewStoreDesc;
     @BindView(R.id.no_special_pets_acceptance)
     TextView textViewPetAcceptance;
-    @BindView(R.id.lizard)
-    TextView lizard;
-    @BindView(R.id.pig)
-    TextView pig;
-    @BindView(R.id.snake)
-    TextView snake;
-    @BindView(R.id.fennec_fox)
-    TextView fennecFox;
+    @BindView(R.id.reptiles)
+    TextView reptiles;
+    @BindView(R.id.birds)
+    TextView birds;
+    @BindView(R.id.aquatics)
+    TextView aquatics;
 
     private Service service;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -220,17 +218,14 @@ public class ServiceActivity extends AppCompatActivity {
                         JSONObject object = array.getJSONObject(i);
                         String pet = object.getString(getString(R.string.pet_name));
                         switch (pet) {
-                            case "lizard":
-                                lizard.setVisibility(View.VISIBLE);
+                            case "reptiles":
+                                reptiles.setVisibility(View.VISIBLE);
                                 break;
-                            case "pig":
-                                pig.setVisibility(View.VISIBLE);
+                            case "birds":
+                                birds.setVisibility(View.VISIBLE);
                                 break;
-                            case "snake":
-                                snake.setVisibility(View.VISIBLE);
-                                break;
-                            case "fennec fox":
-                                fennecFox.setVisibility(View.VISIBLE);
+                            case "aquatics":
+                                aquatics.setVisibility(View.VISIBLE);
                                 break;
                         }
                     }

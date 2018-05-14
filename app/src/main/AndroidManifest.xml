@@ -64,7 +64,15 @@
             android:name=".SearchActivity"
             android:label="@string/search"
             android:screenOrientation="portrait" />
-        <activity android:name=".SortAndFilterActivity"></activity>
+        <activity
+            android:name=".SortAndFilterActivity"
+            android:label="@string/filter_button"
+            android:screenOrientation="portrait" />
+        <activity android:name=".SearchSpecialActivity" />
+        <activity
+            android:name=".SpecialPetsActivity"
+            android:label="@string/title_activity_special_pets"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
