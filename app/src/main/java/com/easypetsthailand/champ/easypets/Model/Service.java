@@ -1,7 +1,5 @@
 package com.easypetsthailand.champ.easypets.Model;
 
-import android.support.annotation.Nullable;
-
 import java.io.Serializable;
 
 import static com.easypetsthailand.champ.easypets.Core.Utils.openDaysStringToBooleanArray;
@@ -42,6 +40,30 @@ public class Service implements Serializable {
         this.latitude = latitude;
         this.longitude = longitude;
         this.description = description;
+    }
+
+    public Service(int serviceId, String ownerUid, String name, String logoPath, String picturePath,
+                   String facebookUrl, boolean[] openDays, String openTime, String closeTime, String tel,
+                   String address, int likes, double latitude, double longitude, String description) {
+        this.serviceId = serviceId;
+        this.ownerUid = ownerUid;
+        this.name = name;
+        this.logoPath = logoPath;
+        this.picturePath = picturePath;
+        this.facebookUrl = facebookUrl;
+        this.openDays = openDays.clone();
+        this.openTime = openTime;
+        this.closeTime = closeTime;
+        this.tel = tel;
+        this.address = address;
+        this.likes = likes;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.description = description;
+    }
+
+    public void setOpenDays(String openDays) {
+        this.openDays = openDaysStringToBooleanArray(openDays);
     }
 
     public int getServiceId() {

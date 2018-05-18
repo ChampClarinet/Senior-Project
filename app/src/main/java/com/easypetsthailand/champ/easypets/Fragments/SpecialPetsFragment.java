@@ -70,7 +70,7 @@ public class SpecialPetsFragment extends Fragment {
             type = type.substring(0, type.length() - 1); //cut 's'*/
         String url = getString(R.string.URL) + getString(R.string.GET_SERVICE_BY_PET_ID_URL)
                 + "keyword=" + keyword + "&pet_id=" + petId;
-        Log.d("querying service", url);
+        Log.d("querying pets", url);
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

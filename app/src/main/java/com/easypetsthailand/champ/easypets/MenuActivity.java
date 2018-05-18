@@ -57,6 +57,7 @@ public class MenuActivity extends AppCompatActivity {
     private ServiceCardAdapter adapter;
     private String keyword = "";
     private String sortBy = "";
+    private String animals = null;
 
     //filters
     private boolean isOpen;
@@ -77,10 +78,7 @@ public class MenuActivity extends AppCompatActivity {
                 return false;
             }
         }
-        if (min > 0 && max > 0 && min < max){
-            if(groom.getPriceRate() < min || groom.getPriceRate() > max) return false;
-        }
-        return true;
+        return min <= 0 || max <= 0 || min >= max || groom.getPriceRate() >= min && groom.getPriceRate() <= max;
     }
 
     private boolean filter(Hospital hospital) {
@@ -92,14 +90,16 @@ public class MenuActivity extends AppCompatActivity {
         if (isAcceptOperation) {
             if (!hospital.isAcceptBigOperation()) return false;
         }
-        if (checkUpMin > 0 && checkUpMax > 0 && checkUpMin < checkUpMax){
-            if(hospital.getCheckupPriceRate() < checkUpMin || hospital.getCheckupPriceRate() > checkUpMax) return false;
+        if (checkUpMin > 0 && checkUpMax > 0 && checkUpMin < checkUpMax) {
+            if (hospital.getCheckupPriceRate() < checkUpMin || hospital.getCheckupPriceRate() > checkUpMax)
+                return false;
         }
-        if (vaccineMin > 0 && vaccineMax > 0 && vaccineMin < vaccineMax){
-            if(hospital.getVaccinePriceRate() < vaccineMin || hospital.getVaccinePriceRate() > vaccineMax) return false;
+        if (vaccineMin > 0 && vaccineMax > 0 && vaccineMin < vaccineMax) {
+            if (hospital.getVaccinePriceRate() < vaccineMin || hospital.getVaccinePriceRate() > vaccineMax)
+                return false;
         }
-        if (operationMin > 0 && operationMax > 0 && operationMin < operationMax){
-            if(hospital.getOperationPriceRate() < operationMin || hospital.getOperationPriceRate() > operationMax) return false;
+        if (operationMin > 0 && operationMax > 0 && operationMin < operationMax) {
+            return hospital.getOperationPriceRate() >= operationMin && hospital.getOperationPriceRate() <= operationMax;
         }
         return true;
     }
@@ -113,8 +113,8 @@ public class MenuActivity extends AppCompatActivity {
         if (isAcceptOperation) {
             if (!hotel.isAcceptOvernight()) return false;
         }
-        if (min > 0 && max > 0 && min < max){
-            if(hotel.getHotelPrice() < min || hotel.getHotelPrice() > max) return false;
+        if (min > 0 && max > 0 && min < max) {
+            if (hotel.getHotelPrice() < min || hotel.getHotelPrice() > max) return false;
         }
         return true;
     }
@@ -134,10 +134,14 @@ public class MenuActivity extends AppCompatActivity {
             } catch (NullPointerException e) {
                 Log.d("keywordResult", "null");
             }
-            if (k.length() > 0) {
+            if (k != null && k.length() > 0) {
                 keyword = k;
                 String text = getString(R.string.search_for, k) + " " + getString(R.string.click_for_reset);
                 textSearchFor.setText(text);
+            }
+            try {
+                animals = data.getStringExtra("animals");
+            } catch (NullPointerException ignored) {
             }
         } else if (requestCode == REQUEST_CODE_FILTER) {
             try {
@@ -192,7 +196,7 @@ public class MenuActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("title");
         setTitle(title);
 
-        if(getIntent().getStringExtra("keyword") != null){
+        if (getIntent().getStringExtra("keyword") != null) {
             keyword = getIntent().getStringExtra("keyword");
         }
 
@@ -291,41 +295,63 @@ public class MenuActivity extends AppCompatActivity {
                         final double longitude = object.getDouble(getString(R.string.longitude));
                         final String description = object.getString(getString(R.string.description));
 
+                        Service newService = new Service(serviceId, ownerUid, name
+                                , logoPath, picturePath, facebookUrl, openDays
+                                , openTime, closeTime, tel, address, likes
+                                , latitude, longitude, description);
+
                         if (serviceType.equalsIgnoreCase(getString(R.string.title_grooming))) {
                             int groomPrice = object.getInt("grooming_price_rate");
-                            Groom newService = new Groom(serviceId, ownerUid, name
-                                    , logoPath, picturePath, facebookUrl, openDays
-                                    , openTime, closeTime, tel, address, likes
-                                    , latitude, longitude, description, groomPrice);
-                            if (filter(newService)) services.add(newService);
+                            newService = new Groom(newService, groomPrice);
+                            if (!filter((Groom) newService)) continue;
                         } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hospital))) {
                             int isAcceptBigOperation = object.getInt("is_accept_big_operation");
                             int checkupPriceRate = object.getInt("checkup_price_rate");
                             int vaccinePriceRate = object.getInt("vaccine_price_rate");
                             int operationPriceRate = object.getInt("operation_price_rate");
-                            Hospital newService = new Hospital(serviceId, ownerUid, name
-                                    , logoPath, picturePath, facebookUrl, openDays
-                                    , openTime, closeTime, tel, address, likes
-                                    , latitude, longitude, description
-                                    , isAcceptBigOperation, checkupPriceRate
-                                    , vaccinePriceRate, operationPriceRate);
-                            if (filter(newService)) services.add(newService);
+                            newService = new Hospital(newService, isAcceptBigOperation
+                                    , checkupPriceRate, vaccinePriceRate, operationPriceRate);
+                            if (!filter((Hospital) newService)) continue;
                         } else if (serviceType.equalsIgnoreCase(getString(R.string.title_hotel))) {
                             int isAcceptOvernight = object.getInt("is_accept_overnight");
                             int hotelPrice = object.getInt("hotel_price");
-                            Hotel newService = new Hotel(serviceId, ownerUid, name
-                                    , logoPath, picturePath, facebookUrl, openDays
-                                    , openTime, closeTime, tel, address, likes
-                                    , latitude, longitude, description
-                                    , isAcceptOvernight, hotelPrice);
-                            if (filter(newService)) services.add(newService);
-                        }else if(serviceType.equalsIgnoreCase(getString(R.string.title_all))){
-                            Service newService = new Service(serviceId, ownerUid, name
-                                    , logoPath, picturePath, facebookUrl, openDays
-                                    , openTime, closeTime, tel, address, likes
-                                    , latitude, longitude, description);
-                            if(filter(newService)) services.add(newService);
+                            newService = new Hotel(newService, isAcceptOvernight, hotelPrice);
+                            if (!filter((Hotel) newService)) continue;
+                        } else if (serviceType.equalsIgnoreCase(getString(R.string.title_all))) {
+                            if (!filter(newService)) continue;
                         }
+                        if (animals != null) {
+                            int petId = -1;
+                            if (animals.equalsIgnoreCase("reptiles")) petId = 1;
+                            if (animals.equalsIgnoreCase("birds")) petId = 5;
+                            if (animals.equalsIgnoreCase("aquatics")) petId = 6;
+                            String type = serviceType;
+                            if (type.charAt(type.length() - 1) == 's')
+                                type = type.substring(0, type.length() - 1);
+                            String url = getString(R.string.URL)
+                                    + getString(R.string.IS_HAS_TYPE_URL, Integer.toString(serviceId), Integer.toString(petId), type);
+                            Log.d("querying pets", url);
+                            final Service finalNewService = newService;
+                            StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        if (Integer.parseInt(response) == 1) {
+                                            if (!services.contains(finalNewService))
+                                                services.add(finalNewService);
+                                            onServiceLoaded();
+                                        }
+                                    } catch (Exception ignored) {
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Log.d(TAG + ": Service animals", "get Service error: " + error);
+                                }
+                            });
+                            Volley.newRequestQueue(MenuActivity.this).add(request);
+                        } else services.add(newService);
                     }
                     onServiceLoaded();
                 } catch (JSONException e) {
@@ -344,6 +370,16 @@ public class MenuActivity extends AppCompatActivity {
 
     private void onServiceLoaded() {
         sort();
+        ArrayList<Service> t = new ArrayList<>();
+        for (Service s : services) {
+            boolean add = true;
+            for (Service s2 : t) {
+                if (s2.getServiceId() == s.getServiceId()) add = false;
+            }
+            if(add) t.add(s);
+        }
+        services.clear();
+        services.addAll(t);
         adapter.notifyDataSetChanged();
         if (services.size() == 0) {
             tvZeroResults.setVisibility(View.VISIBLE);

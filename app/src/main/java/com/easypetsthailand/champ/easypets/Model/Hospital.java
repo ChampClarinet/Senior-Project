@@ -35,6 +35,18 @@ public class Hospital extends Service{
         this.operationPriceRate = operationPriceRate;
     }
 
+    public Hospital(Service service, int isAcceptBigOperation, int checkupPriceRate
+            , int vaccinePriceRate, int operationPriceRate) {
+        super(service.getServiceId(), service.getOwnerUid(), service.getName(), service.getLogoPath()
+                , service.getPicturePath(), service.getFacebookUrl(), service.getOpenDays(), service.getOpenTime()
+                , service.getCloseTime(), service.getTel(), service.getAddress(), service.getLikes()
+                , service.getLatitude(), service.getLongitude(), service.getDescription());
+        this.isAcceptBigOperation = isAcceptBigOperation == 1;
+        this.checkupPriceRate = checkupPriceRate;
+        this.vaccinePriceRate = vaccinePriceRate;
+        this.operationPriceRate = operationPriceRate;
+    }
+
     public boolean isAcceptBigOperation() {
         return isAcceptBigOperation;
     }

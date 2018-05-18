@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="search_hint">ใส่คำค้นหา</string>
+    <string name="search_hint">ใส่ชื่อร้านที่ต้องการค้นหา</string>
     <string name="logout">ล็อคเอาท์</string>
     <string name="search">ค้นหา</string>
     <string name="filter_button">เพิ่มตัวกรองการค้นหา</string>
@@ -93,5 +93,6 @@
     <string name="search_results">ผลการค้นหา</string>
     <string name="title_special_uppercase">รองรับสัตว์พิเศษ</string>
     <string name="title_all_uppercase">ทั้งหมด</string>
+    <string name="search_special_text_label">ต้องการค้นหาสถานบริการของ</string>
 
 </resources>

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchActivity extends AppCompatActivity {
 
     private final String TAG = ServiceActivity.class.getSimpleName();
     private final int REQUEST_CODE_SEARCH = 592;
@@ -22,20 +22,66 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
-        searchSubmitButton.setOnClickListener(this);
+        searchSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyword = keywordTextView.getText().toString();
+                Intent intent = new Intent();
+                intent.putExtra("keyword", keyword);
+                setResult(REQUEST_CODE_SEARCH, intent);
+                finish();
+            }
+        });
+        searchReptilesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                String keyword = keywordTextView.getText().toString();
+                if(keyword.length() > 0)
+                    intent.putExtra("keyword", keyword);
+                intent.putExtra("animals", "reptiles");
+                setResult(REQUEST_CODE_SEARCH, intent);
+                finish();
+            }
+        });
+        searchReptilesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                String keyword = keywordTextView.getText().toString();
+                if(keyword.length() > 0)
+                    intent.putExtra("keyword", keyword);
+                intent.putExtra("animals", "reptiles");
+                setResult(REQUEST_CODE_SEARCH, intent);
+                finish();
+            }
+        });
+        searchBirdsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                String keyword = keywordTextView.getText().toString();
+                if(keyword.length() > 0)
+                    intent.putExtra("keyword", keyword);
+                intent.putExtra("animals", "birds");
+                setResult(REQUEST_CODE_SEARCH, intent);
+                finish();
+            }
+        });
+        searchAquaticsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                String keyword = keywordTextView.getText().toString();
+                if(keyword.length() > 0)
+                    intent.putExtra("keyword", keyword);
+                intent.putExtra("animals", "aquatics");
+                setResult(REQUEST_CODE_SEARCH, intent);
+                finish();
+            }
+        });
         getBackIcon();
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.search_submit){
-            String keyword = keywordTextView.getText().toString();
-            Intent intent = new Intent();
-            intent.putExtra("keyword", keyword);
-            setResult(REQUEST_CODE_SEARCH, intent);
-            finish();
-        }
     }
 
     @Override
@@ -59,5 +105,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     TextView keywordTextView;
     @BindView(R.id.search_submit)
     Button searchSubmitButton;
+    @BindView(R.id.button_special_pets_reptiles)
+    Button searchReptilesButton;
+    @BindView(R.id.button_special_pets_birds)
+    Button searchBirdsButton;
+    @BindView(R.id.button_special_pets_aquatics)
+    Button searchAquaticsButton;
 
 }

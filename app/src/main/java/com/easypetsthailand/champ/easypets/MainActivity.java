@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity{
     ConstraintLayout groomingButton;
     @BindView(R.id.title_hospital)
     ConstraintLayout hospitalButton;
-    @BindView(R.id.title_special)
-    ConstraintLayout specialButton;
     @BindView(R.id.title_all)
     ConstraintLayout searchAll;
 
@@ -53,13 +51,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 openMenuActivity(getString(R.string.title_hospital), getString(R.string.title_hospital_uppercase));
-            }
-        });
-
-        specialButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SpecialPetsActivity.class));
             }
         });
 

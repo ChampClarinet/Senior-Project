@@ -31,7 +31,7 @@
     <string name="groom_price_untranslated" translatable="false">grooming_price_rate</string>
 
     <!--URLS ip for localhost is 10.0.2.2 consider check this url ip before running apps-->
-    <string name="URL" translatable="false">http://10.0.2.2/easypets/</string>
+    <string name="URL" translatable="false">http://93bbbd1e.ngrok.io/easypets/</string>
     <string name="ADD_NEW_USER_URL" translatable="false">new_user_add.php?status=0</string>
     <string name="ATTEMPT_LIKE_URL" translatable="false">attempt_like.php?uid=%1$s&amp;service_id=%2$d</string>
     <string name="GET_AVAILABLE_PETS_FOR_SERVICE_URL" translatable="false">get_available_pets_for_service.php?service_id=%1$s</string>
@@ -45,6 +45,7 @@
     <string name="GET_SERVICE_LIST_URL" translatable="false">get_service_list.php?keyword=%1$s&amp;type=%2$s</string>
     <string name="GET_USER_BY_UID_URL" translatable="false">get_user_by_uid.php?uid=%1$s</string>
     <string name="IS_USER_EXISTS_URL" translatable="false">is_user_exists.php?status=0&amp;uid=%1$s</string>
+    <string name="IS_HAS_TYPE_URL" translatable="false">is_has_type.php?service_id=%1$s&amp;pet_id=%2$s&amp;type=%3$s</string>
     <string name="LIKE_CONDITION_URL" translatable="false">like_condition.php?service_id=%1$d&amp;uid=%2$s</string>
     <string name="POST_REVIEW_URL" translatable="false">post_review.php?service_id=%1$d&amp;uid=%2$s&amp;text=%3$s&amp;img=%4$s</string>
     <string name="REVIEWS_COUNT_URL" translatable="false">reviews_count.php?service_id=%1$d</string>
@@ -172,6 +173,6 @@
     <string name="pet_name" translatable="false">pet_name</string>
     <string name="facebook_url" translatable="false">facebook_url</string>
     <string name="distance">distance</string>
-    <string name="title_activity_special_pets">SpecialPetsActivity</string>
+    <string name="search_special_text_label">Search for</string>
 
 </resources>

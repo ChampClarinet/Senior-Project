@@ -25,6 +25,15 @@ public class Hotel extends Service{
         this.hotelPrice = hotelPrice;
     }
 
+    public Hotel(Service service, int isAcceptOvernight, int hotelPrice) {
+        super(service.getServiceId(), service.getOwnerUid(), service.getName(), service.getLogoPath()
+                , service.getPicturePath(), service.getFacebookUrl(), service.getOpenDays(), service.getOpenTime()
+                , service.getCloseTime(), service.getTel(), service.getAddress(), service.getLikes()
+                , service.getLatitude(), service.getLongitude(), service.getDescription());
+        this.isAcceptOvernight = isAcceptOvernight == 1;
+        this.hotelPrice = hotelPrice;
+    }
+
     public boolean isAcceptOvernight() {
         return isAcceptOvernight;
     }
