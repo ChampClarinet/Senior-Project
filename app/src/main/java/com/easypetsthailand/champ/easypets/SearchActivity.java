@@ -44,18 +44,6 @@ public class SearchActivity extends AppCompatActivity {
                 finish();
             }
         });
-        searchReptilesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                String keyword = keywordTextView.getText().toString();
-                if(keyword.length() > 0)
-                    intent.putExtra("keyword", keyword);
-                intent.putExtra("animals", "reptiles");
-                setResult(REQUEST_CODE_SEARCH, intent);
-                finish();
-            }
-        });
         searchBirdsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

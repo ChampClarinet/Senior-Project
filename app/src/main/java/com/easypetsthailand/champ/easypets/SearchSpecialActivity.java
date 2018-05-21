@@ -1,6 +1,8 @@
 package com.easypetsthailand.champ.easypets;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +22,8 @@ public class SearchSpecialActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
 
+        specialPetsGroup.setVisibility(View.GONE);
+
         searchSubmitButton.setOnClickListener(this);
         getBackIcon();
 
@@ -28,11 +32,11 @@ public class SearchSpecialActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.search_submit){
-            /*String keyword = keywordTextView.getText().toString();
+            String keyword = keywordTextView.getText().toString();
             Intent intent = new Intent(this, ResultActivity.class);
             intent.putExtra("keyword", keyword);
             startActivity(intent);
-            finish();*/
+            finish();
         }
     }
 
@@ -57,5 +61,7 @@ public class SearchSpecialActivity extends AppCompatActivity implements View.OnC
     TextView keywordTextView;
     @BindView(R.id.search_submit)
     Button searchSubmitButton;
+    @BindView(R.id.special_pets_group)
+    ConstraintLayout specialPetsGroup;
 
 }

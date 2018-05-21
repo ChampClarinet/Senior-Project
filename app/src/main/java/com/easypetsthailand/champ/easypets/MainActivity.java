@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity{
     ConstraintLayout hospitalButton;
     @BindView(R.id.title_all)
     ConstraintLayout searchAll;
+    @BindView(R.id.title_other)
+    ConstraintLayout searchOther;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,11 +55,16 @@ public class MainActivity extends AppCompatActivity{
                 openMenuActivity(getString(R.string.title_hospital), getString(R.string.title_hospital_uppercase));
             }
         });
-
         searchAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openMenuActivity(getString(R.string.title_all), getString(R.string.title_all_uppercase));
+            }
+        });
+        searchOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SearchSpecialActivity.class));
             }
         });
 

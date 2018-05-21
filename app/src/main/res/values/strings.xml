@@ -5,7 +5,8 @@
     <string name="title_grooming_uppercase">GROOMING</string>
     <string name="title_hospital_uppercase">HOSPITAL</string>
     <string name="title_hotel_uppercase">HOTEL</string>
-    <string name="title_special_uppercase">SPECIAL PETS CARE</string>
+    <string name="title_other_uppercase">OTHER SERVICE</string>
+    <string name="title_other">Other Services</string>
     <string name="title_all_uppercase">ALL</string>
     <string name="title_grooming" translatable="false">Grooming</string>
     <string name="title_hospital" translatable="false">Hospitals</string>
@@ -174,5 +175,6 @@
     <string name="facebook_url" translatable="false">facebook_url</string>
     <string name="distance">distance</string>
     <string name="search_special_text_label">Search for</string>
+    <string name="or">or</string>
 
 </resources>

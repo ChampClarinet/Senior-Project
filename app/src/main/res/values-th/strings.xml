@@ -91,8 +91,9 @@
     <string name="max_price">สูงสุด</string>
     <string name="search_all_hint">ค้นหาสถานบริการจากชื่อ</string>
     <string name="search_results">ผลการค้นหา</string>
-    <string name="title_special_uppercase">รองรับสัตว์พิเศษ</string>
     <string name="title_all_uppercase">ทั้งหมด</string>
     <string name="search_special_text_label">ต้องการค้นหาสถานบริการของ</string>
+    <string name="title_other_uppercase" translatable="false">บริการอื่นๆ</string>
+    <string name="or">หรือ</string>
 
 </resources>
